@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-import './Mocile.css';
+import './Mobile.css';
 import './Tablette.css';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload ceci est un test.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Flash Anatomy Learning</h1>
       </header>
+      <main>
+        <div>
+          Je vais me transformer en carrousel
+        </div>
+        <div>
+          <button className="btn btn-inscription">Inscription</button>
+          <button className="btn btn-connexion">Connexion</button>
+        </div>
+      </main>
     </div>
   );
 }
