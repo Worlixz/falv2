@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import './Mocile.css';
+import './Tablette.css';
 
 function App() {
   return (
