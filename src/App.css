@@ -2,6 +2,25 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Variable CSS  */
+*{
+  --color-background: #F0F3FF;
+  --header-background: #423FE5;
+  --landing-inscription-btn: #0015B2;
+  --landing-connexion-btn: #F8F9FF;
+  --seConnecter-btn: #0015B2;
+  --sinscrire-btn: #FFB700;
+  --cest-partis-btn: #423FE5;
+  --one-minute: #FF0000;
+  --three-days: #FF7B00;
+  --seven-days: #8DC640;
+  --selection-answer: #4B86F8;
+  --false-ans: #E01E37;
+  --logo-collection: #F18701;
+  --background-modal: rgba(0,0,0,0.5)
 }
 
 .App {
