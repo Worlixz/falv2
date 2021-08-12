@@ -1,0 +1,41 @@
+.carousel {
+  background-image: url(./assets/Blob.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 500px;
+}
+
+.carousel h2 {
+  text-align: center;
+}
+
+.carousel p {
+  text-align: center;
+}
+
+.slick-list {
+  max-width: 700px;
+}
+
+.slick-slider {
+  text-align: center;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+  opacity: 1;
+}
+
+#carousel1 h2 {
+  margin-top: 40px;
+}
+#carousel1 p {
+  margin-top: 40px;
+  font-size: 1.1rem;
+}
+#carousel1 img {
+  margin-top: 50px;
+  margin-left: 30px;
+}

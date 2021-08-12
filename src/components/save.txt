@@ -1,3 +1,5 @@
+Vidéo grafikart faire un carousel
+
 /* class Carousel {
 
         constructor (element, option = {}) {

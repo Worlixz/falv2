@@ -70,23 +70,3 @@ main {
 .btn-connexion {
   margin-left: 30px;
 }
-
-.carousel_bis {
-  background-image: url(./assets/Blob.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-.carousel_bis h2 {
-  text-align: center;
-}
-
-.carousel p {
-  text-align: center;
-}
-
-.slick-slider{
-  width: 60%;
-  text-align: center;
-}
