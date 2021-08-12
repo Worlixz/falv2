@@ -2,25 +2,25 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 /* Variable CSS  */
-*{
-  --color-background: #F0F3FF;
-  --header-background: #423FE5;
-  --landing-inscription-btn: #0015B2;
-  --landing-connexion-btn: #F8F9FF;
-  --seConnecter-btn: #0015B2;
-  --sinscrire-btn: #FFB700;
-  --cest-partis-btn: #423FE5;
-  --one-minute: #FF0000;
-  --three-days: #FF7B00;
-  --seven-days: #8DC640;
-  --selection-answer: #4B86F8;
-  --false-ans: #E01E37;
-  --logo-collection: #F18701;
-  --background-modal: rgba(0,0,0,0.5)
+* {
+  --color-background: #f0f3ff;
+  --header-background: #423fe5;
+  --landing-inscription-btn: #0015b2;
+  --landing-connexion-btn: #f8f9ff;
+  --seConnecter-btn: #0015b2;
+  --sinscrire-btn: #ffb700;
+  --cest-partis-btn: #423fe5;
+  --one-minute: #ff0000;
+  --three-days: #ff7b00;
+  --seven-days: #8dc640;
+  --selection-answer: #4b86f8;
+  --false-ans: #e01e37;
+  --logo-collection: #f18701;
+  --background-modal: rgba(0, 0, 0, 0.5);
 }
 
 .App {
@@ -39,11 +39,11 @@
   color: white;
 }
 
-.App-header h1{
+.App-header h1 {
   padding-left: 30px;
 }
 
-main{
+main {
   height: 90vh;
   display: flex;
   flex-direction: column;
@@ -52,21 +52,36 @@ main{
   background-color: var(--color-background);
 }
 
-.btn{
+.btn {
   width: 460px;
   height: 80px;
   border-radius: 20px;
-  box-shadow: 0px 6px 10px 0px #0000004D;
+  box-shadow: 0px 6px 10px 0px #0000004d;
   border: none;
   font-size: 24px;
   font-weight: bold;
 }
 
-.btn-inscription{
+.btn-inscription {
   background-color: var(--landing-inscription-btn);
   color: white;
 }
 
-.btn-connexion{
+.btn-connexion {
   margin-left: 30px;
+}
+
+.carousel {
+  background-image: url(./assets/Blob.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.carousel h2 {
+  text-align: center;
+}
+
+.carousel p {
+  text-align: center;
 }

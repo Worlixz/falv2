@@ -1,23 +1,20 @@
 import './Mobile.css';
 import './Tablette.css';
 import './App.css';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import Header from './components/Header.js'
+import Landing from './components/Landing.js'
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Flash Anatomy Learning</h1>
-      </header>
-      <main>
-        <div>
-          Je vais me transformer en carrousel
-        </div>
-        <div>
-          <button className="btn btn-inscription">Inscription</button>
-          <button className="btn btn-connexion">Connexion</button>
-        </div>
-      </main>
-    </div>
+    <Router>
+      <Header/>
+       <Switch>
+         <Route exact path="/" component={Landing}/>
+      </Switch>
+    </Router>
+
   );
 }
 
