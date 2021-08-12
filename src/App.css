@@ -71,17 +71,22 @@ main {
   margin-left: 30px;
 }
 
-.carousel {
+.carousel_bis {
   background-image: url(./assets/Blob.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
-.carousel h2 {
+.carousel_bis h2 {
   text-align: center;
 }
 
 .carousel p {
+  text-align: center;
+}
+
+.slick-slider{
+  width: 60%;
   text-align: center;
 }

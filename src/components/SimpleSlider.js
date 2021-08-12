@@ -1,21 +1,24 @@
-import React from 'react'
+import React from "react";
+import Slider from "react-slick";
 import Squelette from '../assets/squelette 2.png'
 import S2C1 from '../assets/Carte 1 - slide 2.png'
 import S2C2 from '../assets/Carte 2 - slide 2.png'
 import Cloche from '../assets/cloche.png'
 import S4C1 from '../assets/groupe carte - slide 3.png'
-import SimpleSlider from './SimpleSlider'
 
 
-function Landing () {
 
-    
-    return (
-        <main>
-            <SimpleSlider/>
-            {/* <div className="container">
-
-                <div id="carousel1" className="carousel_bis">
+export default function SimpleSlider() {
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
+  return (
+    <Slider {...settings}>
+      <div id="carousel1" className="carousel_bis">
                     <h2>BIENVENUE SUR F.A.L</h2>
                     <p>Flash Anatomy Learning (F.A.L) est une <br/> application de Flash Cards orientée Anatomie et <br/>Physiologie</p>
                     <img src={Squelette} />
@@ -37,13 +40,24 @@ function Landing () {
                     <h3>Profite des collections permanentes mise en place par la team F.A.L ou par les autres adhérents</h3>
                     <img src={S4C1} />
                 </div>
-            </div> */}
-            <div>
-                <button className="btn btn-inscription">Inscription</button>
-                <button className="btn btn-connexion">Connexion</button>
-            </div>
-      </main>
-    )
+      {/* <div>
+        <h3>1</h3>
+      </div>
+      <div>
+        <h3>2</h3>
+      </div>
+      <div>
+        <h3>3</h3>
+      </div>
+      <div>
+        <h3>4</h3>
+      </div>
+      <div>
+        <h3>5</h3>
+      </div>
+      <div>
+        <h3>6</h3>
+      </div> */}
+    </Slider>
+  );
 }
-
-export default Landing
