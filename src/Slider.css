@@ -1,3 +1,8 @@
+*{
+  --one-minute: #ff0000;
+  --three-days: #ff7b00;
+  --seven-days: #8dc640;
+}
 .carousel {
   background-image: url(./assets/Blob.png);
   background-position: center;
@@ -12,10 +17,16 @@
 
 .carousel h2 {
   text-align: center;
+  font-size: 1.8rem
+}
+
+.carousel h3{
+  font-size: 1.5rem;
 }
 
 .carousel p {
   text-align: center;
+  font-size: 1.2rem;
 }
 
 .slick-list {
@@ -50,8 +61,42 @@
 #carousel1 {
 }
 #carousel2 {
+  display: flex!important;
+  justify-content: space-evenly;
+}
+#S2C1{
+  transform: translate(45px, -30px);
+}
+#S2C2{
+  transform: translate(-30px, 30px);
 }
 #carousel3 {
 }
-#carousel4 {
+#clocheCarousel{
+  transform: scale(0.9);
+}
+#btnTimeCarousel{
+  flex-direction: column;
+}
+#btnTimeCarousel p{
+  margin-top: 20px;
+  border-radius: 5px;
+  width: 360px;
+  padding: 12px 0px;
+}
+#btn5minutes{
+  background-color: #FFEA00;
+}
+#btn3jours{
+  background-color: #FFB700;
+  
+}
+#btn7jours{
+  background-color: #FF7B00;
+
+}
+
+
+#carousel4 img{
+  transform: translate(0px, 30px);
 }

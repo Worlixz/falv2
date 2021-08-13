@@ -28,15 +28,19 @@ export default function SimpleSlider() {
       </div>
       <div id="carousel2" className="carousel">
         <h3>Créer tes propres flash card d'anatomie ou de Physiologie facilement sur F.A.L</h3>
-        <img src={S2C1} />
-        <img src={S2C2} />
+        <div id="imgCarousel2">
+          <img id="S2C1" src={S2C1} />
+          <img id="S2C2" src={S2C2} />
+        </div>
       </div>
       <div id="carousel3" className="carousel">
         <h3>Définis tes fréquences de rappel et optimise ton apprentissage</h3>
-        <img src={Cloche} />
-        <p className="timeLanding" id="5minutes">5 minutes</p>
-        <p className="timeLanding" id="3jours">3 jours</p>
-        <p className="timeLanding" id="7jours">7 jours</p>
+        <img id="clocheCarousel" src={Cloche} />
+        <div id="btnTimeCarousel">
+          <p className="timeLanding" id="btn5minutes">5 minutes</p>
+          <p className="timeLanding" id="btn3jours">3 jours</p>
+          <p className="timeLanding" id="btn7jours">7 jours</p>
+        </div>
       </div>
       <div id="carousel4" className="carousel">
         <h3>Profite des collections permanentes mise en place par la team F.A.L ou par les autres adhérents</h3>
