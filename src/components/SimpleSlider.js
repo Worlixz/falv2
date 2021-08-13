@@ -17,8 +17,10 @@ export default function SimpleSlider() {
     slidesToShow: 1,
     slidesToScroll: 1
   };
-  return (
-    <Slider {...settings}>
+
+
+
+  return <Slider {...settings}>
       <div id="carousel1" className="carousel">
         <h2>BIENVENUE SUR F.A.L</h2>
         <p>Flash Anatomy Learning (F.A.L) est une <br/> application de Flash Cards orientée Anatomie et <br/>Physiologie</p>
@@ -41,5 +43,5 @@ export default function SimpleSlider() {
         <img src={S4C1} />
       </div>
     </Slider>
-  );
+  
 }

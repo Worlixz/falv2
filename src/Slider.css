@@ -4,6 +4,10 @@
   background-repeat: no-repeat;
   background-size: contain;
   height: 500px;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .carousel h2 {
@@ -22,6 +26,10 @@
   text-align: center;
 }
 
+.slick-active div {
+  display: flex;
+}
+
 .slick-prev:before,
 .slick-next:before {
   color: black;
@@ -29,13 +37,21 @@
 }
 
 #carousel1 h2 {
-  margin-top: 40px;
+  margin-top: 80px;
 }
 #carousel1 p {
-  margin-top: 40px;
+  margin-top: 50px;
   font-size: 1.1rem;
 }
 #carousel1 img {
-  margin-top: 50px;
-  margin-left: 30px;
+  transform: translate(-180px, 45px) scale(1.1);
+}
+
+#carousel1 {
+}
+#carousel2 {
+}
+#carousel3 {
+}
+#carousel4 {
 }
