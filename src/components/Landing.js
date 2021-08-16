@@ -1,5 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import SimpleSlider from './SimpleSlider'
+
 
 
 function Landing () {
@@ -9,8 +11,8 @@ function Landing () {
         <main>
             <SimpleSlider/>
             <div>
-                <button className="btn btn-inscription">Inscription</button>
-                <button className="btn btn-connexion">Connexion</button>
+                <Link className="btn btn-inscription" to="/inscription">Inscription</Link>
+                <Link className="btn btn-connexion" to="/signin">Connexion</Link>
             </div>
       </main>
     )

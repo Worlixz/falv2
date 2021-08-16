@@ -45,6 +45,7 @@
 
 main {
   height: 90vh;
+  max-width: 1920px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -53,8 +54,8 @@ main {
 }
 
 .btn {
-  width: 460px;
-  height: 80px;
+  text-decoration: none;
+  padding: 25px 140px;
   border-radius: 20px;
   box-shadow: 0px 6px 10px 0px #0000004d;
   border: none;
@@ -69,4 +70,85 @@ main {
 
 .btn-connexion {
   margin-left: 30px;
+  color: black;
+}
+
+.containerSignUp {
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-background);
+}
+.containerSignUp form {
+  height: 700px;
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 30px;
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.25);
+  background-color: #f8f9ff;
+}
+
+.containerInForm {
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 70%;
+}
+.containerInForm div {
+  display: flex;
+  flex-direction: column;
+}
+.containerInForm div label {
+  font-size: 18px;
+  font-weight: 600;
+}
+.containerInForm div input {
+  border-radius: 10px;
+  background-color: #e5e5e5;
+  border: none;
+  height: 45px;
+  padding: 5px;
+  font-size: 18px;
+}
+
+#inscriptionFormH3 {
+  font-size: 24px;
+  padding: 20px 40px;
+  background-color: #e5e5e5;
+  color: #0015b2;
+  border-radius: 45px;
+}
+
+#inscriptionFormSubmit {
+  padding: 20px 60px;
+  border: none;
+  font-size: 24px;
+  background-color: #ffb700;
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+#inscriptionFormSubmit:hover {
+  transform: scale(1.05);
+  transition: ease-in-out 0.3s;
+}
+#inscriptionFormSubmit:hover:disabled {
+  transform: none;
+}
+#inscriptionFormSubmit:disabled {
+  padding: 20px 60px;
+  border: none;
+  font-size: 24px;
+  background-color: #e5e5e5;
+  border-radius: 12px;
+  color: black;
+  box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 }

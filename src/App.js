@@ -6,6 +6,8 @@ import "slick-carousel/slick/slick-theme.css";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Header from './components/Header.js'
 import Landing from './components/Landing.js'
+import SignIn from './components/SignIn';
+import Inscription from './components/Inscription';
 
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
       <Header/>
        <Switch>
          <Route exact path="/" component={Landing}/>
+         <Route path="/inscription" component={Inscription}/>
+         <Route path="/signin" component={SignIn}/>
       </Switch>
     </Router>
 
