@@ -12,7 +12,7 @@ function Landing () {
             <SimpleSlider/>
             <div>
                 <Link className="btn btn-inscription" to="/inscription">Inscription</Link>
-                <Link className="btn btn-connexion" to="/signin">Connexion</Link>
+                <Link className="btn btn-connexion" to="/connexion">Connexion</Link>
             </div>
       </main>
     )
