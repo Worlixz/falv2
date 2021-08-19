@@ -12,11 +12,18 @@ function Connexion() {
     const handleChange = (e) => {
         setLoginDataConnexion({...loginDataConnexion, [e.target.id]: e.target.value})
     }
-    console.log(loginDataConnexion)
+  
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log({
+            email: loginDataConnexion.email,
+            password: loginDataConnexion.password
+        })
+    }
 
     return (
         <div className="containerSignUp">
-            <form id="form">
+            <form onSubmit={handleSubmit} id="form">
                 <h3 id="inscriptionFormH3">CONNEXION</h3>
                 <div className="containerInFormConnexion">
                     <div>

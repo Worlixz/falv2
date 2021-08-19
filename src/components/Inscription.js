@@ -17,7 +17,13 @@ function Inscription() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(`user : ${loginData.userName} | email : ${loginData.email} | password : ${loginData.password} | confirmationPassword : ${confirmPassword}`)
+        console.log({
+            user: loginData.userName,
+            email: loginData.email,
+            password: loginData.password,
+            confirmPassword
+        })
+        /* console.log(`user : ${loginData.userName} | email : ${loginData.email} | password : ${loginData.password} | confirmationPassword : ${confirmPassword}`) */
     }
 
     const handleChange = (e) => {
