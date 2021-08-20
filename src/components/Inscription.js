@@ -1,6 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
+import {FirebaseContext} from '../components/Firebase/index'
 
-function Inscription() {
+function Inscription(props) {
+
+    const firebase = useContext(FirebaseContext)
 
     let data = {
         userName: "",
@@ -17,6 +20,16 @@ function Inscription() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        firebase.signupUser(loginData.email, loginData.password)
+        .then((authUser)=>{
+            return (firebase.user(authUser.user.uid).set({
+                userName: loginData.userName,
+                email: loginData.email
+            }))
+        })
+        .then(()=>{
+            props.history.push('/accueil')
+        })
         console.log({
             user: loginData.userName,
             email: loginData.email,

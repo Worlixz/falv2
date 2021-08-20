@@ -1,4 +1,7 @@
 import app from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
+
 
 const config = {
     apiKey: "AIzaSyBaMKAKMaQQYx-iCgZ6TzlCpJ2EtoaGtXc",
@@ -14,10 +17,20 @@ const config = {
 class Firebase {
     constructor(){
         app.initializeApp(config)
-        this.app = app.auth()
+        this.auth = app.auth()
         this.db = app.firestore()
     }
 
+    signupUser = (email, password) => {
+        return (this.auth.createUserWithEmailAndPassword(email, password))
+    }
+
+    loginUser = (email, password) => {
+        return (this.auth.signInWithEmailAndPassword(email, password))
+    }
+
+    user = (uid) => this.db.doc(`users/${uid}`)
+    
     // Config des méthodes aux niveau de la db
 
 
