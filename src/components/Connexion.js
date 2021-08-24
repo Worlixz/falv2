@@ -1,6 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useContext, Fragment} from 'react'
+import {FirebaseContext} from '../components/Firebase/index'
+import Header from './Header'
 
-function Connexion() {
+function Connexion(props) {
+
+    const firebase = useContext(FirebaseContext)
 
     let dataConnexion = {
         email: "",
@@ -15,30 +19,35 @@ function Connexion() {
   
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log({
-            email: loginDataConnexion.email,
-            password: loginDataConnexion.password
+        firebase.loginUser(loginDataConnexion.email, loginDataConnexion.password)
+        .then((authUser) => {
+            console.log(authUser)
+            props.history.push('/accueil')
         })
+        
     }
 
     return (
-        <div className="containerSignUp">
-            <form onSubmit={handleSubmit} id="form">
-                <h3 id="inscriptionFormH3">CONNEXION</h3>
-                <div className="containerInFormConnexion">
-                    <div>
-                        <label>Email</label>
-                        <input required onChange={handleChange} id="email" type="email"/>
-                    </div>
-                    <div>
-                        <label>Mot de passe</label>
-                        <input onChange={handleChange} id="password" type="password"/>
-                    </div>
+        <Fragment>
+            <Header/>
+                <div className="containerSignUp">
+                    <form onSubmit={handleSubmit} id="form">
+                        <h3 id="inscriptionFormH3">CONNEXION</h3>
+                        <div className="containerInFormConnexion">
+                            <div>
+                                <label>Email</label>
+                                <input required onChange={handleChange} id="email" type="email"/>
+                            </div>
+                            <div>
+                                <label>Mot de passe</label>
+                                <input onChange={handleChange} id="password" type="password"/>
+                            </div>
+                        </div>
+                        <button id="inscriptionFormConnexion">Se connecter</button>
+                        <a href="/">Mot de passe oublié ?</a>
+                    </form>
                 </div>
-                <button id="inscriptionFormConnexion">Se connecter</button>
-                <a href="/">Mot de passe oublié ?</a>
-            </form>
-        </div>
+        </Fragment>
     )
 }
 

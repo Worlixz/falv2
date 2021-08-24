@@ -1,5 +1,6 @@
-import React, {useEffect, useState, useContext} from 'react'
+import React, {useEffect, useState, useContext, Fragment} from 'react'
 import {FirebaseContext} from '../components/Firebase/index'
+import Header from './Header'
 
 function Inscription(props) {
 
@@ -30,15 +31,15 @@ function Inscription(props) {
         .then(()=>{
             props.history.push('/accueil')
         })
-        console.log({
-            user: loginData.userName,
-            email: loginData.email,
-            password: loginData.password,
-            confirmPassword
+        .catch((e) => {
+            console.error(e)
         })
-        /* console.log(`user : ${loginData.userName} | email : ${loginData.email} | password : ${loginData.password} | confirmationPassword : ${confirmPassword}`) */
     }
 
+    // Mise en place d'un Regex pour la vérification de la condition du mot de passe
+
+    /* let strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g")
+    console.log(strongRegex.test(loginData.password)) */
     const handleChange = (e) => {
         setLoginData({...loginData, [e.target.id]: e.target.value})
     }
@@ -47,6 +48,8 @@ function Inscription(props) {
     
 
     return (
+        <Fragment>
+            <Header/>
         <div className="containerSignUp">
             <form onSubmit={handleSubmit} id="form">
                 <h3 id="inscriptionFormH3">INSCRIPTION</h3>
@@ -74,6 +77,7 @@ function Inscription(props) {
                 {btn}
             </form>
         </div>
+        </Fragment>
     )
 }
 

@@ -14,7 +14,6 @@ import Accueil from './components/Accueil';
 function App() {
   return (
     <Router>
-      <Header/>
        <Switch>
          <Route exact path="/" component={Landing}/>
          <Route path="/inscription" component={Inscription}/>
