@@ -1,6 +1,7 @@
 import React, {useState, useContext, useEffect, Fragment} from 'react';
 import { FirebaseContext  } from './Firebase/index';
 import Header from './Header'
+import Loader from './Loader';
 
 const Accueil = (props) => {
 
@@ -16,15 +17,19 @@ const Accueil = (props) => {
             listener()
         };
     }, [userSession])
-
-    return (
+    
+    
+     return userSession === null ? 
+    (
+        <Loader />
+    ) 
+    : 
+    (
         <Fragment>
-            <Header dataUser={userSession} />
-            <div>
-                je suis dans welcome
-            </div>
+            <Header props={userSession.uid} />
+            Accueil
         </Fragment>
-    )
+    ) 
 }
 
 
