@@ -30,7 +30,12 @@ class Firebase {
     }
 
     user = (uid) => this.db.doc(`users/${uid}`)
+
+    userData = (uid) => this.db.doc(`users/${uid}`)
     
+    userCollection = (uid) => this.db.doc(`users/${uid}`).collection('CartesCollection')
+    
+    signoutUser = () => this.auth.signOut()
     // Config des méthodes aux niveau de la db
 
 

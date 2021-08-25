@@ -1,15 +1,27 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect,useContext} from 'react'
 import { Link } from 'react-router-dom'
+import { FirebaseContext } from './Firebase/index'
+import Loader from './Loader'
 
 function Header (props) {
-    console.log('je suis dans header props : ', props)
-    const [idUser, setIdUser] = useState('Bienvenue : ', props.props)
 
-    
-    return (
+    const firebase = useContext(FirebaseContext)
+
+    const handleDeconnexion = (e) => {
+        firebase.signoutUser()
+    }
+
+    return props.props == null ? 
+    (
         <header className="App-header">
                 <h1><Link to="/">Flas Anatomy Learning</Link></h1>
-                <h2>{idUser}</h2>
+                <button onClick={handleDeconnexion}>Déco</button>
+        </header>
+    ) : (
+        <header className="App-header">
+                <h1><Link to="/">Flas Anatomy Learning</Link></h1>
+                <button onClick={handleDeconnexion}>Déco</button>
+                <h2>Bienvenue : {props.props.userName}</h2> 
         </header>
     )
 }
