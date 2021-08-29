@@ -9,6 +9,7 @@ import Connexion from './components/Connexion';
 import Inscription from './components/Inscription';
 import Accueil from './components/Accueil';
 import Carte from './components/Carte';
+import Profil from './components/Profil';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
          <Route path="/connexion" component={Connexion}/>
          <Route path="/accueil" component={Accueil}/>
          <Route path="/carte" component={Carte}/>
+         <Route path='/profil' component={Profil} />
       </Switch>
     </Router>
 

@@ -14,12 +14,12 @@ function Header (props) {
     return props.props == null ? 
     (
         <header className="App-header">
-                <h1><Link to="/">Flas Anatomy Learning</Link></h1>
+                <h1><Link to="/">Flash Anatomy Learning</Link></h1>
                 <button onClick={handleDeconnexion}>Déco</button>
         </header>
     ) : (
         <header className="App-header">
-                <h1><Link to="/">Flas Anatomy Learning</Link></h1>
+                <h1><Link to="/">Flash Anatomy Learning</Link></h1>
                 <button onClick={handleDeconnexion}>Déco</button>
                 <h2>Bienvenue : {props.props.userName}</h2> 
         </header>

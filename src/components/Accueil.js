@@ -1,8 +1,11 @@
 import React, {useState, useContext, useEffect, Fragment} from 'react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import { FirebaseContext  } from './Firebase/index';
 import Header from './Header'
 import Loader from './Loader';
 import Sidebar from './Sidebar';
+import Carte from './Carte'
+import Profil from './Profil'
 
 const Accueil = (props) => {
 
@@ -33,10 +36,9 @@ const Accueil = (props) => {
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc => {
                     console.log(doc.id , " => ", doc.data())
+                    const dataTest = doc.data()
+                    console.log(Object.values(dataTest).length)
                 }))
-                querySnapshot.docs.map((doc) => {
-                    console.log(doc.id)
-                })
             })
             
         }
@@ -56,7 +58,7 @@ const Accueil = (props) => {
         <Fragment>
             <Header props={userData} />
             <div className="containerAccueil">
-                <Sidebar/>
+                <Sidebar props={userData}/>
             </div>
         </Fragment>
     ) 

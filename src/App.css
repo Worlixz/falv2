@@ -215,9 +215,39 @@ main {
   display: flex;
   height: 90vh;
   width: 100%;
+  background-color: var(--color-background);
 }
 
 .sideBar {
   display: flex;
-  width: 15vw;
+  width: 200px;
+  background-color: white;
+}
+
+.sideBar ul {
+  width: 100%;
+}
+
+.sideBar li {
+  display: flex;
+  padding: 35px 5px;
+  border-bottom: 1px solid black;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+#profilLi {
+  flex-direction: column;
+}
+#profilLi img {
+  transform: scale(1.4);
+}
+.sideBar li a {
+  padding: 10px;
+  text-decoration: none;
+}
+
+.sideBar li h2 {
+  padding: 10px;
+  text-decoration: none;
 }
