@@ -6,15 +6,13 @@ import { FirebaseContext } from './Firebase/index'
 function Carte(props) {
 
     const firebase = useContext(FirebaseContext)
-    console.log(firebase)
+    console.log(firebase.auth)
 
     return (
         <Fragment>
-            <Header />
             <div>
-                <Sidebar />
-                    Je suis dans carte
-                </div>
+                Je suis dans carte
+            </div>
         </Fragment>
         
     )

@@ -7,7 +7,7 @@ import Sidebar from './Sidebar';
 import Carte from './Carte'
 import Profil from './Profil'
 
-const Accueil = (props) => {
+const User = (props) => {
 
     const firebase = useContext(FirebaseContext)
     const [userSession, setUserSession] = useState(null)
@@ -48,6 +48,8 @@ const Accueil = (props) => {
         };
 
     }, [userSession])
+
+    console.log(props.history.location.pathname)
     
      return userSession === null ? 
     (
@@ -56,13 +58,16 @@ const Accueil = (props) => {
     : 
     (
         <Fragment>
-            <Header props={userData} />
+            <Header children props={userData} />
             <div className="containerAccueil">
-                <Sidebar props={userData}/>
+                <Sidebar children props={userData}/>
+                
+                <Carte />
+                <Profil />
             </div>
         </Fragment>
     ) 
 }
 
 
-export default Accueil;
+export default User;

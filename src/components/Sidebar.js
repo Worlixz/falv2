@@ -1,7 +1,7 @@
 import React, { useContext} from 'react'
-import Accueil from './Accueil'
+import User from './User'
 import Carte from './Carte'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, NavLink, Route, Switch} from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import iconCards from '../assets/sidebar/icon_cards_gris.png'
 import iconHouse from '../assets/sidebar/icon_maison_gris.png'
@@ -26,16 +26,12 @@ function Sidebar(props) {
                 <h2>{props.props.userName}</h2>
             </li>
             <li>
-                <img src={iconHouse}/>
-                <Link to='/accueil'>Accueil</Link>
-            </li>
-            <li>
                 <img src={iconCards}/>
-                <Link to='/carte'>Mes collections</Link>
+                <NavLink activeClassName="active" to='/carte'>Mes collections</NavLink>
             </li>
             <li>
                 <img src={iconProfil}/>
-                <Link to='/profil'>Profil</Link>
+                <NavLink activeClassName="active" to='/profil'>Profil</NavLink>
             </li>
         </ul>
         </div>

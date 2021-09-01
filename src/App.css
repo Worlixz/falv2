@@ -251,3 +251,7 @@ main {
   padding: 10px;
   text-decoration: none;
 }
+
+.active{
+  color: red;
+}

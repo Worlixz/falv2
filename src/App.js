@@ -7,7 +7,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Landing from './components/Landing.js'
 import Connexion from './components/Connexion';
 import Inscription from './components/Inscription';
-import Accueil from './components/Accueil';
+import User from './components/User';
 import Carte from './components/Carte';
 import Profil from './components/Profil';
 
@@ -19,9 +19,9 @@ function App() {
          <Route exact path="/" component={Landing}/>
          <Route path="/inscription" component={Inscription}/>
          <Route path="/connexion" component={Connexion}/>
-         <Route path="/accueil" component={Accueil}/>
-         <Route path="/carte" component={Carte}/>
-         <Route path='/profil' component={Profil} />
+         <Route path="/:user" component={User}/>
+         {/* <Route path="/carte" component={Carte} />
+         <Route path="/profil" component={Profil} /> */}
       </Switch>
     </Router>
 
