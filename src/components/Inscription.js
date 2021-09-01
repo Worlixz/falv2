@@ -29,7 +29,7 @@ function Inscription(props) {
             }))
         })
         .then(()=>{
-            props.history.push('/accueil')
+            props.history.push('/user')
         })
         .catch((e) => {
             console.error(e)

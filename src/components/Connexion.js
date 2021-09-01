@@ -21,7 +21,7 @@ function Connexion(props) {
         e.preventDefault()
         firebase.loginUser(loginDataConnexion.email, loginDataConnexion.password)
         .then((authUser) => {
-            props.history.push('/accueil')
+            props.history.push('/user')
         })
         
     }

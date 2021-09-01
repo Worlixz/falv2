@@ -222,6 +222,8 @@ main {
   display: flex;
   width: 200px;
   background-color: white;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .sideBar ul {
@@ -236,6 +238,7 @@ main {
   justify-content: flex-start;
   align-items: center;
 }
+
 #profilLi {
   flex-direction: column;
 }
@@ -243,15 +246,41 @@ main {
   transform: scale(1.4);
 }
 .sideBar li a {
-  padding: 10px;
+  color: Black;
+  font-weight: 400;
+  padding: 0px;
+  margin: 10px;
   text-decoration: none;
 }
 
 .sideBar li h2 {
   padding: 10px;
   text-decoration: none;
+  transition: 0.05s ease-in-out;
 }
 
-.active{
-  color: red;
+.signOut {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.signOut button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.signOut button:hover {
+  transform: scale(1.1);
+  transition: 0.3s ease-in-out;
+}
+
+#logoSignOut {
+  height: 40px;
+}
+
+.active {
+  border-bottom: #4b86f8 4px solid;
+  border-radius: 3px;
+  transition: 0.05s ease-in-out;
 }

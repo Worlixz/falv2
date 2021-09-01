@@ -4,10 +4,7 @@ import Header from './Header'
 import { FirebaseContext } from './Firebase/index'
 
 function Carte(props) {
-
-    const firebase = useContext(FirebaseContext)
-    console.log(firebase.auth)
-
+    console.log(" je suis dans cards",props)
     return (
         <Fragment>
             <div>

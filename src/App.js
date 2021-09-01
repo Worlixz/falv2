@@ -8,8 +8,7 @@ import Landing from './components/Landing.js'
 import Connexion from './components/Connexion';
 import Inscription from './components/Inscription';
 import User from './components/User';
-import Carte from './components/Carte';
-import Profil from './components/Profil';
+
 
 
 function App() {
@@ -20,8 +19,6 @@ function App() {
          <Route path="/inscription" component={Inscription}/>
          <Route path="/connexion" component={Connexion}/>
          <Route path="/:user" component={User}/>
-         {/* <Route path="/carte" component={Carte} />
-         <Route path="/profil" component={Profil} /> */}
       </Switch>
     </Router>
 

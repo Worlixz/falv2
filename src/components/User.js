@@ -1,5 +1,4 @@
 import React, {useState, useContext, useEffect, Fragment} from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import { FirebaseContext  } from './Firebase/index';
 import Header from './Header'
 import Loader from './Loader';
@@ -12,6 +11,9 @@ const User = (props) => {
     const firebase = useContext(FirebaseContext)
     const [userSession, setUserSession] = useState(null)
     const [userData, setUserData] = useState(null)
+    const [dataCards, setDataCards] = useState({})
+
+    let DataFullCards = {}
     
     useEffect(() => {
         let listener = firebase.auth.onAuthStateChanged((user) =>{
@@ -31,16 +33,16 @@ const User = (props) => {
             .catch((err) => {
                 console.log(err)
             })
-            firebase.userCollection(userSession.uid)
-            .get()
-            .then((querySnapshot) => {
-                querySnapshot.forEach((doc => {
-                    console.log(doc.id , " => ", doc.data())
-                    const dataTest = doc.data()
-                    console.log(Object.values(dataTest).length)
-                }))
-            })
-            
+            if(dataCards != null) {
+                firebase.userCollection(userSession.uid)
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.docs.map((doc) => {
+                        DataFullCards = {[doc.id]: doc.data(), ...DataFullCards}
+                    })
+                    setDataCards(DataFullCards)
+                })
+            }
         }
         
         return () => {
@@ -49,7 +51,28 @@ const User = (props) => {
 
     }, [userSession])
 
-    console.log(props.history.location.pathname)
+    console.log('dataCards - State',dataCards)
+    
+    let content;
+    switch(props.history.location.pathname){
+        case "/carte" : {
+            content = <Carte dataCards={dataCards} />
+            break
+        }
+        case "/profil" : {
+            content = <Profil/>
+            break
+        }
+        default : {
+
+            content = <div>
+                <h2>Je suis dans user</h2>
+
+            </div>
+            
+            break
+        }
+    }
     
      return userSession === null ? 
     (
@@ -61,9 +84,7 @@ const User = (props) => {
             <Header children props={userData} />
             <div className="containerAccueil">
                 <Sidebar children props={userData}/>
-                
-                <Carte />
-                <Profil />
+                {content}
             </div>
         </Fragment>
     ) 
