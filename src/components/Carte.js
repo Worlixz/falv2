@@ -11,10 +11,7 @@ function Carte(props) {
 
     const mapDataCards = []
     const mapDataCardsCopie = props.dataCards
-    
-    /* console.log('Test ', Object.keys(mapDataCards))
-    console.log('Test bis : ', Object.values(mapDataCards)) */
-    
+        
     for(const [key, value] of Object.entries(mapDataCardsCopie)){
         mapDataCards.push({[key]: value})
     } 
