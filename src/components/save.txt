@@ -31,3 +31,20 @@ Vidéo grafikart faire un carousel
         slidesToScroll: 1,
         slidesVisible: 1
     }) */
+
+
+
+
+
+
+
+
+
+    console.log(mapDataCards.map((element, index) => {
+        console.log("element : ",element)
+        for (const [key, value] of Object.entries(mapDataCardsCopie)) {
+            /* console.log(`${key}: ${value}`); */
+            console.log(`Nombre de carte de ${element} :`,Object.keys(value).length)
+        }  
+    }))
+    

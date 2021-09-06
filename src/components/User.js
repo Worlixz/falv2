@@ -11,7 +11,7 @@ const User = (props) => {
     const firebase = useContext(FirebaseContext)
     const [userSession, setUserSession] = useState(null)
     const [userData, setUserData] = useState(null)
-    const [dataCards, setDataCards] = useState({})
+    const [dataCards, setDataCards] = useState("")
 
     let DataFullCards = {}
     
@@ -40,7 +40,7 @@ const User = (props) => {
                 .get()
                 .then((querySnapshot) => {
                     querySnapshot.docs.map((doc) => {
-                        DataFullCards = {[doc.id]: doc.data(), ...DataFullCards}
+                        DataFullCards = {...DataFullCards, [doc.id]: doc.data()}
                     })
                     setDataCards(DataFullCards)
                 })
@@ -55,6 +55,8 @@ const User = (props) => {
 
     sessionStorage.setItem('DataCards', dataCards)
     sessionStorage.setItem('UserData', userData)
+
+    console.log("DataCards User : ",dataCards)
 
     if(sessionStorage.dataCards){console.log("je parse le sessionStorage", JSON.parse(sessionStorage.DataCards))}
     let content;
