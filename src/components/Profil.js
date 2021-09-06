@@ -2,7 +2,7 @@ import React from 'react'
 
 function Profil() {
     return (
-        <div>
+        <div className="containerProfil">
             Je suis dans le profil
         </div>
     )

@@ -284,3 +284,53 @@ main {
   border-radius: 3px;
   transition: 0.05s ease-in-out;
 }
+
+.containerUl{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 50px 0;
+}
+
+.mapCollectionCards{
+}
+
+.liMapCollectionCards{
+  background: #fefefe;
+  border-radius: 20px;
+  display: flex;
+  list-style: none;
+  width: 400px;
+  margin: 20px 0px;
+  align-items: center;
+  transition: .3s ease-in-out;
+}
+.liMapCollectionCards:hover{
+  transform: scale(1.1);
+  transition: .3s ease-in-out;
+}
+
+.divLiMapCollectionCards{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 10px;
+}
+
+.liMapCollectionCards img{
+ height: 35px;
+ margin: 10px;
+}
+
+#btnPlay:hover{
+  cursor: pointer;
+}
+
+.containerUser{
+  width: 100%;
+}
+
+.containerProfil{
+  width: 100%;
+}

@@ -20,6 +20,8 @@ const User = (props) => {
             user ? setUserSession(user) : props.history.push('/')
         })
 
+        console.log('je rentre dans le useEffect')
+
         if(userSession !== null) {
             firebase.userData(userSession.uid)
             .get()
@@ -51,8 +53,10 @@ const User = (props) => {
 
     }, [userSession])
 
-    console.log('dataCards - State',dataCards)
-    
+    sessionStorage.setItem('DataCards', dataCards)
+    sessionStorage.setItem('UserData', userData)
+
+    if(sessionStorage.dataCards){console.log("je parse le sessionStorage", JSON.parse(sessionStorage.DataCards))}
     let content;
     switch(props.history.location.pathname){
         case "/carte" : {
@@ -65,7 +69,7 @@ const User = (props) => {
         }
         default : {
 
-            content = <div>
+            content = <div className="containerUser"> 
                 <h2>Je suis dans user</h2>
 
             </div>
