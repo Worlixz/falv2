@@ -20,8 +20,6 @@ const User = (props) => {
             user ? setUserSession(user) : props.history.push('/')
         })
 
-        console.log('je rentre dans le useEffect')
-
         if(userSession !== null) {
             firebase.userData(userSession.uid)
             .get()
@@ -53,16 +51,14 @@ const User = (props) => {
 
     }, [userSession])
 
-    sessionStorage.setItem('DataCards', dataCards)
-    sessionStorage.setItem('UserData', userData)
+    /* console.log('dataUser', userData)
+    console.log('dataCards', dataCards) */
+    
 
-    console.log("DataCards User : ",dataCards)
-
-    if(sessionStorage.dataCards){console.log("je parse le sessionStorage", JSON.parse(sessionStorage.DataCards))}
     let content;
     switch(props.history.location.pathname){
         case "/carte" : {
-            content = <Carte dataCards={dataCards} />
+            content = <Carte dataCards={dataCards} dataUser={userData} />
             break
         }
         case "/profil" : {

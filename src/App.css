@@ -285,7 +285,7 @@ main {
   transition: 0.05s ease-in-out;
 }
 
-.containerUl {
+.containerUl{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -293,7 +293,7 @@ main {
   padding: 50px 0;
 }
 
-.liMapCollectionCards {
+.liMapCollectionCards{
   background: #fefefe;
   border-radius: 20px;
   display: flex;
@@ -301,33 +301,33 @@ main {
   width: 400px;
   margin: 20px 0px;
   align-items: center;
-  transition: 0.3s ease-in-out;
+  transition: .3s ease-in-out;
 }
-.liMapCollectionCards:hover {
+.liMapCollectionCards:hover{
   transform: scale(1.1);
-  transition: 0.3s ease-in-out;
+  transition: .3s ease-in-out;
 }
 
-.divLiMapCollectionCards {
+.divLiMapCollectionCards{
   display: flex;
   flex-direction: column;
   width: 100%;
   margin: 10px;
 }
 
-.liMapCollectionCards img {
-  height: 35px;
-  margin: 10px;
+.liMapCollectionCards img{
+ height: 35px;
+ margin: 10px;
 }
 
-#btnPlay:hover {
+#btnPlay:hover{
   cursor: pointer;
 }
 
-.containerUser {
+.containerUser{
   width: 100%;
 }
 
-.containerProfil {
+.containerProfil{
   width: 100%;
 }
