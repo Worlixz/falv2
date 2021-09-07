@@ -11,6 +11,12 @@ import Play from '../assets/Cards/bouton-jouer.svg'
 
 function Carte(props) {
 
+    const propsHistory = props.propsHistory
+    const dataUser = props.dataUser
+    const dataCards = props.dataCards
+
+    console.log(propsHistory) 
+
     const mapDataCards = []
     const mapDataCardsCopie = props.dataCards
         
@@ -18,8 +24,10 @@ function Carte(props) {
         mapDataCards.push({[key]: value})
     } 
     
-    const  handleClick = (dataID) => {
+    const  handleClick = (dataID, propsHistory) => {
         console.log('je suis dans : ', dataID)
+        console.log('je viens de cliquer', propsHistory.history)
+        
     } 
     
     const displayCollection = mapDataCards.map((element) => {
@@ -34,9 +42,9 @@ function Carte(props) {
                 <img src={OsCasse} />
                 <div className="divLiMapCollectionCards">
                     <h3>{nameCollection}</h3>
-                    { <p>{nbreCards} Cartes</p> }
+                    { <p>{nbreCards} {nbreCards > 1 ? 'Cartes' : 'Carte'}</p> }
                 </div>
-                <img src={Play} onClick={() => handleClick(nameCollection)} />
+                <img src={Play} onClick={() => handleClick(nameCollection, propsHistory)} />
             </li>
         )
     })

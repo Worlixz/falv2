@@ -58,7 +58,7 @@ const User = (props) => {
     let content;
     switch(props.history.location.pathname){
         case "/carte" : {
-            content = <Carte dataCards={dataCards} dataUser={userData} />
+            content = <Carte dataCards={dataCards} dataUser={userData} propsHistory={props} />
             break
         }
         case "/profil" : {
