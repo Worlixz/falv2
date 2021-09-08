@@ -1,12 +1,14 @@
 import React from 'react'
 
-function Quiz (props) {
+function Quiz(props) {
+    console.log(props)
+    const dataCollection = props.propsHistory.location.state.dataCardsMap
+    const dataCards = props.propsHistory.location.state.dataCardsMap.cards
+    console.log(dataCards)
 
-    console.log("je suis dans quiz : ",props)
     return (
         <div>
-            Quiz
-            {props}
+            Je suis dans Quiz et {dataCollection.nameCollection}
         </div>
     )
 }

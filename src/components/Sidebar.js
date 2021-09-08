@@ -44,6 +44,10 @@ function Sidebar(props) {
                 <img src={iconProfil}/>
                 <NavLink activeClassName="active" to='/profil'>Profil</NavLink>
             </li>
+            <li>
+                <img src={iconProfil}/>
+                <NavLink activeClassName="active" to='/quiz'>Quiz</NavLink>
+            </li>
         </ul>
         <div className="signOut">
             <button onClick={hangleSignOut}><img id="logoSignOut" src={logoSignOut}/></button>

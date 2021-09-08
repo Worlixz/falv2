@@ -5,6 +5,7 @@ import Loader from './Loader';
 import Sidebar from './Sidebar';
 import Carte from './Carte'
 import Profil from './Profil'
+import Quiz from './Quiz';
 
 const User = (props) => {
 
@@ -63,6 +64,10 @@ const User = (props) => {
         }
         case "/profil" : {
             content = <Profil/>
+            break
+        }
+        case "/quiz" : {
+            content = <Quiz propsHistory={props}/>
             break
         }
         default : {

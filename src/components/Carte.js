@@ -1,9 +1,5 @@
-import React, { Fragment, useContext, useState} from 'react'
-import Sidebar from './Sidebar'
-import Header from './Header'
-import ListeCollection from './ListeCollection'
-import Quiz from './Quiz'
-import { FirebaseContext } from './Firebase/index'
+import React, { Fragment} from 'react'
+import { Link } from 'react-router-dom'
 import OsCasse from '../assets/Cards/os-casse.svg'
 import Physio from '../assets/Cards/poumons.svg'
 import Play from '../assets/Cards/bouton-jouer.svg'
@@ -23,28 +19,31 @@ function Carte(props) {
     for(const [key, value] of Object.entries(mapDataCardsCopie)){
         mapDataCards.push({[key]: value})
     } 
-    
-    const  handleClick = (dataID, propsHistory) => {
-        console.log('je suis dans : ', dataID)
-        console.log('je viens de cliquer', propsHistory.history)
-        
-    } 
-    
+       
     const displayCollection = mapDataCards.map((element) => {
-        let nbreCards = 0
-        Object.values(element).map((test) => {
-            nbreCards = Object.keys(test).length
-            return nbreCards
+        let dataCardsMap = {
+            nbreCards: '',
+            cards: '',
+            nameCollection: '',
+            categorie: ''
+        }
+        Object.values(element).map((cards) => {
+            dataCardsMap.nbreCards = Object.keys(cards).length
+            dataCardsMap.cards = cards
+            dataCardsMap.categorie = cards.categorie
+            return dataCardsMap
         })
-        let nameCollection = Object.keys(element).toString()
+        dataCardsMap.nameCollection = Object.keys(element).toString()
         return (
             <li className="liMapCollectionCards">
-                <img src={OsCasse} />
+                <img src={dataCardsMap.categorie == "anatomy" ? OsCasse : Physio} />
                 <div className="divLiMapCollectionCards">
-                    <h3>{nameCollection}</h3>
-                    { <p>{nbreCards} {nbreCards > 1 ? 'Cartes' : 'Carte'}</p> }
+                    <h3>{dataCardsMap.nameCollection}</h3>
+                    { <p>{dataCardsMap.nbreCards} {dataCardsMap.nbreCards > 1 ? 'Cartes' : 'Carte'}</p> }
                 </div>
-                <img src={Play} onClick={() => handleClick(nameCollection, propsHistory)} />
+                <Link to={{pathname:"/quiz", state:{dataCardsMap}}}> 
+                    <img src={Play}/>
+                </Link>
             </li>
         )
     })
