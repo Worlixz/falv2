@@ -38,6 +38,8 @@ class Firebase {
     signoutUser = () => this.auth.signOut()
     // Config des méthodes aux niveau de la db
 
+    setNewCollectionCards = (uid, newCollection) => this.db.collection(`users/${uid}/CartesCollection/${newCollection}`)
+
 
 }
 

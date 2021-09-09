@@ -292,6 +292,9 @@ main {
   width: 100%;
   padding: 50px 0;
 }
+.containerUl ul{
+  position: relative;
+}
 
 .liMapCollectionCards{
   background: #fefefe;
@@ -330,4 +333,76 @@ main {
 
 .containerProfil{
   width: 100%;
+}
+
+.divBtnPlus{
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  transform: translate(50%, 50%);
+}
+.divBtnPlus button{
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: .3s ease-in-out;
+}
+.divBtnPlus button:hover{
+  background: none;
+  border: none;
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: .3s ease-in-out;
+}
+#btnPlus{
+  height: 50px;
+}
+
+.modal{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  height: 230px;
+  width: 500px;  
+  z-index: 3;
+  background: lightgray;
+  border-radius: 30px;
+}
+.btnCloseModal{
+  margin: 10px;
+  width: 30px;
+  align-self: flex-end;
+  background: none;
+  border: none;
+  transition: .3s ease-in-out;
+}
+.btnCloseModal:hover{
+  transform: scale(1.1);
+  transition: .3s ease-in-out;
+}
+.btnCloseModal img{
+  height: 30px;
+}
+
+.formModal{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 0 auto;
+}
+.formModal label{
+  margin-top: 10px;
+}
+.formModal input{
+  margin-top: 5px;
+}
+.formModal button{
+  width: 80px;
+  margin: 15px auto 0 auto;
+  font-size: 16px;
+  height: 30px;
+  background: var(--selection-answer);
+  border-radius: 20px;
+  border: none;
+  color: white;
 }
