@@ -38,7 +38,12 @@ class Firebase {
     signoutUser = () => this.auth.signOut()
     // Config des méthodes aux niveau de la db
 
-    setNewCollectionCards = (uid, newCollection) => this.db.collection(`users/${uid}/CartesCollection/${newCollection}`)
+    setNewCollectionCards = (uid, newCollection) => {
+        console.log('je suis dans la fct firebase uid : ', uid)
+        return this.db.doc(`users/${uid}/CartesCollection/${newCollection.nameCollection}`).set({
+                categorie: newCollection.categorie
+        }, {merge: true})
+    }
 
 
 }

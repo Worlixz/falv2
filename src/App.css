@@ -285,18 +285,18 @@ main {
   transition: 0.05s ease-in-out;
 }
 
-.containerUl{
+.containerUl {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   padding: 50px 0;
 }
-.containerUl ul{
+.containerUl ul {
   position: relative;
 }
 
-.liMapCollectionCards{
+.liMapCollectionCards {
   background: #fefefe;
   border-radius: 20px;
   display: flex;
@@ -304,99 +304,99 @@ main {
   width: 400px;
   margin: 20px 0px;
   align-items: center;
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
-.liMapCollectionCards:hover{
+.liMapCollectionCards:hover {
   transform: scale(1.1);
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
-.divLiMapCollectionCards{
+.divLiMapCollectionCards {
   display: flex;
   flex-direction: column;
   width: 100%;
   margin: 10px;
 }
 
-.liMapCollectionCards img{
- height: 35px;
- margin: 10px;
+.liMapCollectionCards img {
+  height: 35px;
+  margin: 10px;
 }
 
-#btnPlay:hover{
+#btnPlay:hover {
   cursor: pointer;
 }
 
-.containerUser{
+.containerUser {
   width: 100%;
 }
 
-.containerProfil{
+.containerProfil {
   width: 100%;
 }
 
-.divBtnPlus{
+.divBtnPlus {
   position: absolute;
   bottom: -20px;
   right: -20px;
   transform: translate(50%, 50%);
 }
-.divBtnPlus button{
+.divBtnPlus button {
   background: none;
   border: none;
   cursor: pointer;
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
-.divBtnPlus button:hover{
+.divBtnPlus button:hover {
   background: none;
   border: none;
   cursor: pointer;
   transform: scale(1.1);
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
-#btnPlus{
+#btnPlus {
   height: 50px;
 }
 
-.modal{
+.modal {
   display: flex;
   flex-direction: column;
   position: absolute;
   height: 230px;
-  width: 500px;  
+  width: 500px;
   z-index: 3;
-  background: lightgray;
+  background: #aabbff;
   border-radius: 30px;
 }
-.btnCloseModal{
+.btnCloseModal {
   margin: 10px;
   width: 30px;
   align-self: flex-end;
   background: none;
   border: none;
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
-.btnCloseModal:hover{
+.btnCloseModal:hover {
   transform: scale(1.1);
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
-.btnCloseModal img{
+.btnCloseModal img {
   height: 30px;
 }
 
-.formModal{
+.formModal {
   display: flex;
   flex-direction: column;
   width: 70%;
   margin: 0 auto;
 }
-.formModal label{
+.formModal label {
   margin-top: 10px;
 }
-.formModal input{
+.formModal input {
   margin-top: 5px;
 }
-.formModal button{
+.formModal button {
   width: 80px;
   margin: 15px auto 0 auto;
   font-size: 16px;
@@ -405,4 +405,17 @@ main {
   border-radius: 20px;
   border: none;
   color: white;
+  transition: 0.2s ease-in-out;
+}
+.formModal button:hover {
+  transform: scale(1.1);
+  transition: 0.2s ease-in-out;
+}
+
+.sombreModal {
+  position: absolute;
+  z-index: -2;
+  height: 90vh;
+  width: 100%;
+  background: lightgray;
 }
