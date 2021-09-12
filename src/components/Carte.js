@@ -66,6 +66,7 @@ function Carte(props) {
 
     const handleChange = (e) => {
         setNewCollection({...newCollection, [e.target.id]: e.target.value})
+        console.log(newCollection)
     }
 
     const btnCreation = newCollection.nameCollection == '' ? (<button disabled style={{background: "lightgray"}}>Créer</button>) : (newCollection.categorie === 'default') ? (<button disabled style={{background: "lightgray"}}>Créer</button>) : <button>Créer</button>
@@ -83,6 +84,8 @@ function Carte(props) {
                     <option value="physio">Physiologie</option>
                     <option value="autre">Autres</option>
                 </select>
+                <label>Etiquette :</label>
+                <input type="text" id="etiquette"/>
                 {btnCreation}
             </form>
         </div>
