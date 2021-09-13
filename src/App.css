@@ -214,13 +214,13 @@ main {
 .containerAccueil {
   display: flex;
   height: 90vh;
-  width: 100%;
+  width: 100vw;
   background-color: var(--color-background);
 }
 
 .sideBar {
   display: flex;
-  width: 200px;
+  width: 15vw;
   background-color: white;
   flex-direction: column;
   justify-content: space-between;
@@ -419,4 +419,41 @@ main {
   width: 100%;
   background: black;
   opacity: 0.9;
+}
+
+.containerQuiz{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 90vh;
+  align-items: center;
+}
+
+#btnArowPreviously{
+  border: none;
+  background: none;
+  align-self: start;
+  margin: 20px;
+}
+
+#arowPreviously{
+  height: 30px;
+  transform: rotateZ(-90deg);
+  border-radius: 3px;
+  transition: .2s ease-in-out;
+}
+#arowPreviously:hover{
+  transform: scale(1.1) rotateZ(-90deg);
+  transition: .2s ease-in-out;
+}
+
+.btnGo{
+  background: #423FE5;
+  margin-top: 30px;
+  width: 250px;
+  height: 60px;
+  font-size: 24px;
+  color: white;
+  border-radius: 30px;
+  border: none;
 }
