@@ -41,7 +41,8 @@ class Firebase {
     setNewCollectionCards = (uid, newCollection) => {
         console.log('je suis dans la fct firebase uid : ', uid)
         return this.db.doc(`users/${uid}/CartesCollection/${newCollection.nameCollection}`).set({
-                categorie: newCollection.categorie
+            categorie: newCollection.categorie,
+            etiquette: newCollection.etiquette
         }, {merge: true})
     }
 

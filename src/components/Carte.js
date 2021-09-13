@@ -18,7 +18,8 @@ function Carte(props) {
     const propsHistory = props.propsHistory
     const dataNewCollection = {
         nameCollection : '',
-        categorie: 'default'
+        categorie: 'default',
+        etiquette: ''
     }
     const mapDataCards = []
     const mapDataCardsCopie = props.dataCards
@@ -69,7 +70,10 @@ function Carte(props) {
         console.log(newCollection)
     }
 
-    const btnCreation = newCollection.nameCollection == '' ? (<button disabled style={{background: "lightgray"}}>Créer</button>) : (newCollection.categorie === 'default') ? (<button disabled style={{background: "lightgray"}}>Créer</button>) : <button>Créer</button>
+    const btnCreation = newCollection.nameCollection == '' ? 
+        (<button disabled style={{background: "lightgray"}}>Créer</button>) : (newCollection.categorie === 'default') ? 
+        (<button disabled style={{background: "lightgray"}}>Créer</button>) : (newCollection.etiquette === '') ?
+        (<button disabled style={{background: "lightgray"}}>Créer</button>) : (<button>Créer</button>)
 
     const modal = (
         <div className="modal">
@@ -84,8 +88,8 @@ function Carte(props) {
                     <option value="physio">Physiologie</option>
                     <option value="autre">Autres</option>
                 </select>
-                <label>Etiquette :</label>
-                <input type="text" id="etiquette"/>
+                <label id="etiquette">Etiquette :</label>
+                <input type="text" id="etiquette" onChange={handleChange}/>
                 {btnCreation}
             </form>
         </div>
