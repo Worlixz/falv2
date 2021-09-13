@@ -421,34 +421,35 @@ main {
   opacity: 0.9;
 }
 
-.containerQuiz{
+.containerQuiz {
   display: flex;
+  position: relative;
   flex-direction: column;
-  width: 100%;
+  width: 100vw;
   height: 90vh;
   align-items: center;
 }
 
-#btnArowPreviously{
+#btnArowPreviously {
   border: none;
   background: none;
   align-self: start;
   margin: 20px;
 }
 
-#arowPreviously{
+#arowPreviously {
   height: 30px;
   transform: rotateZ(-90deg);
   border-radius: 3px;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
-#arowPreviously:hover{
+#arowPreviously:hover {
   transform: scale(1.1) rotateZ(-90deg);
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
-.btnGo{
-  background: #423FE5;
+.btnGo {
+  background: #423fe5;
   margin-top: 30px;
   width: 250px;
   height: 60px;
@@ -456,4 +457,123 @@ main {
   color: white;
   border-radius: 30px;
   border: none;
+}
+
+.containerCardsForManage {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardsCards {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: white;
+  margin: 20px 0;
+  width: 650px;
+  border-radius: 17px;
+}
+
+.cardsCardsDivInfo {
+}
+.cardsCardsDivBTN {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-right: 10px;
+}
+.cardsTitle {
+  padding: 10px;
+}
+.cardsText {
+  padding: 10px;
+  font-size: 14px;
+  color: #c4c4c4;
+}
+
+.btnCardsManagement {
+  background: none;
+  border: none;
+}
+#crossRed {
+  height: 20px;
+}
+#pencil {
+  height: 20px;
+}
+
+/*  Modal cards Management*/
+
+.sombreModalCardsManagement {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  z-index: -2;
+  height: 90vh;
+  width: 100%;
+  background: black;
+  opacity: 0.9;
+}
+
+.modalForCardsManagement {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  background-color: #e5e5e5;
+  width: 600px;
+  z-index: 3;
+  opacity: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  align-items: center;
+  border-radius: 30px;
+}
+
+.formModalCardsManagement {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+.formModalCardsManagement h5 {
+  margin-top: 30px;
+  margin-bottom: 5px;
+}
+.formModalCardsManagement textarea {
+  max-width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+.formModalCardsManagement select {
+  height: 30px;
+  font-size: 16px;
+}
+
+.selectVraiFaux {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+.selectVraiFaux select {
+  width: 100%;
+  margin-left: 10px;
+}
+.selectVraiFaux img {
+  height: 25px;
+}
+
+.modificationCards {
+  margin: 40px 0;
+  width: 70%;
+  height: 60px;
+  background: #0015b2;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
 }
