@@ -478,8 +478,6 @@ main {
   border-radius: 17px;
 }
 
-.cardsCardsDivInfo {
-}
 .cardsCardsDivBTN {
   display: flex;
   flex-direction: column;
@@ -576,4 +574,11 @@ main {
   border: none;
   border-radius: 10px;
   font-size: 20px;
+}
+
+.quizReponseModification textarea{
+  width: 100%;
+  resize: none;
+  height: 30px;
+  padding: 4px;
 }

@@ -34,13 +34,15 @@ function Quiz(props) {
     const displayCards = Object.entries(dataCards).map((element) => {
         let creattionCards = {
             question: "",
-            reponse: ''
+            reponse: '',
+            type: ''
         }
         /* console.log("je suis dans map : " , element) */
         Object.values(element).map((deepElement) => {
             if(deepElement.question != undefined){
                 /* console.log("Question : ", deepElement.question) */
                 creattionCards.question = deepElement.question
+                creattionCards.type = deepElement.type
             }
             if(deepElement.reponse != undefined){
                 /* console.log("Réponse : " , deepElement.reponse) */
@@ -68,13 +70,21 @@ function Quiz(props) {
 
     const handleClickBtn = (creattionCards) => {
         setModalCheck(true)
-        setModalData(creattionCards)
-        console.log(modalData)
+        setModalData(creattionCards) //Initialisation des données su state en fonction de la carte cliqué
+        console.log(creattionCards)
         assombrir.style.zIndex = "2"
     }
+
+    const handleChange = (e) => {
+        // Modification du state de handleClickBtn 
+        setModalData({...modalData, [e.target.id]: e.target.value})
+        console.log("modal Data : ",modalData)
+
+    }
     
-    const handleCloseModal = () => {
+    const handleCloseModal = (e) => {
         setModalCheck(false)
+        setModalData("")
         /* setNewCollection(dataNewCollection) */
         assombrir.style.zIndex = "-2"
     }
@@ -88,20 +98,33 @@ function Quiz(props) {
                     <hr/>
                     <h4>{dataCollection.nameCollection}</h4>
                     <h5>Type de réponse</h5>
-                    <select>
+                    <select id="type" value={modalData.type} onChange={handleChange}>
                         <option value="vraiFaux">Vrai - Faux</option>
                         <option value="quiz">Quiz</option>
                     </select>
                     <h5 id="question">Question :</h5>
-                    <textarea type="text" id="question" value={modalData.question}/> 
+                    <textarea type="text" id="question" value={modalData.question} onChange={handleChange}/> 
                     <h5 id="reponse">Réponse :</h5>
-                    <div className="selectVraiFaux">
-                        <img src={check} />
-                        <select>
+                    {modalData.type == 'vraiFaux' ? (<div className="selectVraiFaux">
+                        
+                        {modalData.reponse == 'true' ? (<img src={check} />) : (<img src={crossRed} />)}
+                        <select id="reponse" value={modalData.reponse} onChange={handleChange}>
                             <option value={true}>Vrai</option>
                             <option value={false}>Faux</option>
                         </select>
-                    </div>
+                    </div>) : (
+                        <div className="quizReponseModification">
+                            <textarea id="reponse" value={modalData.reponse} onChange={handleChange} />
+                            <h5> Possibilité : </h5>
+                            <div className="quizReponsePossibilite">
+                                <textarea />
+                                <textarea />
+                                <textarea />
+                                <textarea />
+                            </div>
+                        </div>
+                    )}
+                    
                 </form>
                 <button className="modificationCards">Modifier ma carte</button>
             </div>
