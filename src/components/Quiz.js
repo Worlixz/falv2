@@ -29,42 +29,6 @@ function Quiz(props) {
             listener()
         }
     }, [userSession])
-    
-
-    const displayCards = Object.entries(dataCards).map((element) => {
-        let creattionCards = {
-            question: "",
-            reponse: '',
-            type: '',
-            id: ''
-        }
-        const idCards = Object.values(element)
-        Object.values(element).map((deepElement) => {
-            if(deepElement.question != undefined){
-                /* console.log("Question : ", deepElement.question)*/
-                creattionCards.question = deepElement.question
-                creattionCards.type = deepElement.type
-                creattionCards.id = idCards[0]
-            }
-            if(deepElement.reponse != undefined){
-                /* console.log("Réponse : " , deepElement.reponse) */
-                creattionCards.reponse = deepElement.reponse === true ? (deepElement.reponse.toString()) : deepElement.reponse
-            }
-            return creattionCards
-        })
-        return creattionCards.question ? 
-            (<div className="cardsCards">
-                <div className="cardsCardsDivInfo">
-                    <h3 className="cardsTitle">{creattionCards.question}</h3>
-                    <p className="cardsText">{creattionCards.reponse}</p>
-                </div>
-                <div className="cardsCardsDivBTN">
-                    <button onClick={() => handleClickBtn(creattionCards)} className="btnCardsManagement"><img id="pencil" src={pencil} /></button>
-                    <button className="btnCardsManagement"><img id="crossRed" onClick={() => deleteCards()} src={crossRed} /></button>
-                </div>
-            </div>) : null
-        
-    })
 
     const handlePreviously = (props) => {
         props.view.location.assign('/carte')
@@ -96,9 +60,48 @@ function Quiz(props) {
         firebase.modificationCards(userSession.uid, dataCollection, modalData)
     }
 
-    const deleteCards = () => {
-        firebase.deleteCards(userSession.uid, dataCollection, modalData)
+    const deleteCards = (creattionCards) => {
+        setModalData(creattionCards)
+        firebase.deleteDataCards(userSession.uid, dataCollection, creattionCards.id)
+        debugger
+        
     }
+    
+
+    const displayCards = Object.entries(dataCards).map((element) => {
+        let creattionCards = {
+            question: "",
+            reponse: '',
+            type: '',
+            id: ''
+        }
+        const idCards = Object.values(element)
+        Object.values(element).map((deepElement) => {
+            if(deepElement.question != undefined){
+                /* console.log("Question : ", deepElement.question)*/
+                creattionCards.question = deepElement.question
+                creattionCards.type = deepElement.type
+                creattionCards.id = idCards[0]
+            }
+            if(deepElement.reponse != undefined){
+                /* console.log("Réponse : " , deepElement.reponse) */
+                creattionCards.reponse = deepElement.reponse === true ? (deepElement.reponse.toString()) : deepElement.reponse
+            }
+            return creattionCards
+        })
+        return creattionCards.question ? 
+            (<div className="cardsCards">
+                <div className="cardsCardsDivInfo">
+                    <h3 className="cardsTitle">{creattionCards.question}</h3>
+                    <p className="cardsText">{creattionCards.reponse}</p>
+                </div>
+                <div className="cardsCardsDivBTN">
+                    <button onClick={() => handleClickBtn(creattionCards)} className="btnCardsManagement"><img id="pencil" src={pencil} /></button>
+                    <button className="btnCardsManagement"><img id="crossRed" onClick={() => deleteCards(creattionCards)} src={crossRed} /></button>
+                </div>
+            </div>) : null
+        
+    })
 
     const modal = (
         <Fragment>

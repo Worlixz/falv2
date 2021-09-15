@@ -49,7 +49,7 @@ class Firebase {
     // Permet la modification d'une carte nécessite : UID | LA COLLECTION | LES DATA DE LA CARTE
     modificationCards = (uid, dataCollection, modalData) => {
         return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
-            [modalData.id]: {
+            ["modalData.id"]: {
                 question: modalData.question,
                     reponse: modalData.reponse,
                     type: modalData.type,
@@ -62,11 +62,28 @@ class Firebase {
     }
 
     // Suppression d'une carte
-    deleteCards = (uid, dataCollection, modalData) => {
-        return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).delete(modalData.id)
+    /* deleteCards = (uid, dataCollection, modalData) => {
+        return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).update({
+            [modalData]: delete()
+        })
+    } */
+
+    deleteDataCards = (uid, dataCollection, creattionCards) => {
+        let refCards = this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`)
+        /* let deleteCards = refCards.update({
+            [creattionCards]: {
+                test: 'test3'
+            }
+        }) */
+        let deleteCards = refCards.update({
+            [creattionCards]: this.db.FieldValue.delete()
+        })
+        /* let deleteCards = refCards.update({
+            [modalData]: firebase.firestore.FieldValue.delete()
+        }) */
+
+        return deleteCards
     }
-
-
 }
 
 export default Firebase
