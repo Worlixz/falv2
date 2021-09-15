@@ -46,6 +46,26 @@ class Firebase {
         }, {merge: true})
     }
 
+    // Permet la modification d'une carte nécessite : UID | LA COLLECTION | LES DATA DE LA CARTE
+    modificationCards = (uid, dataCollection, modalData) => {
+        return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
+            [modalData.id]: {
+                question: modalData.question,
+                    reponse: modalData.reponse,
+                    type: modalData.type,
+                    p1: modalData.p1,
+                    p2: modalData.p2,
+                    p3: modalData.p3,
+                    p4: modalData.p4
+            }
+        }, {merge: true})
+    }
+
+    // Suppression d'une carte
+    deleteCards = (uid, dataCollection, modalData) => {
+        return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).delete(modalData.id)
+    }
+
 
 }
 

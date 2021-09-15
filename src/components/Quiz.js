@@ -35,14 +35,16 @@ function Quiz(props) {
         let creattionCards = {
             question: "",
             reponse: '',
-            type: ''
+            type: '',
+            id: ''
         }
-        /* console.log("je suis dans map : " , element) */
+        const idCards = Object.values(element)
         Object.values(element).map((deepElement) => {
             if(deepElement.question != undefined){
-                /* console.log("Question : ", deepElement.question) */
+                /* console.log("Question : ", deepElement.question)*/
                 creattionCards.question = deepElement.question
                 creattionCards.type = deepElement.type
+                creattionCards.id = idCards[0]
             }
             if(deepElement.reponse != undefined){
                 /* console.log("Réponse : " , deepElement.reponse) */
@@ -58,7 +60,7 @@ function Quiz(props) {
                 </div>
                 <div className="cardsCardsDivBTN">
                     <button onClick={() => handleClickBtn(creattionCards)} className="btnCardsManagement"><img id="pencil" src={pencil} /></button>
-                    <button className="btnCardsManagement"><img id="crossRed" src={crossRed} /></button>
+                    <button className="btnCardsManagement"><img id="crossRed" onClick={() => deleteCards()} src={crossRed} /></button>
                 </div>
             </div>) : null
         
@@ -89,11 +91,20 @@ function Quiz(props) {
         assombrir.style.zIndex = "-2"
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        firebase.modificationCards(userSession.uid, dataCollection, modalData)
+    }
+
+    const deleteCards = () => {
+        firebase.deleteCards(userSession.uid, dataCollection, modalData)
+    }
+
     const modal = (
         <Fragment>
             <div className="modalForCardsManagement">
                 <button className="btnCloseModal" onClick={() => handleCloseModal()}><img src={btnClose}/></button>
-                <form className="formModalCardsManagement">
+                <form onSubmit={handleSubmit} className="formModalCardsManagement">
                     <h2>Collection</h2>
                     <hr/>
                     <h4>{dataCollection.nameCollection}</h4>
@@ -117,16 +128,16 @@ function Quiz(props) {
                             <textarea id="reponse" value={modalData.reponse} onChange={handleChange} />
                             <h5> Possibilité : </h5>
                             <div className="quizReponsePossibilite">
-                                <textarea />
-                                <textarea />
-                                <textarea />
-                                <textarea />
+                                <textarea id="p1"onChange={handleChange}/>
+                                <textarea id="p2"onChange={handleChange}/>
+                                <textarea id="p3"onChange={handleChange}/>
+                                <textarea id="p4"onChange={handleChange}/>
                             </div>
                         </div>
                     )}
                     
-                </form>
                 <button className="modificationCards">Modifier ma carte</button>
+                </form>
             </div>
         </Fragment>
     )
