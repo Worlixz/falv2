@@ -460,6 +460,7 @@ main {
 }
 
 .containerCardsForManage {
+  position: relative;
   height: 100%;
   width: 100%;
   display: flex;
@@ -581,4 +582,51 @@ main {
   resize: none;
   height: 30px;
   padding: 4px;
+}
+.deleteModalDiv{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  z-index: 3;
+  border-radius: 20px;
+}
+.deleteModalTitle{
+  padding: 20px 30px;
+  
+}
+.deleteModalBTN{
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.deleteModalBTN button{
+  font-size: 16px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  transition: .2s ease-in-out;
+}
+.deleteModalBTN button:hover{
+  transform: scale(1.1);
+  transition: .2s ease-in-out;
+}
+#deleteBTN{
+  color: red;
+}
+
+.containerCardsAdd{
+  position: relative;
+}
+
+#btnPlusQuiz{
+  height: 50px;
+  transform: translateX(275px);
+  transition: .15s ease-in-out;
+}
+#btnPlusQuiz:hover{
+  transform: translateX(275px) scale(1.1);
+  transition: .15s ease-in-out;
 }

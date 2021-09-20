@@ -4,6 +4,7 @@ import crossRed from '../assets/CardsManagement/crossRedClose.svg'
 import pencil from '../assets/CardsManagement/pencil.svg'
 import btnClose from '../assets/close.svg'
 import check from '../assets/CardsManagement/check.svg'
+import btnPlus from '../assets/plus.svg'
 import { FirebaseContext } from './Firebase'
 
 function Quiz(props) {
@@ -18,8 +19,14 @@ function Quiz(props) {
     const assombrir = document.querySelector('.sombreModalCardsManagement')
 
     const [modalCheck, setModalCheck] = useState(false)
+    const [deleteModal, setDeleteModal] = useState(false)
     const [userSession, setUserSession] = useState("")
-    const [modalData, setModalData] = useState("")
+    const [modalData, setModalData] = useState({
+        question: "",
+        reponse: '',
+        type: '',
+        id: ''
+    })
 
     useEffect(() => {
         let listener = firebase.auth.onAuthStateChanged(user => {
@@ -40,12 +47,12 @@ function Quiz(props) {
         console.log(creattionCards)
         assombrir.style.zIndex = "2"
     }
-
+    
     const handleChange = (e) => {
         // Modification du state de handleClickBtn 
         setModalData({...modalData, [e.target.id]: e.target.value})
         console.log("modal Data : ",modalData)
-
+        
     }
     
     const handleCloseModal = (e) => {
@@ -54,18 +61,32 @@ function Quiz(props) {
         /* setNewCollection(dataNewCollection) */
         assombrir.style.zIndex = "-2"
     }
-
+    
     const handleSubmit = (e) => {
         e.preventDefault()
         firebase.modificationCards(userSession.uid, dataCollection, modalData)
     }
-
-    const deleteCards = (creattionCards) => {
-        setModalData(creattionCards)
-        firebase.deleteDataCards(userSession.uid, dataCollection, creattionCards.id)
-        debugger
-        
+    
+    const deleteCards = () => {
+        firebase.deleteDataCards(userSession.uid, dataCollection, modalData.id)
+        .then(() => {
+            window.location.reload()
+        })
+        setDeleteModal(false)
+        assombrir.style.zIndex = "-2"
     }
+    
+    const handleDeleteModalOpen = (creattionCards) => {
+        setModalData(creattionCards)
+        setDeleteModal(true)
+        assombrir.style.zIndex = "2"
+    }
+    const handleDeleteModalClose = () => {
+        setDeleteModal(false)
+        assombrir.style.zIndex = "-2"
+    }
+
+
     
 
     const displayCards = Object.entries(dataCards).map((element) => {
@@ -97,11 +118,24 @@ function Quiz(props) {
                 </div>
                 <div className="cardsCardsDivBTN">
                     <button onClick={() => handleClickBtn(creattionCards)} className="btnCardsManagement"><img id="pencil" src={pencil} /></button>
-                    <button className="btnCardsManagement"><img id="crossRed" onClick={() => deleteCards(creattionCards)} src={crossRed} /></button>
+                    <button className="btnCardsManagement"><img id="crossRed" onClick={() => handleDeleteModalOpen(creattionCards)} src={crossRed} /></button>
+                    {/* <button className="btnCardsManagement"><img id="crossRed" onClick={() => deleteCards(creattionCards)} src={crossRed} /></button> */}
                 </div>
             </div>) : null
         
     })
+
+    const deleteModalDisplay = (
+            <div className="deleteModalDiv">
+                <div className="deleteModalTitle">
+                    <h4>Est-vous sur de vouloir supprimer cette carte ? </h4>
+                </div>
+                <div className="deleteModalBTN">
+                    <button id="deleteBTN" onClick={() => deleteCards()}>Supprimer</button>
+                    <button id="conserverBTN" onClick={() => handleDeleteModalClose()}>Conserver</button>
+                </div>
+            </div>
+    )
 
     const modal = (
         <Fragment>
@@ -150,11 +184,15 @@ function Quiz(props) {
             <div className="sombreModalCardsManagement"></div>
             <button onClick={handlePreviously} id="btnArowPreviously"><img id="arowPreviously" src={arow}/></button>
             <h2>Collection : {dataCollection.nameCollection}</h2> 
-            <button className="btnGo">C'est parti !</button>
+            <div className="containerCardsAdd">
+                <button className="btnGo">C'est parti !</button>
+            </div>
             <div className="containerCardsForManage">
                 {displayCards}  
+                <img id="btnPlusQuiz" src={btnPlus} />
             </div>
-            {modalCheck ? (modal) : null}
+            {modalCheck ? modal : null}
+            {deleteModal ? deleteModalDisplay : null}
         </div>
     )
 }

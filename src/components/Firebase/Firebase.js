@@ -70,13 +70,10 @@ class Firebase {
 
     deleteDataCards = (uid, dataCollection, creattionCards) => {
         let refCards = this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`)
-        /* let deleteCards = refCards.update({
-            [creattionCards]: {
-                test: 'test3'
-            }
-        }) */
+
+        // Permet le non affichage et la non création de div sur le DOM mais garde une donnée dans la DB => Problème à regler !!!!
         let deleteCards = refCards.update({
-            [creattionCards]: this.db.FieldValue.delete()
+            [creattionCards]: ""
         })
         /* let deleteCards = refCards.update({
             [modalData]: firebase.firestore.FieldValue.delete()
