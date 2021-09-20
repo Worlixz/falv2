@@ -49,6 +49,39 @@
   color: #f8f9ff;
 }
 
+/* LOADER */
+
+.containerLoaderSpine {
+  height: 90vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loaderSpine {
+  position: relative;
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  border-top-color: #423fe5;
+  border-bottom-color: #423fe5;
+  animation: spin 1s ease-in-out infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textLoaderSpine {
+  position: absolute;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 main {
   height: 90vh;
   max-width: 1920px;
@@ -448,13 +481,23 @@ main {
   transition: 0.2s ease-in-out;
 }
 
-.btnGo {
-  background: #423fe5;
+.containerCardsAdd {
+  position: relative;
   margin-top: 30px;
-  width: 250px;
-  height: 60px;
+  margin-bottom: 10px;
+  transition: 0.3s ease-in-out;
+}
+.containerCardsAdd:hover {
+  transform: scale(1.05);
+  transition: 0.3s ease-in-out;
+}
+
+.btnGo {
+  text-decoration: none;
+  background: #423fe5;
   font-size: 24px;
   color: white;
+  padding: 10px 40px;
   border-radius: 30px;
   border: none;
 }
@@ -497,6 +540,15 @@ main {
 .btnCardsManagement {
   background: none;
   border: none;
+  transition: ease-in-out 0.2s;
+}
+.btnCardsManagement img {
+  transition: ease-in-out 0.2s;
+}
+
+.btnCardsManagement img:hover {
+  transform: scale(1.15);
+  transition: ease-in-out 0.2s;
 }
 #crossRed {
   height: 20px;
@@ -575,15 +627,16 @@ main {
   border: none;
   border-radius: 10px;
   font-size: 20px;
+  align-self: center;
 }
 
-.quizReponseModification textarea{
+.quizReponseModification textarea {
   width: 100%;
   resize: none;
   height: 30px;
   padding: 4px;
 }
-.deleteModalDiv{
+.deleteModalDiv {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -591,42 +644,46 @@ main {
   z-index: 3;
   border-radius: 20px;
 }
-.deleteModalTitle{
+.deleteModalTitle {
   padding: 20px 30px;
-  
 }
-.deleteModalBTN{
+.deleteModalBTN {
   padding: 20px 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 }
-.deleteModalBTN button{
+.deleteModalBTN button {
   font-size: 16px;
   font-weight: bold;
   background: none;
   border: none;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
-.deleteModalBTN button:hover{
+.deleteModalBTN button:hover {
   transform: scale(1.1);
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
-#deleteBTN{
+#deleteBTN {
   color: red;
 }
 
-.containerCardsAdd{
-  position: relative;
-}
-
-#btnPlusQuiz{
+#btnPlusQuiz {
   height: 50px;
   transform: translateX(275px);
-  transition: .15s ease-in-out;
+  transition: 0.15s ease-in-out;
 }
-#btnPlusQuiz:hover{
+#btnPlusQuiz:hover {
   transform: translateX(275px) scale(1.1);
-  transition: .15s ease-in-out;
+  transition: 0.15s ease-in-out;
+}
+
+.quizContainer {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100vw;
+  height: 90vh;
+  align-items: center;
 }

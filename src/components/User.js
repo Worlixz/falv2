@@ -3,8 +3,9 @@ import { FirebaseContext  } from './Firebase/index';
 import Header from './Header'
 import Loader from './Loader';
 import Sidebar from './Sidebar';
-import Carte from './Carte'
+import Collection from './Collection'
 import Profil from './Profil'
+import Carte from './Carte';
 import Quiz from './Quiz';
 
 const User = (props) => {
@@ -58,16 +59,20 @@ const User = (props) => {
 
     let content;
     switch(props.history.location.pathname){
-        case "/carte" : {
-            content = <Carte dataCards={dataCards} dataUser={userData} propsHistory={props} userSession={userSession} />
+        case "/collection" : {
+            content = <Collection dataCards={dataCards} dataUser={userData} propsHistory={props} userSession={userSession} />
             break
         }
         case "/profil" : {
             content = <Profil/>
             break
         }
+        case "/carte" : {
+            content = <Carte propsHistory={props}/>
+            break
+        }
         case "/quiz" : {
-            content = <Quiz propsHistory={props}/>
+            content = <Quiz propsHistory={props} dataUser={userData} userSession={userSession}/>
             break
         }
         default : {

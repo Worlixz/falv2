@@ -1,6 +1,6 @@
 import React, { useContext} from 'react'
 import User from './User'
-import Carte from './Carte'
+import Collection from './Collection'
 import {BrowserRouter as Router, NavLink, Route, Switch} from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import iconCards from '../assets/sidebar/icon_cards_gris.png'
@@ -38,7 +38,7 @@ function Sidebar(props) {
             </li>
             <li>
                 <img src={iconCards}/>
-                <NavLink activeClassName="active" to='/carte'>Mes collections</NavLink>
+                <NavLink activeClassName="active" to='/collection'>Mes collections</NavLink>
             </li>
             <li>
                 <img src={iconProfil}/>

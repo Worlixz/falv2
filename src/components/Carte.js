@@ -1,144 +1,201 @@
-import React, { Fragment, useState, useContext, useEffect} from 'react'
+import React, {useState, useEffect, useContext, Fragment} from 'react'
 import { Link } from 'react-router-dom'
-import { FirebaseContext } from './Firebase'
-import OsCasse from '../assets/Cards/os-casse.svg'
-import Physio from '../assets/Cards/poumons.svg'
-import Play from '../assets/Cards/bouton-jouer.svg'
-import btnPlus from '../assets/plus.svg'
+import arow from '../assets/up-arrow-angle.svg'
+import crossRed from '../assets/CardsManagement/crossRedClose.svg'
+import pencil from '../assets/CardsManagement/pencil.svg'
 import btnClose from '../assets/close.svg'
-import interogationPoint from '../assets/Cards/interrogationPoint.svg'
-
+import check from '../assets/CardsManagement/check.svg'
+import btnPlus from '../assets/plus.svg'
+import { FirebaseContext } from './Firebase'
 
 function Carte(props) {
 
     const firebase = useContext(FirebaseContext)
-
-    const assombrir = document.querySelector('.sombreModal')
-
-    const propsHistory = props.propsHistory
-    const dataNewCollection = {
-        nameCollection : '',
-        categorie: 'default',
-        etiquette: ''
-    }
-    const mapDataCards = []
-    const mapDataCardsCopie = props.dataCards
+    console.log(props)
     
+    
+    const dataCollection = props.propsHistory.location.state.dataCardsMap
+    const dataCards = props.propsHistory.location.state.dataCardsMap.cards
+
+    const assombrir = document.querySelector('.sombreModalCardsManagement')
+
     const [modalCheck, setModalCheck] = useState(false)
-    const [newCollection, setNewCollection] = useState(dataNewCollection)
-    const [userSession, setUserSession] = useState(props.userSession.uid.toString())
-    
-
+    const [deleteModal, setDeleteModal] = useState(false)
+    const [userSession, setUserSession] = useState("")
+    const [modalData, setModalData] = useState({
+        question: "",
+        reponse: '',
+        type: '',
+        id: ''
+    })
 
     useEffect(() => {
         let listener = firebase.auth.onAuthStateChanged(user => {
-            user ? setUserSession(user) : propsHistory.push('/')
+            user ? setUserSession(user) : props.history.push('/')
         })
         return () => {
             listener()
         }
     }, [userSession])
 
-    const handleClickBtn = () => {
+    
+    const handlePreviously = (props) => {
+        props.view.location.assign('/carte')
+    }
+    
+    const handleClickBtn = (creattionCards) => {
         setModalCheck(true)
+        setModalData(creattionCards) //Initialisation des données su state en fonction de la carte cliqué
+        console.log(creattionCards)
         assombrir.style.zIndex = "2"
     }
     
-    const handleCloseModal = () => {
+    const handleChange = (e) => {
+        // Modification du state de handleClickBtn 
+        setModalData({...modalData, [e.target.id]: e.target.value})
+        console.log("modal Data : ",modalData)
+        
+    }
+    
+    const handleCloseModal = (e) => {
         setModalCheck(false)
-        setNewCollection(dataNewCollection)
+        setModalData("")
+        /* setNewCollection(dataNewCollection) */
         assombrir.style.zIndex = "-2"
     }
-
-    function reloadPage () {
-        window.location.reload()
-    }
-
+    
     const handleSubmit = (e) => {
         e.preventDefault()
-        firebase.setNewCollectionCards(userSession.uid, newCollection)
+        firebase.modificationCards(userSession.uid, dataCollection, modalData)
+    }
+    
+    const deleteCards = () => {
+        firebase.deleteDataCards(userSession.uid, dataCollection, modalData.id)
         .then(() => {
-            reloadPage()
+            window.location.reload()
         })
-        .catch((err) => {
-            console.log(err)
+        setDeleteModal(false)
+        assombrir.style.zIndex = "-2"
+    }
+    
+    const handleDeleteModalOpen = (creattionCards) => {
+        setModalData(creattionCards)
+        setDeleteModal(true)
+        assombrir.style.zIndex = "2"
+    }
+    const handleDeleteModalClose = () => {
+        setDeleteModal(false)
+        assombrir.style.zIndex = "-2"
+    }
+   
+    
+    
+    
+    const displayCards = Object.entries(dataCards).map((element) => {
+        let creattionCards = {
+            question: "",
+            reponse: '',
+            type: '',
+            id: ''
+        }
+        const idCards = Object.values(element)
+        Object.values(element).map((deepElement) => {
+            if(deepElement.question != undefined){
+                /* console.log("Question : ", deepElement.question)*/
+                creattionCards.question = deepElement.question
+                creattionCards.type = deepElement.type
+                creattionCards.id = idCards[0]
+            }
+            if(deepElement.reponse != undefined){
+                /* console.log("Réponse : " , deepElement.reponse) */
+                creattionCards.reponse = deepElement.reponse === true ? (deepElement.reponse.toString()) : deepElement.reponse
+            }
+            return creattionCards
         })
-    }
+        return creattionCards.question ? 
+            (<div className="cardsCards">
+                <div className="cardsCardsDivInfo">
+                    <h3 className="cardsTitle">{creattionCards.question}</h3>
+                    <p className="cardsText">{creattionCards.reponse}</p>
+                </div>
+                <div className="cardsCardsDivBTN">
+                    <button onClick={() => handleClickBtn(creattionCards)} className="btnCardsManagement"><img id="pencil" src={pencil} /></button>
+                    <button className="btnCardsManagement"><img id="crossRed" onClick={() => handleDeleteModalOpen(creattionCards)} src={crossRed} /></button>
+                </div>
+            </div>) : null
+        
+    })
 
-    const handleChange = (e) => {
-        setNewCollection({...newCollection, [e.target.id]: e.target.value})
-        console.log(newCollection)
-    }
-
-    const btnCreation = newCollection.nameCollection == '' ? 
-        (<button disabled style={{background: "lightgray"}}>Créer</button>) : (newCollection.categorie === 'default') ? 
-        (<button disabled style={{background: "lightgray"}}>Créer</button>) : (newCollection.etiquette === '') ?
-        (<button disabled style={{background: "lightgray"}}>Créer</button>) : (<button>Créer</button>)
+    const deleteModalDisplay = (
+            <div className="deleteModalDiv">
+                <div className="deleteModalTitle">
+                    <h4>Est-vous sur de vouloir supprimer cette carte ? </h4>
+                </div>
+                <div className="deleteModalBTN">
+                    <button id="deleteBTN" onClick={() => deleteCards()}>Supprimer</button>
+                    <button id="conserverBTN" onClick={() => handleDeleteModalClose()}>Conserver</button>
+                </div>
+            </div>
+    )
 
     const modal = (
-        <div className="modal">
-            <button className="btnCloseModal" onClick={() => handleCloseModal()}><img src={btnClose}  /></button>
-            <form onSubmit={handleSubmit} className="formModal">
-                <label id="nameCollection">Créer ta nouvelle collection : </label>
-                <input type="text" id="nameCollection" onChange={handleChange}/>
-                <label id="categorie">Catégorie :</label>
-                <select id="categorie" onChange={handleChange}>
-                    <option value="default" selected>--Default--</option>
-                    <option value="anatomy">Anatomie</option>
-                    <option value="physio">Physiologie</option>
-                    <option value="autre">Autres</option>
-                </select>
-                <label id="etiquette">Etiquette :</label>
-                <input type="text" id="etiquette" onChange={handleChange}/>
-                {btnCreation}
-            </form>
-        </div>
+        <Fragment>
+            <div className="modalForCardsManagement">
+                <button className="btnCloseModal" onClick={() => handleCloseModal()}><img src={btnClose}/></button>
+                <form onSubmit={handleSubmit} className="formModalCardsManagement">
+                    <h2>Collection</h2>
+                    <hr/>
+                    <h4>{dataCollection.nameCollection}</h4>
+                    <h5>Type de réponse</h5>
+                    <select id="type" value={modalData.type} onChange={handleChange}>
+                        <option value="vraiFaux">Vrai - Faux</option>
+                        <option value="quiz">Quiz</option>
+                    </select>
+                    <h5 id="question">Question :</h5>
+                    <textarea type="text" id="question" value={modalData.question} onChange={handleChange}/> 
+                    <h5 id="reponse">Réponse :</h5>
+                    {modalData.type == 'vraiFaux' ? (<div className="selectVraiFaux">
+                        
+                        {modalData.reponse == 'true' ? (<img src={check} />) : (<img src={crossRed} />)}
+                        <select id="reponse" value={modalData.reponse} onChange={handleChange}>
+                            <option value={true}>Vrai</option>
+                            <option value={false}>Faux</option>
+                        </select>
+                    </div>) : (
+                        <div className="quizReponseModification">
+                            <textarea id="reponse" value={modalData.reponse} onChange={handleChange} />
+                            <h5> Possibilité : </h5>
+                            <div className="quizReponsePossibilite">
+                                <textarea id="p1"onChange={handleChange}/>
+                                <textarea id="p2"onChange={handleChange}/>
+                                <textarea id="p3"onChange={handleChange}/>
+                                <textarea id="p4"onChange={handleChange}/>
+                            </div>
+                        </div>
+                    )}
+                    
+                <button className="modificationCards">Modifier ma carte</button>
+                </form>
+            </div>
+        </Fragment>
     )
-        
-    for(const [key, value] of Object.entries(mapDataCardsCopie)){
-        mapDataCards.push({[key]: value})
-    } 
-       
-    const displayCollection = mapDataCards.map((element) => {
-        let dataCardsMap = {
-            nbreCards: '',
-            cards: '',
-            nameCollection: '',
-            categorie: ''
-        }
-        Object.values(element).map((cards) => {
-            dataCardsMap.nbreCards = Object.keys(cards).length -1
-            dataCardsMap.cards = cards
-            dataCardsMap.categorie = cards.categorie
-            return dataCardsMap
-        })
-        dataCardsMap.nameCollection = Object.keys(element).toString()
-        return (
-            <li className="liMapCollectionCards">
-                <img src={dataCardsMap.categorie == "anatomy" ? OsCasse : dataCardsMap.categorie == "physio" ? Physio : interogationPoint} />
-                <div className="divLiMapCollectionCards">
-                    <h3>{dataCardsMap.nameCollection}</h3>
-                    { <p>{dataCardsMap.nbreCards} {dataCardsMap.nbreCards > 1 ? 'Cartes' : 'Carte'}</p> }
-                </div>
-                <Link to={{pathname:"/quiz", state:{dataCardsMap}}}> 
-                    <img src={Play}/>
-                </Link>
-            </li>
-        )
-    })
 
     return (
         <Fragment>
-            <div className="sombreModal"></div>
-            <div className="containerUl">
-                <ul>
-                    {displayCollection}
-                    <div className='divBtnPlus'>
-                        <button onClick={() => handleClickBtn()}><img id='btnPlus' src={btnPlus}/></button>
-                    </div>
-                </ul>
-                {modalCheck ? (modal) : (null)}
+            <div className="sombreModalCardsManagement"></div>
+            <div className="containerQuiz">
+            <Link to="/collection" id="btnArowPreviously"><img id="arowPreviously" src={arow}/></Link>
+            <h2>Collection : {dataCollection.nameCollection}</h2> 
+            <div className="containerCardsAdd">
+                <Link className="btnGo" to={{pathname:"/quiz", state:{dataCards}}}>C'est parti !</Link>
             </div>
+            <div className="containerCardsForManage">
+                {displayCards}  
+                <img id="btnPlusQuiz" src={btnPlus} />
+            </div>
+            {modalCheck ? modal : null}
+            {deleteModal ? deleteModalDisplay : null}
+        </div>
         </Fragment>
         
     )

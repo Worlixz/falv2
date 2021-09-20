@@ -8,6 +8,7 @@ import Landing from './components/Landing.js'
 import Connexion from './components/Connexion';
 import Inscription from './components/Inscription';
 import User from './components/User';
+import Loader from './components/Loader';
 
 
 
@@ -19,6 +20,7 @@ function App() {
          <Route path="/inscription" component={Inscription}/>
          <Route path="/connexion" component={Connexion}/>
          <Route path="/:user" component={User}/>
+         <Route component={Loader}/>
       </Switch>
     </Router>
 
