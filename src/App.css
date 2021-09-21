@@ -320,13 +320,23 @@ main {
 
 .containerUl {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   width: 100%;
   padding: 50px 0;
 }
+.containerUl h2{
+  margin-bottom: 55px;
+}
+
 .containerUl ul {
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  align-items: center;
   position: relative;
+  overflow-y: auto;
+  margin-bottom: 30px;
 }
 
 .liMapCollectionCards {
@@ -334,10 +344,11 @@ main {
   border-radius: 20px;
   display: flex;
   list-style: none;
-  width: 400px;
-  margin: 20px 0px;
+  width: 600px;
+  margin: 10px 0px;
   align-items: center;
   transition: 0.3s ease-in-out;
+  box-shadow: 0px 3px 6px 1px rgb(0 0 0 / 40%);
 }
 .liMapCollectionCards:hover {
   transform: scale(1.1);
@@ -369,12 +380,13 @@ main {
 }
 
 .divBtnPlus {
-  position: absolute;
-  bottom: -20px;
-  right: -20px;
-  transform: translate(50%, 50%);
+  position: relative;
+  height: 70px;
+  width: 600px;
 }
 .divBtnPlus button {
+  position: absolute;
+  right: 0px;
   background: none;
   border: none;
   cursor: pointer;
@@ -500,16 +512,18 @@ main {
   padding: 10px 40px;
   border-radius: 30px;
   border: none;
+  box-shadow: 0px 5px 5px rgba(0,0,0, 0.4);
 }
 
 .containerCardsForManage {
-  position: relative;
-  height: 100%;
-  width: 100%;
   display: flex;
+  position: relative;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  overflow-y: auto;
+  margin: 50px 0 0px 0;
+  width: 102%;
+  
 }
 
 .cardsCards {
@@ -517,9 +531,10 @@ main {
   flex-direction: row;
   justify-content: space-between;
   background: white;
-  margin: 20px 0;
+  margin: 10px 0;
   width: 650px;
   border-radius: 17px;
+  box-shadow: 0px 3px 6px 1px rgb(0 0 0 / 40%);
 }
 
 .cardsCardsDivBTN {
@@ -670,12 +685,14 @@ main {
 }
 
 #btnPlusQuiz {
+  position: absolute;
+  top: 90px;
+  right: 0px;
   height: 50px;
-  transform: translateX(275px);
   transition: 0.15s ease-in-out;
 }
 #btnPlusQuiz:hover {
-  transform: translateX(275px) scale(1.1);
+  transform: scale(1.1);
   transition: 0.15s ease-in-out;
 }
 
@@ -686,4 +703,34 @@ main {
   width: 100vw;
   height: 90vh;
   align-items: center;
+}
+
+.containerTest{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 85%;
+  align-items: center;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  scroll-margin-left: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #423fe5; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #3a38cc; 
 }

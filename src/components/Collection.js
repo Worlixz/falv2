@@ -131,11 +131,12 @@ function Collection(props) {
         <Fragment>
             <div className="sombreModal"></div>
             <div className="containerUl">
+                <h2>Mes collections</h2>
+                <div className='divBtnPlus'>
+                    <button onClick={() => handleClickBtn()}><img id='btnPlus' src={btnPlus}/></button>
+                </div>
                 <ul>
                     {displayCollection}
-                    <div className='divBtnPlus'>
-                        <button onClick={() => handleClickBtn()}><img id='btnPlus' src={btnPlus}/></button>
-                    </div>
                 </ul>
                 {modalCheck ? (modal) : (null)}
             </div>

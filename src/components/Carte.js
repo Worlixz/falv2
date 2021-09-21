@@ -184,17 +184,19 @@ function Carte(props) {
         <Fragment>
             <div className="sombreModalCardsManagement"></div>
             <div className="containerQuiz">
-            <Link to="/collection" id="btnArowPreviously"><img id="arowPreviously" src={arow}/></Link>
-            <h2>Collection : {dataCollection.nameCollection}</h2> 
-            <div className="containerCardsAdd">
-                <Link className="btnGo" to={{pathname:"/quiz", state:{dataCards}}}>C'est parti !</Link>
-            </div>
-            <div className="containerCardsForManage">
-                {displayCards}  
-                <img id="btnPlusQuiz" src={btnPlus} />
-            </div>
-            {modalCheck ? modal : null}
-            {deleteModal ? deleteModalDisplay : null}
+                <Link to="/collection" id="btnArowPreviously"><img id="arowPreviously" src={arow}/></Link>
+                <div className="containerTest">
+                    <h2>Collection : {dataCollection.nameCollection}</h2> 
+                    <div className="containerCardsAdd">
+                        <Link className="btnGo" to={{pathname:"/quiz", state:{dataCards}}}>C'est parti !</Link>
+                    </div>
+                        <img id="btnPlusQuiz" src={btnPlus} />
+                    <div className="containerCardsForManage">
+                        {displayCards}  
+                    </div>
+                </div>
+                {modalCheck ? modal : null}
+                {deleteModal ? deleteModalDisplay : null}
         </div>
         </Fragment>
         
