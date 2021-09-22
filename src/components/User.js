@@ -78,8 +78,11 @@ const User = (props) => {
         default : {
 
             content = <div className="containerUser"> 
-                <h2>Je suis dans user</h2>
-
+                <div>
+                    <h2>Bienvenu dans l'application FAL</h2>
+                    <p>Sur cette page ce trouve une vidéo tutoriel, dans cette dernière tu apprendra pourquoi nous avons crée FAL et comment s'en servir. < br />Tout les retours sont les bienvenu afin d'améliorer cette dernière</p>
+                </div>
+                <iframe src="https://youtu.be/L_ADtp1tWPA" />
             </div>
             
             break
