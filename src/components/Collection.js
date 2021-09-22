@@ -129,7 +129,9 @@ function Collection(props) {
 
     return (
         <Fragment>
-            <div className="sombreModal"></div>
+            <div className="sombreModal">
+                {modalCheck ? (modal) : (null)}
+            </div>
             <div className="containerUl">
                 <h2>Mes collections</h2>
                 <div className='divBtnPlus'>
@@ -138,7 +140,6 @@ function Collection(props) {
                 <ul>
                     {displayCollection}
                 </ul>
-                {modalCheck ? (modal) : (null)}
             </div>
         </Fragment>
         

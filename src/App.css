@@ -325,7 +325,7 @@ main {
   width: 100%;
   padding: 50px 0;
 }
-.containerUl h2{
+.containerUl h2 {
   margin-bottom: 55px;
 }
 
@@ -458,12 +458,14 @@ main {
 }
 
 .sombreModal {
+  display: flex;
   position: absolute;
+  justify-content: center;
+  align-items: center;
   z-index: -2;
   height: 90vh;
   width: 100%;
-  background: black;
-  opacity: 0.9;
+  background: rgba(0, 0, 0, 0.9);
 }
 
 .containerQuiz {
@@ -512,7 +514,7 @@ main {
   padding: 10px 40px;
   border-radius: 30px;
   border: none;
-  box-shadow: 0px 5px 5px rgba(0,0,0, 0.4);
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
 }
 
 .containerCardsForManage {
@@ -523,7 +525,6 @@ main {
   overflow-y: auto;
   margin: 50px 0 0px 0;
   width: 102%;
-  
 }
 
 .cardsCards {
@@ -532,7 +533,7 @@ main {
   justify-content: space-between;
   background: white;
   margin: 10px 0;
-  width: 650px;
+  width: 640px;
   border-radius: 17px;
   box-shadow: 0px 3px 6px 1px rgb(0 0 0 / 40%);
 }
@@ -582,8 +583,7 @@ main {
   z-index: -2;
   height: 90vh;
   width: 100%;
-  background: black;
-  opacity: 0.9;
+  background: rgba(0, 0, 0, 0.9);
 }
 
 .modalForCardsManagement {
@@ -696,21 +696,13 @@ main {
   transition: 0.15s ease-in-out;
 }
 
-.quizContainer {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  width: 100vw;
-  height: 90vh;
-  align-items: center;
-}
-
-.containerTest{
+.containerTest {
   position: relative;
   display: flex;
   flex-direction: column;
   height: 85%;
   align-items: center;
+  width: 650px;
 }
 
 /* width */
@@ -723,14 +715,83 @@ main {
 ::-webkit-scrollbar-track {
   border-radius: 10px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #423fe5; 
+  background: transparent;
+  /* background: #423fe5; */
   border-radius: 10px;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #3a38cc; 
+.quizContainer {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100vw;
+  height: 90vh;
+  align-items: center;
+}
+.divQuizNameCollection {
+  margin-top: 40px;
+}
+.divQuizNameCollection h3 {
+  padding: 10px 25px;
+  background: white;
+  font-size: 24px;
+  border: 2px solid #f18701;
+  border-radius: 8px;
+}
+.divQuizQuestion {
+  margin-top: 40px;
+  min-width: 750px;
+  background: white;
+  border-radius: 8px;
+  text-align: center;
+  vertical-align: center;
+}
+.divQuizQuestion h3 {
+  font-size: 24px;
+  padding: 15px 25px;
+  font-weight: 400;
+}
+.divQuizPossibilite {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 50px;
+  width: 750px;
+}
+.divQuizPossibilite button {
+  margin: 15px;
+  padding: 20px;
+  font-size: 24px;
+  background: white;
+  border-radius: 8px;
+  border: none;
+}
+.divQuizTimer {
+  width: 750px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.divQuizNbreCards {
+  margin-bottom: 10px;
+}
+.btnTimer {
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: 400;
+}
+.minute {
+  background: #ff0000;
+}
+.days3 {
+  background: #ff7b00;
+}
+.days7 {
+  background: #8dc640;
 }

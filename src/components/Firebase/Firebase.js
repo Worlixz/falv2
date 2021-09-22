@@ -49,7 +49,7 @@ class Firebase {
     // Permet la modification d'une carte nécessite : UID | LA COLLECTION | LES DATA DE LA CARTE
     modificationCards = (uid, dataCollection, modalData) => {
         return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
-            ["modalData.id"]: {
+            [modalData.id]: {
                 question: modalData.question,
                     reponse: modalData.reponse,
                     type: modalData.type,

@@ -7,6 +7,9 @@ import btnClose from '../assets/close.svg'
 import check from '../assets/CardsManagement/check.svg'
 import btnPlus from '../assets/plus.svg'
 import { FirebaseContext } from './Firebase'
+import { nanoid } from 'nanoid'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Carte(props) {
 
@@ -20,13 +23,18 @@ function Carte(props) {
     const assombrir = document.querySelector('.sombreModalCardsManagement')
 
     const [modalCheck, setModalCheck] = useState(false)
+    const [modalCreation, setModalCreation] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
     const [userSession, setUserSession] = useState("")
     const [modalData, setModalData] = useState({
         question: "",
         reponse: '',
         type: '',
-        id: ''
+        id: '',
+        p1: "",
+        p2: "",
+        p3: "",
+        p4: ""
     })
 
     useEffect(() => {
@@ -38,11 +46,7 @@ function Carte(props) {
         }
     }, [userSession])
 
-    
-    const handlePreviously = (props) => {
-        props.view.location.assign('/carte')
-    }
-    
+        
     const handleClickBtn = (creattionCards) => {
         setModalCheck(true)
         setModalData(creattionCards) //Initialisation des données su state en fonction de la carte cliqué
@@ -68,6 +72,33 @@ function Carte(props) {
         e.preventDefault()
         firebase.modificationCards(userSession.uid, dataCollection, modalData)
     }
+    const handleSubmitCreationCards = (e) => {
+        e.preventDefault()
+        modalData.id = nanoid()
+        firebase.modificationCards(userSession.uid, dataCollection, modalData)
+        .then(() => {
+            console.log('ok carte créer')
+            setModalData("")
+            handleDeleteModalClose()
+            toast.success('🦄 Carte créer avec succès !', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+        
+    }
+
+    const test = () => {
+        setModalData('')
+    }
     
     const deleteCards = () => {
         firebase.deleteDataCards(userSession.uid, dataCollection, modalData.id)
@@ -87,6 +118,30 @@ function Carte(props) {
         setDeleteModal(false)
         assombrir.style.zIndex = "-2"
     }
+    
+    const handleModalCreationOpen = () => {
+        setModalData("")
+        setModalCreation(true)
+        assombrir.style.zIndex = "2"
+    }
+    const handleModalCreationClose = () => {
+        setModalCreation(false)
+        setModalData("")
+        assombrir.style.zIndex = "-2"
+    }
+
+    // Pour création carte nécessite : 
+        // Générateur ID => nanoid
+        // Récupération date pour initialisation : dateCreation + dateRevision
+        // Type 
+            // Vrai Faux => vraiFaux
+            // Quiz => quiz
+        // Question
+        // Réponse
+        //p1
+        //p2
+        //p3
+        //p4
    
     
     
@@ -180,23 +235,70 @@ function Carte(props) {
         </Fragment>
     )
 
+    // Modif à faire : 
+        //gestion des valeurs par defualt pour affichage
+
+    const modalCreationCards = (
+        <Fragment>
+            <div className="modalForCardsManagement">
+                <button className="btnCloseModal" onClick={() => handleModalCreationClose()}><img src={btnClose}/></button>
+                <form onSubmit={handleSubmitCreationCards} className="formModalCardsManagement">
+                    <h2>Collection</h2>
+                    <hr/>
+                    <h4>{dataCollection.nameCollection}</h4>
+                    <h5>Type de réponse</h5>
+                    <select id="type" value={modalData.type} onChange={handleChange}>
+                        <option value="vraiFaux" selected>Vrai - Faux</option>
+                        <option selected value="quiz">Quiz</option>
+                    </select>
+                    <h5 id="question">Question :</h5>
+                    <textarea type="text" id="question" value={modalData.question} onChange={handleChange}/> 
+                    <h5 id="reponse">Réponse :</h5>
+                    {modalData.type == 'vraiFaux' ? (<div className="selectVraiFaux">
+                        
+                        {modalData.reponse == 'true' ? (<img src={check} />) : (<img src={crossRed} />)}
+                        <select id="reponse" value={modalData.reponse} onChange={handleChange}>
+                            <option value={true}>Vrai</option>
+                            <option selected value={false}>Faux</option>
+                        </select>
+                    </div>) : (
+                        <div className="quizReponseModification">
+                            <textarea id="reponse" value={modalData.reponse} onChange={handleChange} />
+                            <h5> Possibilité : </h5>
+                            <div className="quizReponsePossibilite">
+                                <textarea id="p1"onChange={handleChange}/>
+                                <textarea id="p2"onChange={handleChange}/>
+                                <textarea id="p3"onChange={handleChange}/>
+                                <textarea id="p4"onChange={handleChange}/>
+                            </div>
+                        </div>
+                    )}
+                    
+                <button className="modificationCards">Créer ma carte</button>
+                </form>
+            </div>
+        </Fragment>
+    )
+
     return (
         <Fragment>
-            <div className="sombreModalCardsManagement"></div>
+            <div className="sombreModalCardsManagement">
+                {modalCheck ? modal : null}
+                {deleteModal ? deleteModalDisplay : null}
+                {modalCreation ? modalCreationCards : null}
+            </div>
             <div className="containerQuiz">
                 <Link to="/collection" id="btnArowPreviously"><img id="arowPreviously" src={arow}/></Link>
                 <div className="containerTest">
                     <h2>Collection : {dataCollection.nameCollection}</h2> 
                     <div className="containerCardsAdd">
-                        <Link className="btnGo" to={{pathname:"/quiz", state:{dataCards}}}>C'est parti !</Link>
+                        <Link className="btnGo" to={{pathname:"/quiz", state:{dataCards, dataCollection}}}>C'est parti !</Link>
                     </div>
-                        <img id="btnPlusQuiz" src={btnPlus} />
+                        <img id="btnPlusQuiz" onClick={() => handleModalCreationOpen()} src={btnPlus} />
                     <div className="containerCardsForManage">
                         {displayCards}  
                     </div>
                 </div>
-                {modalCheck ? modal : null}
-                {deleteModal ? deleteModalDisplay : null}
         </div>
         </Fragment>
         
