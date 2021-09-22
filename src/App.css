@@ -373,10 +373,64 @@ main {
 
 .containerUser {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.divPresentation h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+iframe {
+  margin-top: 50px;
 }
 
 .containerProfil {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blobProfil {
+  margin-top: 40px;
+  position: relative;
+}
+.blobProfil img {
+  height: 285px;
+}
+
+.displayInfo {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.containerInfoImg {
+  position: absolute;
+  top: 142px;
+  left: 170px;
+  transform: translate(-50%, -50%);
+}
+.containerInfo :nth-child(2) {
+  padding: 5px 10px;
+}
+.containerInfo button {
+  margin: 5px 10px;
+  background: var(--selection-answer);
+  border-radius: 8px;
+  border: none;
+  transition: 0.2s ease-in-out;
+}
+.containerInfo button:hover {
+  transform: scale(1.1);
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .divBtnPlus {

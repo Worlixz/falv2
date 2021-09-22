@@ -64,7 +64,7 @@ const User = (props) => {
             break
         }
         case "/profil" : {
-            content = <Profil/>
+            content = <Profil dataUser={userData}/>
             break
         }
         case "/carte" : {
@@ -78,11 +78,11 @@ const User = (props) => {
         default : {
 
             content = <div className="containerUser"> 
-                <div>
+                <div className="divPresentation">
                     <h2>Bienvenu dans l'application FAL</h2>
                     <p>Sur cette page ce trouve une vidéo tutoriel, dans cette dernière tu apprendra pourquoi nous avons crée FAL et comment s'en servir. < br />Tout les retours sont les bienvenu afin d'améliorer cette dernière</p>
                 </div>
-                <iframe src="https://youtu.be/L_ADtp1tWPA" />
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/oZYauzQWtvk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             
             break
