@@ -5,8 +5,7 @@ import S2C1 from '../assets/Carte 1 - slide 2.png'
 import S2C2 from '../assets/Carte 2 - slide 2.png'
 import Cloche from '../assets/cloche.png'
 import S4C1 from '../assets/groupe carte - slide 3.png'
-import '../Slider.css'
-
+import '../style/Slider.css'
 
 
 export default function SimpleSlider() {

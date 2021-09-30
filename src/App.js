@@ -1,6 +1,6 @@
-import './Mobile.css';
-import './Tablette.css';
-import './App.css';
+import './style/mobile/Mobile.css';
+import './style/tablette/Tablette.css';
+import './style/desktop/App.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'

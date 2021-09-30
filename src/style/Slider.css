@@ -4,7 +4,7 @@
   --seven-days: #8dc640;
 }
 .carousel {
-  background-image: url(./assets/Blob.png);
+  background-image: url(../assets/Blob.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
