@@ -95,10 +95,6 @@ function Carte(props) {
         })
         
     }
-
-    const test = () => {
-        setModalData('')
-    }
     
     const deleteCards = () => {
         firebase.deleteDataCards(userSession.uid, dataCollection, modalData.id)
@@ -151,7 +147,11 @@ function Carte(props) {
             question: "",
             reponse: '',
             type: '',
-            id: ''
+            id: '',
+            p1: "",
+            p2: "",
+            p3: "",
+            p4: ""
         }
         const idCards = Object.values(element)
         Object.values(element).map((deepElement) => {
@@ -164,6 +164,12 @@ function Carte(props) {
             if(deepElement.reponse != undefined){
                 /* console.log("Réponse : " , deepElement.reponse) */
                 creattionCards.reponse = deepElement.reponse === true ? (deepElement.reponse.toString()) : deepElement.reponse
+            }
+            if(deepElement.type === "quiz"){
+                creattionCards.p1 = deepElement.p1
+                creattionCards.p2 = deepElement.p2
+                creattionCards.p3 = deepElement.p3
+                creattionCards.p4 = deepElement.p4
             }
             return creattionCards
         })
@@ -221,10 +227,10 @@ function Carte(props) {
                             <textarea id="reponse" value={modalData.reponse} onChange={handleChange} />
                             <h5> Possibilité : </h5>
                             <div className="quizReponsePossibilite">
-                                <textarea id="p1"onChange={handleChange}/>
-                                <textarea id="p2"onChange={handleChange}/>
-                                <textarea id="p3"onChange={handleChange}/>
-                                <textarea id="p4"onChange={handleChange}/>
+                                <textarea id="p1" onChange={handleChange} value={modalData.p1} />
+                                <textarea id="p2" onChange={handleChange} value="je suis un test" />
+                                <textarea id="p3" onChange={handleChange} value="je suis un test" />
+                                <textarea id="p4" onChange={handleChange} value="je suis un test" />
                             </div>
                         </div>
                     )}
@@ -266,10 +272,10 @@ function Carte(props) {
                             <textarea id="reponse" value={modalData.reponse} onChange={handleChange} />
                             <h5> Possibilité : </h5>
                             <div className="quizReponsePossibilite">
-                                <textarea id="p1"onChange={handleChange}/>
-                                <textarea id="p2"onChange={handleChange}/>
-                                <textarea id="p3"onChange={handleChange}/>
-                                <textarea id="p4"onChange={handleChange}/>
+                                <textarea id="p1" onChange={handleChange}/>
+                                <textarea id="p2" onChange={handleChange}/>
+                                <textarea id="p3" onChange={handleChange}/>
+                                <textarea id="p4" onChange={handleChange}/>
                             </div>
                         </div>
                     )}

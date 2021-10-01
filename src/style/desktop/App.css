@@ -424,9 +424,17 @@ iframe {
   height: 150px;
   width: 150px;
 }
+
+.containerModifProfil{
+  position: relative;
+}
+
 #modificationPencil{
+  position: absolute;
   height: 20px;
+  width: 20px;
   margin-top: 10px;
+  bottom: 5px;
 }
 
 #paraModifIMG{ 

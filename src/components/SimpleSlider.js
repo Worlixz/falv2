@@ -1,5 +1,5 @@
-import React from "react";
-import Slider from "react-slick";
+import React from "react"
+import Slider from "react-slick"
 import Squelette from '../assets/squelette 2.png'
 import S2C1 from '../assets/Carte 1 - slide 2.png'
 import S2C2 from '../assets/Carte 2 - slide 2.png'

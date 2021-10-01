@@ -87,8 +87,10 @@ function Profil(props) {
                 <img src={Blob} />
                 <div className="containerInfoImg">
                     {modeEdition ? (<p id="paraModifIMG">Mettre une image d'une grandeur de 150*150px <br />Pour redimentionnser votre image :<a target="_blank" href="https://convert-my-image.com/ImageConverter_Fr"> C'est par ici !</a></p>) : (null)}
-                    <img src={dataProfil.profilPicture} />
-                    {modeEdition ? (<img onClick={handleEditionMode} id="modificationPencil" src={crossRed} />) : (<img onClick={handleEditionMode} id="modificationPencil" src={pencil} />)}
+                    <div className="containerModifProfil">
+                        <img src={dataProfil.profilPicture} />
+                        {modeEdition ? (<img onClick={handleEditionMode} id="modificationPencil" src={crossRed} />) : (<img onClick={handleEditionMode} id="modificationPencil" src={pencil} />)} 
+                    </div>
                     {modeEdition ? (
                         <input type="file" id="profilPicture" name="profile_pic"
                             accept=".jpg, .jpeg, .png"></input>) : (null)}
