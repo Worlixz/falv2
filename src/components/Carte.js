@@ -80,15 +80,6 @@ function Carte(props) {
             console.log('ok carte créer')
             setModalData("")
             handleDeleteModalClose()
-            toast.success('🦄 Carte créer avec succès !', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
         })
         .catch((err) => {
             console.log(err)
@@ -228,9 +219,9 @@ function Carte(props) {
                             <h5> Possibilité : </h5>
                             <div className="quizReponsePossibilite">
                                 <textarea id="p1" onChange={handleChange} value={modalData.p1} />
-                                <textarea id="p2" onChange={handleChange} value="je suis un test" />
-                                <textarea id="p3" onChange={handleChange} value="je suis un test" />
-                                <textarea id="p4" onChange={handleChange} value="je suis un test" />
+                                <textarea id="p2" onChange={handleChange} value={modalData.p2} />
+                                <textarea id="p3" onChange={handleChange} value={modalData.p3} />
+                                <textarea id="p4" onChange={handleChange} value={modalData.p4} />
                             </div>
                         </div>
                     )}

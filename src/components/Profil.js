@@ -5,6 +5,8 @@ import Loader from './Loader'
 import iconProfil from '../assets/sidebar/icon_profil_gris.png'
 import pencil from '../assets/CardsManagement/pencil.svg'
 import crossRed from '../assets/CardsManagement/crossRedClose.svg'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Profil(props) {
 
@@ -58,6 +60,30 @@ function Profil(props) {
 
     const handleChange = (e) => {
         setDataProfil({...dataProfil, [e.target.id]: e.target.value})
+        console.log(dataProfil)
+    }
+
+    const handleUpdateProfilData = (e) => {
+        e.preventDefault()
+        firebase.updateProfil(userSession.uid, dataProfil.userName, dataProfil.email, dataProfil.nomPrenom, dataProfil.etude, dataProfil.profilPicture)
+        .then(() => {
+            console.log("ok")
+            setModeEdition(!modeEdition)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
+    const handleResetPassword = (e) => {
+        e.preventDefault()
+        firebase.resetPassword(dataProfil.email)
+        .then(() => {
+            console.log("reset envoyé")
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     const selector = (
@@ -111,7 +137,7 @@ function Profil(props) {
                 </div>
                 <div className="containerInfo">
                     <h3>Mot de passe</h3>
-                    <button>Réinitilisation</button>
+                    <button onClick={handleResetPassword}>Réinitilisation</button>
                 </div>
                 <div className="containerInfo">
                     <h3>Etude</h3>
@@ -136,7 +162,7 @@ function Profil(props) {
                     
                 </div>
                 {modeEdition ? (<div className="containerInfo">
-                    <button id="sauvegarde">Sauvegarder</button>
+                    <button id="sauvegarde" onClick={handleUpdateProfilData}>Sauvegarder</button>
                 </div>) : null}
                 
             </div>

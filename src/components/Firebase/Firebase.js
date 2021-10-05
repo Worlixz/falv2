@@ -36,7 +36,10 @@ class Firebase {
     userCollection = (uid) => this.db.doc(`users/${uid}`).collection('CartesCollection')
     
     signoutUser = () => this.auth.signOut()
-    // Config des méthodes aux niveau de la db
+
+    resetPassword = (email) => {
+        return this.auth.sendPasswordResetEmail(email)
+    }
 
     setNewCollectionCards = (uid, newCollection) => {
         console.log('je suis dans la fct firebase uid : ', uid)
@@ -61,12 +64,6 @@ class Firebase {
         }, {merge: true})
     }
 
-    // Suppression d'une carte
-    /* deleteCards = (uid, dataCollection, modalData) => {
-        return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).update({
-            [modalData]: delete()
-        })
-    } */
 
     deleteDataCards = (uid, dataCollection, creattionCards) => {
         let refCards = this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`)
@@ -81,6 +78,15 @@ class Firebase {
 
         return deleteCards
     }
+
+    updateProfil = (uid, userName, email,nomPrenom, etude, profilPicture) => this.db.doc(`users/${uid}`).set({
+        userName: userName,
+        email: email,
+        nomPrenom: nomPrenom,
+        etude: etude,
+        profilPicture: profilPicture
+    })
+    user = (uid) => this.db.doc(`users/${uid}`)
 }
 
 export default Firebase
