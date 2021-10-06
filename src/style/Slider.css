@@ -1,4 +1,4 @@
-*{
+* {
   --one-minute: #ff0000;
   --three-days: #ff7b00;
   --seven-days: #8dc640;
@@ -17,10 +17,24 @@
 
 .carousel h2 {
   text-align: center;
-  font-size: 1.8rem
+  font-size: 1.8rem;
 }
 
-.carousel h3{
+#containertitle {
+  position: relative;
+}
+
+#beta {
+  position: absolute;
+  background: orange;
+  right: -60px;
+  bottom: 20px;
+  transform: rotate(27deg);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.carousel h3 {
   font-size: 1.5rem;
 }
 
@@ -61,42 +75,39 @@
 #carousel1 {
 }
 #carousel2 {
-  display: flex!important;
+  display: flex !important;
   justify-content: space-evenly;
 }
-#S2C1{
+#S2C1 {
   transform: translate(45px, -30px);
 }
-#S2C2{
+#S2C2 {
   transform: translate(-30px, 30px);
 }
 #carousel3 {
 }
-#clocheCarousel{
+#clocheCarousel {
   transform: scale(0.9);
 }
-#btnTimeCarousel{
+#btnTimeCarousel {
   flex-direction: column;
 }
-#btnTimeCarousel p{
+#btnTimeCarousel p {
   margin-top: 20px;
   border-radius: 5px;
   width: 360px;
   padding: 12px 0px;
 }
-#btn5minutes{
-  background-color: #FFEA00;
+#btn5minutes {
+  background-color: #ffea00;
 }
-#btn3jours{
-  background-color: #FFB700;
-  
+#btn3jours {
+  background-color: #ffb700;
 }
-#btn7jours{
-  background-color: #FF7B00;
-
+#btn7jours {
+  background-color: #ff7b00;
 }
 
-
-#carousel4 img{
+#carousel4 img {
   transform: translate(0px, 30px);
 }

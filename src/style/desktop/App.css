@@ -835,6 +835,15 @@ iframe {
   border: 2px solid #f18701;
   border-radius: 8px;
 }
+
+.containerScoreAndProgression {
+  display: flex;
+  flex-direction: row;
+  width: 750px;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
 .divQuizQuestion {
   margin-top: 40px;
   min-width: 750px;
@@ -860,7 +869,7 @@ iframe {
   justify-content: center !important;
 }
 
-.divQuizPossibilite button {
+.divQuizPossibilite p {
   margin: 15px;
   padding: 10px;
   font-size: 24px;
@@ -903,4 +912,16 @@ iframe {
 .valider {
   background: var(--cest-partis-btn);
   color: white;
+}
+
+.selected {
+  background: #f18701 !important;
+}
+
+.succes {
+  background: #07bc0c;
+}
+
+.error {
+  background: #e74c3c;
 }
