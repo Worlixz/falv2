@@ -1,7 +1,7 @@
 import app from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
-
+/* import { doc, updateDoc, deleteField } from "firebase/firestore"; */
 
 const config = {
     apiKey: "AIzaSyBaMKAKMaQQYx-iCgZ6TzlCpJ2EtoaGtXc",
@@ -64,6 +64,20 @@ class Firebase {
         }, {merge: true})
     }
 
+    creationCards = (uid, dataCollection, modalData) => {
+        return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
+            [modalData.id]: {
+                question: modalData.question,
+                    reponse: modalData.reponse,
+                    type: modalData.type,
+                    p1: modalData.p1,
+                    p2: modalData.p2,
+                    p3: modalData.p3,
+                    p4: modalData.p4
+            }
+        }, {merge: true})
+    }
+
 
     deleteDataCards = (uid, dataCollection, creattionCards) => {
         let refCards = this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`)
@@ -72,9 +86,7 @@ class Firebase {
         let deleteCards = refCards.update({
             [creattionCards]: ""
         })
-        /* let deleteCards = refCards.update({
-            [modalData]: firebase.firestore.FieldValue.delete()
-        }) */
+        
 
         return deleteCards
     }

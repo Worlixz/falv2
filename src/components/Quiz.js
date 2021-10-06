@@ -19,6 +19,7 @@ function Quiz(props) {
     const [score, setScore] = useState(0)
 
     const dataQuizDisplay = Object.values(dataQuiz)
+    const arraySuccessSentence = ["Au top", "Une de plus de réussi", "Tu es sur la bonne voie", "Génial", "Bravo", "+1 au compteur", "Tu continue à progresser", "L'anatomie n'a plus de secret pour toi", "Elle est validé !!!", "Parfait"]
 
 
     const divQuiz = document.querySelector('.divQuizTimer')
@@ -56,6 +57,7 @@ function Quiz(props) {
             handleSwitchMode()
         }else{
             console.log('je viens de finir')
+            //lancer un modal de résumé de la session
         }
     }
 
@@ -87,7 +89,10 @@ function Quiz(props) {
     }
 
     const toastModalSucces = () => {
-        toast.success('Au top !!!', {
+        const min = 1; 
+        const max = 10;  
+        let random = Math.floor(Math.random() * (max - min)) + min;
+        toast.success(arraySuccessSentence[random], {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -117,7 +122,7 @@ function Quiz(props) {
             </div>
             <div className="containerScoreAndProgression">
                 <h4>Score {score} / {dataQuizDisplay.length}</h4>
-                <h4>Progression : {count} / {dataQuizDisplay.length}</h4>
+                <h4>Progression : {count +1} / {dataQuizDisplay.length}</h4>
             </div>
             <div className="divQuizQuestion">
                 <h3>{dataQuizDisplay[count].question}</h3>

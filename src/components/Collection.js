@@ -7,6 +7,10 @@ import Play from '../assets/Cards/bouton-jouer.svg'
 import btnPlus from '../assets/plus.svg'
 import btnClose from '../assets/close.svg'
 import interogationPoint from '../assets/Cards/interrogationPoint.svg'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure()
 
 
 function Collection(props) {

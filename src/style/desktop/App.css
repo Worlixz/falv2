@@ -925,3 +925,7 @@ iframe {
 .error {
   background: #e74c3c;
 }
+
+.disabled {
+  background: rgba(0, 0, 0, 0.25);
+}

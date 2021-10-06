@@ -8,6 +8,8 @@ import crossRed from '../assets/CardsManagement/crossRedClose.svg'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure()
+
 function Profil(props) {
 
     const firebase = useContext(FirebaseContext)

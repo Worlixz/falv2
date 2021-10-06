@@ -11,6 +11,8 @@ import { nanoid } from 'nanoid'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure()
+
 function Carte(props) {
 
     const firebase = useContext(FirebaseContext)
@@ -30,12 +32,23 @@ function Carte(props) {
         question: "",
         reponse: '',
         type: '',
-        id: '',
+        id: "",
         p1: "",
         p2: "",
         p3: "",
         p4: ""
     })
+
+    const resetModalData = {
+        question: "",
+        reponse: '',
+        type: '',
+        id: "",
+        p1: "",
+        p2: "",
+        p3: "",
+        p4: ""
+    }
 
     useEffect(() => {
         let listener = firebase.auth.onAuthStateChanged(user => {
@@ -71,18 +84,30 @@ function Carte(props) {
     const handleSubmit = (e) => {
         e.preventDefault()
         firebase.modificationCards(userSession.uid, dataCollection, modalData)
+        .then(() => {
+            toastModalModification()
+            handleDeleteModalClose()
+            setModalData("")
+        })
+        .catch(() => {
+            toastModalError()
+            handleDeleteModalClose()
+            setModalData("")
+        })
     }
     const handleSubmitCreationCards = (e) => {
         e.preventDefault()
         modalData.id = nanoid()
-        firebase.modificationCards(userSession.uid, dataCollection, modalData)
+        firebase.creationCards(userSession.uid, dataCollection, modalData)
         .then(() => {
-            console.log('ok carte créer')
-            setModalData("")
+            toastModalModification()
             handleDeleteModalClose()
+            setModalData("")
         })
-        .catch((err) => {
-            console.log(err)
+        .catch(() => {
+            toastModalError()
+            handleDeleteModalClose()
+            setModalData("")
         })
         
     }
@@ -107,31 +132,40 @@ function Carte(props) {
     }
     
     const handleModalCreationOpen = () => {
-        setModalData("")
+        setModalData(resetModalData)
         setModalCreation(true)
         assombrir.style.zIndex = "2"
     }
     const handleModalCreationClose = () => {
         setModalCreation(false)
-        setModalData("")
+        setModalData(resetModalData)
         assombrir.style.zIndex = "-2"
     }
 
-    // Pour création carte nécessite : 
-        // Générateur ID => nanoid
-        // Récupération date pour initialisation : dateCreation + dateRevision
-        // Type 
-            // Vrai Faux => vraiFaux
-            // Quiz => quiz
-        // Question
-        // Réponse
-        //p1
-        //p2
-        //p3
-        //p4
-   
+    const toastModalModification = () => {
+        toast.success("C'est un succès. Pense à actualiser ton navigateur", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+    }
+    const toastModalError = () => {
+        toast.error("Oups, je crois qu'on a un bug...", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+    }
     
-    
+    const btnCreationCards = modalData.type !== "" && modalData.reponse !== "" ? (<button className="modificationCards">Créer ma carte</button>) : (<button disabled className="modificationCards disabled">Créer ma carte</button>)    
     
     const displayCards = Object.entries(dataCards).map((element) => {
         let creattionCards = {
@@ -218,10 +252,10 @@ function Carte(props) {
                             <textarea id="reponse" value={modalData.reponse} onChange={handleChange} />
                             <h5> Possibilité : </h5>
                             <div className="quizReponsePossibilite">
-                                <textarea id="p1" onChange={handleChange} value={modalData.p1} />
-                                <textarea id="p2" onChange={handleChange} value={modalData.p2} />
-                                <textarea id="p3" onChange={handleChange} value={modalData.p3} />
-                                <textarea id="p4" onChange={handleChange} value={modalData.p4} />
+                                <textarea id="p1" onChange={handleChange} value={modalData.p1 != "" ? (modalData.p1) : ("")} />
+                                <textarea id="p2" onChange={handleChange} value={modalData.p2 != "" ? (modalData.p2) : ("")} />
+                                <textarea id="p3" onChange={handleChange} value={modalData.p3 != "" ? (modalData.p3) : ("")} />
+                                <textarea id="p4" onChange={handleChange} value={modalData.p4 != "" ? (modalData.p4) : ("")} />
                             </div>
                         </div>
                     )}
@@ -231,9 +265,6 @@ function Carte(props) {
             </div>
         </Fragment>
     )
-
-    // Modif à faire : 
-        //gestion des valeurs par defualt pour affichage
 
     const modalCreationCards = (
         <Fragment>
@@ -245,8 +276,9 @@ function Carte(props) {
                     <h4>{dataCollection.nameCollection}</h4>
                     <h5>Type de réponse</h5>
                     <select id="type" value={modalData.type} onChange={handleChange}>
-                        <option value="vraiFaux" selected>Vrai - Faux</option>
-                        <option selected value="quiz">Quiz</option>
+                        <option selected value="">-- A définir --</option>
+                        <option value="vraiFaux">Vrai - Faux</option>
+                        <option value="quiz">Quiz</option>
                     </select>
                     <h5 id="question">Question :</h5>
                     <textarea type="text" id="question" value={modalData.question} onChange={handleChange}/> 
@@ -255,8 +287,9 @@ function Carte(props) {
                         
                         {modalData.reponse == 'true' ? (<img src={check} />) : (<img src={crossRed} />)}
                         <select id="reponse" value={modalData.reponse} onChange={handleChange}>
+                            <option selected value="">-- A définir --</option>
                             <option value={true}>Vrai</option>
-                            <option selected value={false}>Faux</option>
+                            <option value={false}>Faux</option>
                         </select>
                     </div>) : (
                         <div className="quizReponseModification">
@@ -270,8 +303,7 @@ function Carte(props) {
                             </div>
                         </div>
                     )}
-                    
-                <button className="modificationCards">Créer ma carte</button>
+                {btnCreationCards}
                 </form>
             </div>
         </Fragment>
