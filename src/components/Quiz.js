@@ -76,7 +76,7 @@ function Quiz(props) {
     }
 
     const handleVerif = (e) => {
-        if(dataQuizDisplay[count].reponse == repUser){
+        if(dataQuizDisplay[count].reponse === repUser){
             console.log("j'ai juste")
             toastModalSucces()
             setScore(score +1)
@@ -135,8 +135,8 @@ function Quiz(props) {
                 <p onClick={handleCheck} >{dataQuizDisplay[count].p4}</p>
             </Fragment>) : (
                 <Fragment>
-                    <p value="true" onClick={handleCheck}>Vrai</p>
-                    <p value="false" onClick={handleCheck}>Faux</p>
+                    <p value={true} onClick={handleCheck}>Vrai</p>
+                    <p value={false} onClick={handleCheck}>Faux</p>
                 </Fragment>
             )}
                 
