@@ -72,8 +72,6 @@
   transform: translate(-180px, 45px) scale(1.1);
 }
 
-#carousel1 {
-}
 #carousel2 {
   display: flex !important;
   justify-content: space-evenly;
@@ -84,8 +82,7 @@
 #S2C2 {
   transform: translate(-30px, 30px);
 }
-#carousel3 {
-}
+
 #clocheCarousel {
   transform: scale(0.9);
 }

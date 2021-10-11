@@ -68,27 +68,25 @@ class Firebase {
         return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
             [modalData.id]: {
                 question: modalData.question,
-                reponse: modalData.reponse,
-                type: modalData.type,
-                p1: modalData.p1,
-                p2: modalData.p2,
-                p3: modalData.p3,
-                p4: modalData.p4
+                    reponse: modalData.reponse,
+                    type: modalData.type,
+                    p1: modalData.p1,
+                    p2: modalData.p2,
+                    p3: modalData.p3,
+                    p4: modalData.p4
             }
         }, {merge: true})
     }
 
 
-    deleteDataCards = (uid, dataCollection, creattionCards) => {
-        let refCards = this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`)
-
-        // Permet le non affichage et la non création de div sur le DOM mais garde une donnée dans la DB => Problème à regler !!!!
-        let deleteCards = refCards.update({
-            [creattionCards]: ""
-        })
-        
-
-        return deleteCards
+    deleteDataCards = (dataCollection, creattionCards) => {
+        const admin = require('firebase-admin');
+        const FieldValue = admin.firestore.FieldValue;
+        let refCards = this.db.collection('CartesCollection').doc(dataCollection.nameCollection);
+        const deleteCards = refCards.update({
+            [creattionCards]: FieldValue.delete()
+        });
+        return deleteCards;
     }
 
     updateProfil = (uid, userName, email,nomPrenom, etude, profilPicture) => this.db.doc(`users/${uid}`).set({

@@ -113,7 +113,7 @@ function Carte(props) {
     }
     
     const deleteCards = () => {
-        firebase.deleteDataCards(userSession.uid, dataCollection, modalData.id)
+        firebase.deleteDataCards(dataCollection, modalData.id)
         .then(() => {
             window.location.reload()
         })
