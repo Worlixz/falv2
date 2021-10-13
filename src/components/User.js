@@ -7,6 +7,7 @@ import Collection from './Collection'
 import Profil from './Profil'
 import Carte from './Carte';
 import Quiz from './Quiz';
+import Dashboard from './Dashboard';
 
 const User = (props) => {
 
@@ -74,6 +75,10 @@ const User = (props) => {
         case "/quiz" : {
             content = <Quiz propsHistory={props} dataUser={userData} userSession={userSession}/>
             break
+        }
+        case "/dashboard" : {
+            content = <Dashboard propsHistory={props} />
+            break;
         }
         default : {
 

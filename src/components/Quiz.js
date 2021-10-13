@@ -1,4 +1,5 @@
 import React, {Fragment, useContext, useEffect, useState} from 'react'
+import { Link } from 'react-router-dom'
 import {FirebaseContext} from './Firebase/index'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,6 +11,12 @@ function Quiz(props) {
 
     const firebase = useContext(FirebaseContext)
 
+    const [stateScore, setStateScore] = useState({
+        score: 0,
+        carteSucces: [],
+        carteFails: [],
+    })
+
     const {dataCards, dataCollection} = props.propsHistory.location.state
 
     const [modeQuestion, setModeQuestion] = useState(false)
@@ -20,6 +27,7 @@ function Quiz(props) {
 
     const dataQuizDisplay = Object.values(dataQuiz)
     const arraySuccessSentence = ["Au top", "Une de plus de réussi", "Tu es sur la bonne voie", "Génial", "Bravo", "+1 au compteur", "Tu continue à progresser", "L'anatomie n'a plus de secret pour toi", "Elle est validé !!!", "Parfait"]
+    const arrayErrorSentence = ["Je crois en toi", "Tu peux le faire", "La prochaine fois ça sera la bonne", "Il faut tomber pour apprendre", "Tu y es presque", "Tu te fera plus avoir", "Persévérer", "Soit acteur de ta réussite tu vas y arriver", "Dommage", "La route de la connaissance est semé d'embûches"]
 
 
     const divQuiz = document.querySelector('.divQuizTimer')
@@ -46,9 +54,10 @@ function Quiz(props) {
         }
     }
 
-    const handleNext = () => {
+    const handleNext = (e) => {
+        console.log("je clique sur le bouton : ",e)
         let countCurrent = count
-        if(countCurrent < dataQuizDisplay.length -1 ){
+        if(count < dataQuizDisplay.length -1 ){
             countCurrent++
             setCount(countCurrent)
             for(let i = 0; i < pdivQuiz.length; i++){
@@ -56,10 +65,16 @@ function Quiz(props) {
             }
             handleSwitchMode()
         }else{
-            console.log('je viens de finir')
-            //lancer un modal de résumé de la session
+            console.log("je viens de finir et faut faire un appel à la db")
         }
     }
+
+
+    const btnTime = (count < dataQuizDisplay.length -1 ) ? (<Fragment><button className="btnTimer minute" onClick={handleNext}>1 minute</button>
+    <button className="btnTimer days3" onClick={handleNext}>3 jours</button>
+    <button className="btnTimer days7" onClick={handleNext}>7 jours</button></Fragment>) : (<Fragment><Link className="btnTimer minute" onClick={handleNext} to={{pathname: '/dashboard', state:{stateScore}}}>1 minute</Link>
+    <Link className="btnTimer days3" onClick={handleNext} to={{pathname: '/dashboard', state:{stateScore}}} >3 jours</Link>
+    <Link className="btnTimer days7" onClick={handleNext} to={{pathname: '/dashboard', state:{stateScore}}} >7 jours</Link></Fragment>)
 
     const handleCheck = (e) => {
         for(let i = 0; i < pdivQuiz.length; i++){
@@ -77,12 +92,16 @@ function Quiz(props) {
 
     const handleVerif = (e) => {
         if(dataQuizDisplay[count].reponse === repUser){
-            console.log("j'ai juste")
             toastModalSucces()
             setScore(score +1)
+            setStateScore( stateScore => ({
+                ...stateScore, score: score+1
+            }))
+            setStateScore( stateScore => ({
+                ...stateScore, carteSucces: dataQuizDisplay[count]
+            }))
             handleSwitchMode()
         }else{
-            console.log("j'ai faux")
             toastModalError()
             handleSwitchMode()
         }
@@ -103,7 +122,10 @@ function Quiz(props) {
             });
     }
     const toastModalError = () => {
-        toast.error("Je crois que tu t'es trompé :/", {
+        const min = 1; 
+        const max = 10;  
+        let random = Math.floor(Math.random() * (max - min)) + min;
+        toast.error(arrayErrorSentence[random], {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -142,9 +164,7 @@ function Quiz(props) {
                 
             </div>
             <div className="divQuizTimer btnValider">
-                {modeQuestion ? (<Fragment><button className="btnTimer minute" onClick={handleNext}>1 minute</button>
-                <button className="btnTimer days3" onClick={handleNext}>3 jours</button>
-                <button className="btnTimer days7" onClick={handleNext}>7 jours</button></Fragment>)
+                {modeQuestion ? (btnTime)
                 : 
                 (<button className="btnTimer valider" onClick={handleVerif}>Valider</button>)}             
             </div>

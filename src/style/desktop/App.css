@@ -23,6 +23,11 @@
   --background-modal: rgba(0, 0, 0, 0.5);
 }
 
+a {
+  text-decoration: none;
+  text-align: center;
+}
+
 .App {
   text-align: center;
   height: 100vh;
@@ -894,6 +899,8 @@ iframe {
   font-size: 20px;
   font-weight: 400;
   transition: ease-in-out 0.2s;
+  color: black;
+  padding: 13px;
 }
 .btnTimer:hover {
   transform: scale(1.1);

@@ -87,7 +87,8 @@ class Firebase {
             [creattionCards]: FieldValue.delete()
         });
         return deleteCards;
-    }
+    } 
+ 
 
     updateProfil = (uid, userName, email,nomPrenom, etude, profilPicture) => this.db.doc(`users/${uid}`).set({
         userName: userName,
