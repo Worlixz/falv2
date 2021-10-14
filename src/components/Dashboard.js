@@ -29,8 +29,8 @@ function Dashboard(props) {
                 <h4>{stateDashboardPage.nameCollection}</h4>
             </div>
             <div className="scoringCollection">
-                <h5>Score : {stateDashboardPage.score}</h5>
-                <h5>Durée : </h5>
+                <h5>Réussite : {stateDashboardPage.score*100/stateDashboardPage.nbreCards} % </h5>
+                <progress value={stateDashboardPage.score*100/stateDashboardPage.nbreCards} max="100"></progress>
             </div>
             <div className="containerTable">
                 <div className="containerTableSuccess">

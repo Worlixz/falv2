@@ -13,6 +13,7 @@ function Quiz(props) {
 
     const [stateDashboard, setStateDashboard] = useState({
         score: 0,
+        nbreCards: 0,
         carteSucces: [],
         carteFails: [],
         nameCollection: null
@@ -94,26 +95,24 @@ function Quiz(props) {
         }
     }
 
-    const handleVerif = () => {
+    const handleVerif = (e) => {
         if(dataQuizDisplay[count].reponse === repUser){
             toastModalSucces()
             setScore(score +1)
+            
             arraySucces = stateTemporaire
             arraySucces.push(dataQuizDisplay[count])
             setStateTemporaire(arraySucces)
-            console.log("array succes ",arraySucces)
-            console.log("state tempo ",stateTemporaire)
             setStateDashboard( stateDashboard => ({
-                ...stateDashboard, score: score+1, nameCollection: dataCollection.nameCollection, carteSucces: stateTemporaire
+                ...stateDashboard, score: score+1, nameCollection: dataCollection.nameCollection, carteSucces: stateTemporaire, nbreCards:dataQuizDisplay.length
             }))
             handleSwitchMode()
         }else{
             toastModalError()
+
             arrayError = stateTemporaireError
             arrayError.push(dataQuizDisplay[count])
             setStateTemporaireError(arrayError)
-            console.log("array succes ",arraySucces)
-            console.log("state tempo ",stateTemporaire)
             setStateDashboard( stateDashboard => ({
                 ...stateDashboard, carteFails: stateTemporaireError
             }))
