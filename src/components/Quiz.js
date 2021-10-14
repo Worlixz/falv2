@@ -11,24 +11,29 @@ function Quiz(props) {
 
     const firebase = useContext(FirebaseContext)
 
-    const [stateScore, setStateScore] = useState({
+    const [stateDashboard, setStateDashboard] = useState({
         score: 0,
         carteSucces: [],
         carteFails: [],
+        nameCollection: null
     })
 
-    const {dataCards, dataCollection} = props.propsHistory.location.state
+    const {dataCards, dataCollection, startTimer} = props.propsHistory.location.state
+    console.log('startTimer : ',startTimer)
 
     const [modeQuestion, setModeQuestion] = useState(false)
     const [count, setCount] = useState(0)
     const [dataQuiz, setDataQuiz] = useState(dataCards)
     const [repUser, setRepUser] = useState("")
     const [score, setScore] = useState(0)
+    const [stateTemporaire, setStateTemporaire] = useState([])
+    const [stateTemporaireError, setStateTemporaireError] = useState([])
 
     const dataQuizDisplay = Object.values(dataQuiz)
     const arraySuccessSentence = ["Au top", "Une de plus de réussi", "Tu es sur la bonne voie", "Génial", "Bravo", "+1 au compteur", "Tu continue à progresser", "L'anatomie n'a plus de secret pour toi", "Elle est validé !!!", "Parfait"]
     const arrayErrorSentence = ["Je crois en toi", "Tu peux le faire", "La prochaine fois ça sera la bonne", "Il faut tomber pour apprendre", "Tu y es presque", "Tu te fera plus avoir", "Persévérer", "Soit acteur de ta réussite tu vas y arriver", "Dommage", "La route de la connaissance est semé d'embûches"]
-
+    let arraySucces = []
+    let arrayError = []
 
     const divQuiz = document.querySelector('.divQuizTimer')
     const pdivQuiz = document.querySelectorAll('.divQuizPossibilite p')
@@ -55,7 +60,6 @@ function Quiz(props) {
     }
 
     const handleNext = (e) => {
-        console.log("je clique sur le bouton : ",e)
         let countCurrent = count
         if(count < dataQuizDisplay.length -1 ){
             countCurrent++
@@ -72,9 +76,9 @@ function Quiz(props) {
 
     const btnTime = (count < dataQuizDisplay.length -1 ) ? (<Fragment><button className="btnTimer minute" onClick={handleNext}>1 minute</button>
     <button className="btnTimer days3" onClick={handleNext}>3 jours</button>
-    <button className="btnTimer days7" onClick={handleNext}>7 jours</button></Fragment>) : (<Fragment><Link className="btnTimer minute" onClick={handleNext} to={{pathname: '/dashboard', state:{stateScore}}}>1 minute</Link>
-    <Link className="btnTimer days3" onClick={handleNext} to={{pathname: '/dashboard', state:{stateScore}}} >3 jours</Link>
-    <Link className="btnTimer days7" onClick={handleNext} to={{pathname: '/dashboard', state:{stateScore}}} >7 jours</Link></Fragment>)
+    <button className="btnTimer days7" onClick={handleNext}>7 jours</button></Fragment>) : (<Fragment><Link className="btnTimer minute" onClick={handleNext} to={{pathname: '/dashboard', state:{stateDashboard}}}>1 minute</Link>
+    <Link className="btnTimer days3" onClick={handleNext} to={{pathname: '/dashboard', state:{stateDashboard}}} >3 jours</Link>
+    <Link className="btnTimer days7" onClick={handleNext} to={{pathname: '/dashboard', state:{stateDashboard}}} >7 jours</Link></Fragment>)
 
     const handleCheck = (e) => {
         for(let i = 0; i < pdivQuiz.length; i++){
@@ -90,19 +94,29 @@ function Quiz(props) {
         }
     }
 
-    const handleVerif = (e) => {
+    const handleVerif = () => {
         if(dataQuizDisplay[count].reponse === repUser){
             toastModalSucces()
             setScore(score +1)
-            setStateScore( stateScore => ({
-                ...stateScore, score: score+1
-            }))
-            setStateScore( stateScore => ({
-                ...stateScore, carteSucces: dataQuizDisplay[count]
+            arraySucces = stateTemporaire
+            arraySucces.push(dataQuizDisplay[count])
+            setStateTemporaire(arraySucces)
+            console.log("array succes ",arraySucces)
+            console.log("state tempo ",stateTemporaire)
+            setStateDashboard( stateDashboard => ({
+                ...stateDashboard, score: score+1, nameCollection: dataCollection.nameCollection, carteSucces: stateTemporaire
             }))
             handleSwitchMode()
         }else{
             toastModalError()
+            arrayError = stateTemporaireError
+            arrayError.push(dataQuizDisplay[count])
+            setStateTemporaireError(arrayError)
+            console.log("array succes ",arraySucces)
+            console.log("state tempo ",stateTemporaire)
+            setStateDashboard( stateDashboard => ({
+                ...stateDashboard, carteFails: stateTemporaireError
+            }))
             handleSwitchMode()
         }
     }

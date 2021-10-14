@@ -936,3 +936,78 @@ iframe {
 .disabled {
   background: rgba(0, 0, 0, 0.25);
 }
+
+/* DASHBOARD */
+
+.containerDashboard{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.infoCollection h4{
+  text-align: center;
+  margin-top: 10px;
+}
+.scoringCollection{
+  display: flex;
+  flex-direction: row;
+  max-width: 700px;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.containerTable{
+  width: 700px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.containerTableSuccess{
+  width: 100%;
+}
+
+.containerTableFails{
+  width: 100%;
+}
+
+table{
+  width: 100%;
+}
+
+table td {
+    border: 1px solid #333;
+}
+
+thead,
+tfoot {
+    background-color: #333;
+    color: #fff;
+}
+
+.tableQuestionReponse td{
+  background-color: rgba(0, 28, 84, 0.204) !important;
+}
+
+tr:nth-child(2n){
+  background-color: rgba(0, 85, 255, 0.3) !important;
+}
+tr:nth-child(n){
+  background-color: none;
+}
+
+.btnBackCollection{
+  background-color: var(--cest-partis-btn);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+  transition: .2s ease-in-out;
+}
+.btnBackCollection:hover{
+  transform: scale(1.05);
+  transition: .2s ease-in-out;
+}

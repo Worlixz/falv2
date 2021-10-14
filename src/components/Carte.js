@@ -10,6 +10,7 @@ import { FirebaseContext } from './Firebase'
 import { nanoid } from 'nanoid'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { initializeApp } from 'firebase-admin'
 
 toast.configure()
 
