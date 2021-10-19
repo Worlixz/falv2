@@ -3,6 +3,7 @@ import Blob from '../assets/Blob.png'
 import { FirebaseContext } from './Firebase/index'
 import Loader from './Loader'
 import iconProfil from '../assets/sidebar/icon_profil_gris.png'
+import profilImg from '../assets/sidebar/profil_grey.svg'
 import pencil from '../assets/CardsManagement/pencil.svg'
 import crossRed from '../assets/CardsManagement/crossRedClose.svg'
 import { ToastContainer, toast } from 'react-toastify';
@@ -42,7 +43,7 @@ function Profil(props) {
                         email: myData.email ? myData.email : "A renseigner",
                         nomPrenom: myData.nomPrenom ? myData.nomPrenom : "A renseigner",
                         etude: myData.etude ? myData.etude : "A renseigner",
-                        profilPicture: myData.profilPicture ? myData.profilPicture : iconProfil
+                        profilPicture: myData.profilPicture ? myData.profilPicture : profilImg
                     })
                 }
             })
@@ -120,7 +121,7 @@ function Profil(props) {
                         {modeEdition ? (<img onClick={handleEditionMode} id="modificationPencil" src={crossRed} />) : (<img onClick={handleEditionMode} id="modificationPencil" src={pencil} />)} 
                     </div>
                     {modeEdition ? (
-                        <input type="file" id="profilPicture" name="profile_pic"
+                        <input onChange={handleChange} type="file" id="profilPicture" name="profile_pic"
                             accept=".jpg, .jpeg, .png"></input>) : (null)}
                 </div>
             </div>

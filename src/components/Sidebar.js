@@ -1,12 +1,15 @@
-import React, { useContext} from 'react'
+import React, { Fragment, useContext, useState} from 'react'
 import User from './User'
 import Collection from './Collection'
 import {BrowserRouter as Router, NavLink, Route, Switch} from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import iconCards from '../assets/sidebar/icon_cards_gris.png'
-import iconProfil from '../assets/sidebar/icon_profil_gris.png'
 import {FirebaseContext} from './Firebase/index'
 import logoSignOut from "../assets/sidebar/logout.svg"
+import rightArrow from '../assets/sidebar/rightArrow.png'
+import imgHouse from '../assets/sidebar/house_grey.svg'
+import cardsImg from '../assets/sidebar/cards_grey.svg'
+import profilImg from '../assets/sidebar/profil_grey.svg'
+import arrowRightSidebard from '../assets/sidebar/arrowRightSidebard.png'
 
 
 function Sidebar(props) {
@@ -15,6 +18,26 @@ function Sidebar(props) {
 
     const hangleSignOut = (e) => {
         firebase.signoutUser()
+    }
+
+    const [imgCheck, setImgCheck] = useState(true)
+
+    const imgArow = document.querySelector('.rightArrow')
+    const sidebar = document.querySelector('.sideBar')
+    
+    const handleModifImg = () => {
+        setImgCheck(!imgCheck)
+        if(imgCheck){
+            imgArow.classList.remove('noDisplayRightArow')
+            imgArow.classList.add('displayRightArow')
+            sidebar.classList.add('sideBarDisplay')
+            sidebar.classList.remove('noSideBarDisplay')
+        }else{
+            imgArow.classList.add('noDisplayRightArow')
+            imgArow.classList.remove('displayRightArow')
+            sidebar.classList.add('noSideBarDisplay')
+            sidebar.classList.remove('sideBarDisplay')
+        }
     }
 
     return props.props == null ? (
@@ -27,31 +50,45 @@ function Sidebar(props) {
         </div>
     ) : (
         <div className="sideBar">
+        <img onClick={handleModifImg} className="rightArrow" src={arrowRightSidebard} />
         <ul>
-        <li id='profilLi'>
-                <img src={iconProfil}/>
+        {imgCheck ? (<Fragment>
+            <li className='profilLi' id="liSidebar">
+                <img src={profilImg}/>
+            </li>
+            <li id="liSidebar">
+                <NavLink activeClassName="active" to='/user'><img src={imgHouse}/></NavLink>
+            </li>
+            <li id="liSidebar">
+                <NavLink activeClassName="active" to='/collection'><img src={cardsImg}/></NavLink>
+            </li>
+            <li id="liSidebar"> 
+                <NavLink activeClassName="active" to='/profil'><img src={profilImg}/></NavLink>
+            </li>
+        </Fragment>) : (<Fragment>
+            <li className='profilLi' id="liSidebar">
+                <img src={profilImg}/>
                 <h2>{props.props.userName}</h2>
             </li>
-            <li>
-                <img src={iconCards}/>
+            <li id="liSidebar">
+                <img src={imgHouse}/>
                 <NavLink activeClassName="active" to='/user'>Accueil</NavLink>
             </li>
-            <li>
-                <img src={iconCards}/>
+            <li id="liSidebar">
+                <img src={cardsImg}/>
                 <NavLink activeClassName="active" to='/collection'>Mes collections</NavLink>
             </li>
-            <li>
-                <img src={iconProfil}/>
+            <li id="liSidebar">
+                <img src={profilImg}/>
                 <NavLink activeClassName="active" to='/profil'>Profil</NavLink>
             </li>
-            <li>
-                <img src={iconProfil}/>
-                <NavLink activeClassName="active" to='/quiz'>Quiz</NavLink>
-            </li>
+        </Fragment>)}
+        
+            
         </ul>
         <div className="signOut">
             <button onClick={hangleSignOut}><img id="logoSignOut" src={logoSignOut}/></button>
-            <h4>Déconnexion</h4>
+            {imgCheck ? (null) : (<h4>Déconnexion</h4>)}
         </div>
         </div>
     )
