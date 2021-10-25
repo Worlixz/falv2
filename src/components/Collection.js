@@ -16,6 +16,7 @@ toast.configure()
 function Collection(props) {
 
     const firebase = useContext(FirebaseContext)
+    console.log("je suis dans Collection : ",props)
 
     const assombrir = document.querySelector('.sombreModal')
 

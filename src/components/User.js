@@ -27,9 +27,11 @@ const User = (props) => {
             firebase.userData(userSession.uid)
             .get()
             .then((doc) => {
+                console.log("clg de doc dans userData : ",doc)
                 if(doc.exists){
-                    console.log(doc.data())
+                    console.log("clg de doc dans userData mais dans le if avec data : ",doc)
                     const myData = doc.data()
+                    console.log(myData.collectionUser)
                     setUserData(myData)
                 }
             })
@@ -54,8 +56,7 @@ const User = (props) => {
 
     }, [userSession])
 
-    /* console.log('dataUser', userData)
-    console.log('dataCards', dataCards) */
+    
     
 
     let content;

@@ -34,6 +34,21 @@ class Firebase {
     userData = (uid) => this.db.doc(`users/${uid}`)
     
     userCollection = (uid) => this.db.doc(`users/${uid}`).collection('CartesCollection')
+
+    /* userCollection = () => {
+        let refCollection = this.db.listCollections()
+        console.log(refCollection)
+        return refCollection
+    } */
+    
+    /* userCollection = (uid) => {
+        let refCollection = this.db.doc(`users/${uid}`).collection()
+        .get()
+        .then((collection) => {
+            console.log("je suis dans le then",collection)
+        })
+        console.log(refCollection)
+    } */
     
     signoutUser = () => this.auth.signOut()
 
@@ -81,12 +96,24 @@ class Firebase {
 
     deleteDataCards = (dataCollection, creattionCards) => {
         const admin = require('firebase-admin');
-        const FieldValue = admin.firestore.FieldValue;
-        let refCards = this.db.collection('CartesCollection').doc(dataCollection.nameCollection);
-        const deleteCards = refCards.update({
-            [creattionCards]: FieldValue.delete()
+        const FieldValue = admin.firestore.FieldValue; 
+        console.log("dataCollection : ", dataCollection)
+        let refCollection = this.db.collection('CartesCollection').doc(dataCollection.nameCollection);
+        console.log(refCollection)
+        /* let refCards = refCollection.id 
+        delete dataCollection.cards[creattionCards] */
+        /* Modifier dataCollectyion.cards pour supp données */
+        const deleteCards = refCollection.update({
+            [dataCollection.cards]: FieldValue.arrayRemove(creattionCards)
         });
+
+
+
         return deleteCards;
+
+        /* return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
+            dataCollection: dataCollection
+        }, {merge: true}) */
     } 
  
 

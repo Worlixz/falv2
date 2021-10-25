@@ -115,9 +115,9 @@ function Carte(props) {
     
     const deleteCards = () => {
         firebase.deleteDataCards(dataCollection, modalData.id)
-        .then(() => {
+        /* .then(() => {
             window.location.reload()
-        })
+        }) */
         setDeleteModal(false)
         assombrir.style.zIndex = "-2"
     }
