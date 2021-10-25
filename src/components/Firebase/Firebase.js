@@ -94,17 +94,19 @@ class Firebase {
     }
 
 
-    deleteDataCards = (dataCollection, creattionCards) => {
+    deleteDataCards = (uid, dataCollection, creattionCards) => {
         const admin = require('firebase-admin');
         const FieldValue = admin.firestore.FieldValue; 
         console.log("dataCollection : ", dataCollection)
-        let refCollection = this.db.collection('CartesCollection').doc(dataCollection.nameCollection);
+        /* let refCollection = this.db.collection('CartesCollection').doc(dataCollection.nameCollection); */
+        let refCollection = this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`);
+        let refCards = dataCollection.cards
         console.log(refCollection)
         /* let refCards = refCollection.id 
         delete dataCollection.cards[creattionCards] */
         /* Modifier dataCollectyion.cards pour supp données */
         const deleteCards = refCollection.update({
-            [dataCollection.cards]: FieldValue.arrayRemove(creattionCards)
+            refCards: FieldValue.arrayRemove(creattionCards)
         });
 
 
