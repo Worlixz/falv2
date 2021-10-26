@@ -16,7 +16,6 @@ toast.configure()
 function Collection(props) {
 
     const firebase = useContext(FirebaseContext)
-    console.log("je suis dans Collection : ",props)
 
     const assombrir = document.querySelector('.sombreModal')
 
@@ -26,25 +25,61 @@ function Collection(props) {
         categorie: 'default',
         etiquette: ''
     }
+    const dataCollection = []
     const mapDataCards = []
     const mapDataCardsCopie = props.dataCards
     
     const [modalCheck, setModalCheck] = useState(false)
     const [newCollection, setNewCollection] = useState(dataNewCollection)
-    const [userSession, setUserSession] = useState(props.userSession.uid.toString())
+    const [userSession, setUserSession] = useState(null)
     
+    const [dataUserCollection, setDataUserCollection] = useState(null)
+    const [setupCollection, setSetupCollection] = useState({
+        nameCollection: '',
+        categorie: '',
+        etiquette: '',
+        nbreCards: 0
+    })
 
 
     useEffect(() => {
         let listener = firebase.auth.onAuthStateChanged(user => {
             user ? setUserSession(user) : propsHistory.push('/')
         })
+        if(userSession){
+            firebase.userData(userSession.uid)
+            .get()
+            .then((doc) => {
+                if(doc.exists){
+                    const dataUser = doc.data()
+                    setDataUserCollection(dataUser)
+                }
+            })
+        }
         return () => {
             listener()
         }
     }, [userSession])
 
-    const handleClickBtn = () => {
+    
+    if(dataUserCollection){
+        const arrayCollection = dataUserCollection.collectionUser
+        arrayCollection.forEach(element => {
+            firebase.getDataCollection(userSession.uid,element)
+            .get()
+            .then((doc) => {
+                if(doc.exists){
+                    dataCollection.push(doc.data())
+                }
+            })
+        })
+    }
+
+    console.log('je suis dans dataCollection hors if : ', dataCollection)
+    dataCollection.map(element => console.log("je suis dans le map de datacollection ",element))
+   
+
+    function handleClickBtn() {
         setModalCheck(true)
         assombrir.style.zIndex = "2"
     }

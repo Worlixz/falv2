@@ -35,6 +35,8 @@ class Firebase {
     
     userCollection = (uid) => this.db.doc(`users/${uid}`).collection('CartesCollection')
 
+    getDataCollection = (uid, nameCollection) => this.db.doc(`users/${uid}`).collection(nameCollection).doc('DataCollection')
+
     /* userCollection = () => {
         let refCollection = this.db.listCollections()
         console.log(refCollection)
