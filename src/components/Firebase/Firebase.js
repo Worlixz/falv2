@@ -13,7 +13,7 @@ const config = {
     measurementId: "G-6QKN8HD5B5"
 }
 
-
+let dataCollection = []
 class Firebase {
     constructor(){
         app.initializeApp(config)
@@ -35,7 +35,20 @@ class Firebase {
     
     userCollection = (uid) => this.db.doc(`users/${uid}`).collection('CartesCollection')
 
-    getDataCollection = (uid, nameCollection) => this.db.doc(`users/${uid}`).collection(nameCollection).doc('DataCollection')
+    /* getDataCollection = (uid, nameCollection) => {
+        return this.db.doc(`users/${uid}`).collection(nameCollection).doc('DataCollection')
+    } */
+    dataCollection = []
+    getDataCollection = (uid, nameCollection) => {
+        this.db.doc(`users/${uid}`).collection(nameCollection).doc('DataCollection')
+        .get()
+        .then((doc) => {
+            if(doc.exists){
+                dataCollection.push(doc.data())
+            }
+        })
+        return dataCollection
+    }
 
     /* userCollection = () => {
         let refCollection = this.db.listCollections()

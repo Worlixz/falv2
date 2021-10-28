@@ -25,13 +25,11 @@ function Collection(props) {
         categorie: 'default',
         etiquette: ''
     }
-    const dataCollection = []
     const mapDataCards = []
     const mapDataCardsCopie = props.dataCards
     
     const [modalCheck, setModalCheck] = useState(false)
     const [newCollection, setNewCollection] = useState(dataNewCollection)
-    const [userSession, setUserSession] = useState(null)
     
     const [dataUserCollection, setDataUserCollection] = useState(null)
     const [setupCollection, setSetupCollection] = useState({
@@ -40,8 +38,11 @@ function Collection(props) {
         etiquette: '',
         nbreCards: 0
     })
-
-
+    
+    
+    //Logique vérification de la connexion 
+    //  Ajout de la data de l'utilisateur à son State
+    const [userSession, setUserSession] = useState(null)
     useEffect(() => {
         let listener = firebase.auth.onAuthStateChanged(user => {
             user ? setUserSession(user) : propsHistory.push('/')
@@ -60,24 +61,35 @@ function Collection(props) {
             listener()
         }
     }, [userSession])
-
     
+    
+    //Si logique de récupération des collections
+    //  Ce fait via un array contenant la data dans la data de l'utilisateur
+    console.log("dataUserCollection : ",dataUserCollection)
+    let dataCollection = []
+    let test
     if(dataUserCollection){
         const arrayCollection = dataUserCollection.collectionUser
         arrayCollection.forEach(element => {
-            firebase.getDataCollection(userSession.uid,element)
-            .get()
+            test = firebase.getDataCollection(userSession.uid,element)
+            /* .get()
             .then((doc) => {
                 if(doc.exists){
+                    console.log("doc.data : ",doc.data())
                     dataCollection.push(doc.data())
+                    console.log("dataCollection avec data : " , dataCollection)
                 }
-            })
+            }) */
         })
-    }
+        console.table("array Collection : ",arrayCollection)
+    }   
+    console.log("dataCollection : ",dataCollection[0])
+    console.log("test0", test[0])
+    console.log("test1", test[1])
+    console.log("test2", test[2])
+    console.log("test3", test[3])
+    
 
-    console.log('je suis dans dataCollection hors if : ', dataCollection)
-    dataCollection.map(element => console.log("je suis dans le map de datacollection ",element))
-   
 
     function handleClickBtn() {
         setModalCheck(true)
