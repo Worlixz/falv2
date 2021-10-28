@@ -99,19 +99,32 @@ class Firebase {
         const FieldValue = admin.firestore.FieldValue; 
         console.log("dataCollection : ", dataCollection)
         /* let refCollection = this.db.collection('CartesCollection').doc(dataCollection.nameCollection); */
-        let refCollection = this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`);
         let refCards = dataCollection.cards
-        console.log(refCollection)
+        console.log(creattionCards)
+        debugger
+        let selectedCards = dataCollection.cards.creattionCards
+        let selectedCardsBis = dataCollection.cards[creattionCards]
+        let selectedCardsBisBis = dataCollection.cards['creattionCards']
+        console.log("refCards : " ,refCards) 
+        console.log("creationCards", creattionCards)
+        console.log("selectedCards : ", selectedCardsBis)
+        delete refCards.creattionCards
+        debugger
+        console.log("refCards delet : ", refCards.creattionCards)
+        return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).update({
+            refCards: FieldValue.arrayRemove(creattionCards)
+        })
+        //console.log(refCollection)
         /* let refCards = refCollection.id 
         delete dataCollection.cards[creattionCards] */
         /* Modifier dataCollectyion.cards pour supp données */
-        const deleteCards = refCollection.update({
+        /* const deleteCards = refCollection.update({
             refCards: FieldValue.arrayRemove(creattionCards)
-        });
+        }); */
 
 
         //Modifier la position de lka DB
-        return deleteCards;
+        //return deleteCards;
 
         /* return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
             dataCollection: dataCollection
