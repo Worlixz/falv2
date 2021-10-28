@@ -110,7 +110,7 @@ class Firebase {
         });
 
 
-
+        //Modifier la position de lka DB
         return deleteCards;
 
         /* return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
