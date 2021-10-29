@@ -64,10 +64,10 @@ function Carte(props) {
     }, [userSession])
 
         
-    const handleClickBtn = (creattionCards) => {
+    const handleClickBtn = (creationCards) => {
         setModalCheck(true)
-        setModalData(creattionCards) //Initialisation des données su state en fonction de la carte cliqué
-        console.log(creattionCards)
+        setModalData(creationCards) //Initialisation des données su state en fonction de la carte cliqué
+        console.log(creationCards)
         assombrir.style.zIndex = "2"
     }
     
@@ -125,8 +125,8 @@ function Carte(props) {
         assombrir.style.zIndex = "-2"
     }
     
-    const handleDeleteModalOpen = (creattionCards) => {
-        setModalData(creattionCards)
+    const handleDeleteModalOpen = (creationCards) => {
+        setModalData(creationCards)
         setDeleteModal(true)
         assombrir.style.zIndex = "2"
     }
@@ -171,8 +171,8 @@ function Carte(props) {
     
     const btnCreationCards = modalData.type !== "" && modalData.reponse !== "" ? (<button className="modificationCards">Créer ma carte</button>) : (<button disabled className="modificationCards disabled">Créer ma carte</button>)    
     
-    const displayCards = Object.entries(dataCards).map((element) => {
-        let creattionCards = {
+    const displayCards = Object.entries(newArchiDB).map((element) => {
+        let creationCards = {
             question: "",
             reponse: '',
             type: '',
@@ -183,34 +183,36 @@ function Carte(props) {
             p4: ""
         }
         const idCards = Object.values(element)
+        console.log("je suiis dans element de map : ",element)
         Object.values(element).map((deepElement) => {
+            console.log("deepElement : ",deepElement)
             if(deepElement.question != undefined){
                 /* console.log("Question : ", deepElement.question)*/
-                creattionCards.question = deepElement.question
-                creattionCards.type = deepElement.type
-                creattionCards.id = idCards[0]
+                creationCards.question = deepElement.question
+                creationCards.type = deepElement.type
+                creationCards.id = idCards[0]
             }
             if(deepElement.reponse != undefined){
                 /* console.log("Réponse : " , deepElement.reponse) */
-                creattionCards.reponse = deepElement.reponse === true ? (deepElement.reponse.toString()) : deepElement.reponse
+                creationCards.reponse = deepElement.reponse === true ? (deepElement.reponse.toString()) : deepElement.reponse
             }
             if(deepElement.type === "quiz"){
-                creattionCards.p1 = deepElement.p1
-                creattionCards.p2 = deepElement.p2
-                creattionCards.p3 = deepElement.p3
-                creattionCards.p4 = deepElement.p4
+                creationCards.p1 = deepElement.p1
+                creationCards.p2 = deepElement.p2
+                creationCards.p3 = deepElement.p3
+                creationCards.p4 = deepElement.p4
             }
-            return creattionCards
+            return creationCards
         })
-        return creattionCards.question ? 
+        return creationCards.question ? 
             (<div className="cardsCards">
                 <div className="cardsCardsDivInfo">
-                    <h3 className="cardsTitle">{creattionCards.question}</h3>
-                    <p className="cardsText">{creattionCards.reponse}</p>
+                    <h3 className="cardsTitle">{creationCards.question}</h3>
+                    <p className="cardsText">{creationCards.reponse}</p>
                 </div>
                 <div className="cardsCardsDivBTN">
-                    <button onClick={() => handleClickBtn(creattionCards)} className="btnCardsManagement"><img id="pencil" src={pencil} /></button>
-                    <button className="btnCardsManagement"><img id="crossRed" onClick={() => handleDeleteModalOpen(creattionCards)} src={crossRed} /></button>
+                    <button onClick={() => handleClickBtn(creationCards)} className="btnCardsManagement"><img id="pencil" src={pencil} /></button>
+                    <button className="btnCardsManagement"><img id="crossRed" onClick={() => handleDeleteModalOpen(creationCards)} src={crossRed} /></button>
                 </div>
             </div>) : null
         
