@@ -17,11 +17,14 @@ toast.configure()
 function Carte(props) {
 
     const firebase = useContext(FirebaseContext)
-    console.log(props)
+    console.log("clg props carte.js : ",props)
     
     
     const dataCollection = props.propsHistory.location.state.dataCardsMap
     const dataCards = props.propsHistory.location.state.dataCardsMap.cards
+
+    const newArchiDB = props.propsHistory.location.state.dataCardsMap.cards.cards
+    console.log("clg new archi carte.JS", newArchiDB)
 
     const assombrir = document.querySelector('.sombreModalCardsManagement')
 

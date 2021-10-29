@@ -93,27 +93,29 @@ class Firebase {
         }, {merge: true})
     }
 
-
     deleteDataCards = (uid, dataCollection, creattionCards) => {
+        /* let selectedCardsBis */
         const admin = require('firebase-admin');
         const FieldValue = admin.firestore.FieldValue; 
         console.log("dataCollection : ", dataCollection)
         /* let refCollection = this.db.collection('CartesCollection').doc(dataCollection.nameCollection); */
         let refCards = dataCollection.cards
-        console.log(creattionCards)
-        debugger
-        let selectedCards = dataCollection.cards.creattionCards
-        let selectedCardsBis = dataCollection.cards[creattionCards]
-        let selectedCardsBisBis = dataCollection.cards['creattionCards']
-        console.log("refCards : " ,refCards) 
+        /* console.log(creattionCards) */
+       
+        /* let selectedCards = dataCollection.cards.creattionCards
+        selectedCardsBis = {...dataCollection.cards[creattionCards]}
+        let selectedCardsBisBis = dataCollection.cards['creattionCards'] */
+        /* console.log("refCards : " ,refCards) 
         console.log("creationCards", creattionCards)
-        console.log("selectedCards : ", selectedCardsBis)
-        delete refCards.creattionCards
+        console.log("selectedCards : ", selectedCardsBis) */
+        delete refCards[creattionCards]
+        console.log(refCards)
         debugger
-        console.log("refCards delet : ", refCards.creattionCards)
+        return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).update({refCards})
+        /* console.log("refCards delet : ", refCards.creattionCards)
         return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).update({
             refCards: FieldValue.arrayRemove(creattionCards)
-        })
+        }) */
         //console.log(refCollection)
         /* let refCards = refCollection.id 
         delete dataCollection.cards[creattionCards] */
