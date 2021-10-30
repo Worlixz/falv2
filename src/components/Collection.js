@@ -24,7 +24,8 @@ function Collection(props) {
     const dataNewCollection = {
         nameCollection : '',
         categorie: 'default',
-        etiquette: ''
+        etiquette: '',
+        cards: {}
     }
     const mapDataCards = []
     const mapDataCardsCopie = props.dataCards
@@ -105,6 +106,7 @@ function Collection(props) {
     } 
        
     const displayCollection = mapDataCards.map((element) => {
+        console.log(" fonction map : ", element)
         let dataCardsMap = {
             nbreCards: '',
             cards: '',
@@ -112,7 +114,11 @@ function Collection(props) {
             categorie: ''
         }
         Object.values(element).map((cards) => {
-            dataCardsMap.nbreCards = Object.keys(cards).length -1
+            console.log("je suis dans map cards : ",cards.cards)
+             let saveNbre = cards.cards
+            /* console.log("je cherche la longeur de cards : ",  Object.keys(cards.cards).length) */
+            dataCardsMap.nbreCards = Object.keys(saveNbre).length
+            console.log("datacardsNbreCards : ", dataCardsMap.nbreCards)
             dataCardsMap.cards = cards
             dataCardsMap.categorie = cards.categorie
             return dataCardsMap
