@@ -116,7 +116,6 @@ function Collection(props) {
         Object.values(element).map((cards) => {
             console.log("je suis dans map cards : ",cards.cards)
              let saveNbre = cards.cards
-            /* console.log("je cherche la longeur de cards : ",  Object.keys(cards.cards).length) */
             dataCardsMap.nbreCards = Object.keys(saveNbre).length
             console.log("datacardsNbreCards : ", dataCardsMap.nbreCards)
             dataCardsMap.cards = cards

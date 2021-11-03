@@ -68,22 +68,26 @@ class Firebase {
     // Permet la modification d'une carte nécessite : UID | LA COLLECTION | LES DATA DE LA CARTE
     modificationCards = (uid, dataCollection, modalData) => {
         return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
-            [modalData.id]: {
-                question: modalData.question,
-                    reponse: modalData.reponse,
-                    type: modalData.type,
-                    p1: modalData.p1,
-                    p2: modalData.p2,
-                    p3: modalData.p3,
-                    p4: modalData.p4
+            cards : {
+                [modalData.id]: {
+                    question: modalData.question,
+                        reponse: modalData.reponse,
+                        type: modalData.type,
+                        p1: modalData.p1,
+                        p2: modalData.p2,
+                        p3: modalData.p3,
+                        p4: modalData.p4
+                }
             }
         }, {merge: true})
     }
 
     creationCards = (uid, dataCollection, modalData) => {
+        debugger
         return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
-            [modalData.id]: {
-                question: modalData.question,
+            cards: {
+                [modalData.id]: {
+                    question: modalData.question,
                     reponse: modalData.reponse,
                     type: modalData.type,
                     p1: modalData.p1,
@@ -91,47 +95,19 @@ class Firebase {
                     p3: modalData.p3,
                     p4: modalData.p4
             }
+            }   
         }, {merge: true})
     }
 
     deleteDataCards = (uid, dataCollection, creattionCards) => {
-        /* let selectedCardsBis */
         const admin = require('firebase-admin');
         const FieldValue = admin.firestore.FieldValue; 
         console.log("dataCollection : ", dataCollection)
-        /* let refCollection = this.db.collection('CartesCollection').doc(dataCollection.nameCollection); */
-        let refCards = dataCollection.cards
-        /* console.log(creattionCards) */
+        let cards = dataCollection.cards.cards
+        
+        delete cards[creattionCards]
+        return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).update({cards})
        
-        /* let selectedCards = dataCollection.cards.creattionCards
-        selectedCardsBis = {...dataCollection.cards[creattionCards]}
-        let selectedCardsBisBis = dataCollection.cards['creattionCards'] */
-        /* console.log("refCards : " ,refCards) 
-        console.log("creationCards", creattionCards)
-        console.log("selectedCards : ", selectedCardsBis) */
-        delete refCards[creattionCards]
-        console.log(refCards)
-        debugger
-        return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).update({refCards})
-        /* console.log("refCards delet : ", refCards.creattionCards)
-        return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).update({
-            refCards: FieldValue.arrayRemove(creattionCards)
-        }) */
-        //console.log(refCollection)
-        /* let refCards = refCollection.id 
-        delete dataCollection.cards[creattionCards] */
-        /* Modifier dataCollectyion.cards pour supp données */
-        /* const deleteCards = refCollection.update({
-            refCards: FieldValue.arrayRemove(creattionCards)
-        }); */
-
-
-        //Modifier la position de lka DB
-        //return deleteCards;
-
-        /* return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
-            dataCollection: dataCollection
-        }, {merge: true}) */
     } 
  
 
