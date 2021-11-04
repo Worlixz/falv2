@@ -20,17 +20,21 @@ function Quiz(props) {
     })
 
     const {dataCards, dataCollection, startTimer} = props.propsHistory.location.state
-    console.log('startTimer : ',startTimer)
+    console.log('DataCards : ',dataCards.cards)
+    console.log('datacollection ',dataCollection )
 
     const [modeQuestion, setModeQuestion] = useState(false)
     const [count, setCount] = useState(0)
-    const [dataQuiz, setDataQuiz] = useState(dataCards)
+    const [dataQuiz, setDataQuiz] = useState(dataCards.cards)
     const [repUser, setRepUser] = useState("")
     const [score, setScore] = useState(0)
     const [stateTemporaire, setStateTemporaire] = useState([])
     const [stateTemporaireError, setStateTemporaireError] = useState([])
 
     const dataQuizDisplay = Object.values(dataQuiz)
+    const dataQuizDisplayID = Object.keys(dataQuiz)
+    console.log('dataQuizDisplay : ',dataQuizDisplay)
+    console.log('dataQuizDisplayID : ',dataQuizDisplayID)
     const arraySuccessSentence = ["Au top", "Une de plus de réussi", "Tu es sur la bonne voie", "Génial", "Bravo", "+1 au compteur", "Tu continue à progresser", "L'anatomie n'a plus de secret pour toi", "Elle est validé !!!", "Parfait"]
     const arrayErrorSentence = ["Je crois en toi", "Tu peux le faire", "La prochaine fois ça sera la bonne", "Il faut tomber pour apprendre", "Tu y es presque", "Tu te fera plus avoir", "Persévérer", "Soit acteur de ta réussite tu vas y arriver", "Dommage", "La route de la connaissance est semé d'embûches"]
     let arraySucces = []
@@ -62,6 +66,8 @@ function Quiz(props) {
 
     const handleNext = (e) => {
         let countCurrent = count
+        console.log(e)
+        firebase.updateTimerFalse(userSession.uid, dataCollection.nameCollection, dataQuizDisplayID[count], e)
         if(count < dataQuizDisplay.length -1 ){
             countCurrent++
             setCount(countCurrent)
@@ -75,11 +81,11 @@ function Quiz(props) {
     }
 
 
-    const btnTime = (count < dataQuizDisplay.length -1 ) ? (<Fragment><button className="btnTimer minute" onClick={handleNext}>1 minute</button>
-    <button className="btnTimer days3" onClick={handleNext}>3 jours</button>
-    <button className="btnTimer days7" onClick={handleNext}>7 jours</button></Fragment>) : (<Fragment><Link className="btnTimer minute" onClick={handleNext} to={{pathname: '/dashboard', state:{stateDashboard}}}>1 minute</Link>
-    <Link className="btnTimer days3" onClick={handleNext} to={{pathname: '/dashboard', state:{stateDashboard}}} >3 jours</Link>
-    <Link className="btnTimer days7" onClick={handleNext} to={{pathname: '/dashboard', state:{stateDashboard}}} >7 jours</Link></Fragment>)
+    const btnTime = (count < dataQuizDisplay.length -1 ) ? (<Fragment><button className="btnTimer minute" onClick={() => handleNext(1)}>1 minute</button>
+    <button className="btnTimer days3" onClick={() =>handleNext(3)}>3 jours</button>
+    <button className="btnTimer days7" onClick={() => handleNext(7)}>7 jours</button></Fragment>) : (<Fragment><Link className="btnTimer minute" onClick={() => handleNext(1)} to={{pathname: '/dashboard', state:{stateDashboard}}}>1 minute</Link>
+    <Link className="btnTimer days3" onClick={() =>handleNext(3)} to={{pathname: '/dashboard', state:{stateDashboard}}} >3 jours</Link>
+    <Link className="btnTimer days7" onClick={() => handleNext(7)} to={{pathname: '/dashboard', state:{stateDashboard}}} >7 jours</Link></Fragment>)
 
     const handleCheck = (e) => {
         for(let i = 0; i < pdivQuiz.length; i++){
@@ -164,10 +170,10 @@ function Quiz(props) {
             </div>
             <div className="divQuizPossibilite">
             {dataQuizDisplay[count].type == "quiz" ? (<Fragment>
-                <p onClick={handleCheck} >{dataQuizDisplay[count].p1}</p>
-                <p onClick={handleCheck} >{dataQuizDisplay[count].p2}</p>
-                <p onClick={handleCheck} >{dataQuizDisplay[count].p3}</p>
-                <p onClick={handleCheck} >{dataQuizDisplay[count].p4}</p>
+                <p onClick={handleCheck} >{dataQuizDisplay[count].possibilite.p1}</p>
+                <p onClick={handleCheck} >{dataQuizDisplay[count].possibilite.p2}</p>
+                <p onClick={handleCheck} >{dataQuizDisplay[count].possibilite.p3}</p>
+                <p onClick={handleCheck} >{dataQuizDisplay[count].possibilite.p4}</p>
             </Fragment>) : (
                 <Fragment>
                     <p value={true} onClick={handleCheck}>Vrai</p>

@@ -83,7 +83,6 @@ class Firebase {
     }
 
     creationCards = (uid, dataCollection, modalData) => {
-        debugger
         return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
             cards: {
                 [modalData.id]: {
@@ -118,6 +117,34 @@ class Firebase {
         etude: etude,
         profilPicture: profilPicture
     })
+
+    // NECESSITE 
+        // Identifiant User OK
+        // Identifiant cards
+        // Identifiant collection
+    updateTimerFalse = (uid, nameCollection, idCards, event) => {
+        let date
+
+        switch(event){
+            case 1 : date = Date.now()
+            break
+            
+            case 3 : date = (Date.now() + 3*86400000)
+            break
+
+            case 7 : date = (Date.now() + 7*86400000)
+            break
+        }
+        return this.db.doc(`users/${uid}/CartesCollection/${nameCollection}`).set({
+            cards: {
+                [idCards]: {
+                    revisionDate: date
+            }
+            }   
+        }, {merge: true})
+    }
+    
+
     user = (uid) => this.db.doc(`users/${uid}`)
 }
 
