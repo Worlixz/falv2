@@ -20,8 +20,7 @@ function Quiz(props) {
     })
 
     const {dataCards, dataCollection, startTimer} = props.propsHistory.location.state
-    console.log('DataCards : ',dataCards.cards)
-    console.log('datacollection ',dataCollection )
+   
 
     const [modeQuestion, setModeQuestion] = useState(false)
     const [count, setCount] = useState(0)
@@ -31,10 +30,11 @@ function Quiz(props) {
     const [stateTemporaire, setStateTemporaire] = useState([])
     const [stateTemporaireError, setStateTemporaireError] = useState([])
 
-    const dataQuizDisplay = Object.values(dataQuiz)
-    const dataQuizDisplayID = Object.keys(dataQuiz)
-    console.log('dataQuizDisplay : ',dataQuizDisplay)
-    console.log('dataQuizDisplayID : ',dataQuizDisplayID)
+    const arrayFilter = Object.values(dataQuiz)
+    const dataQuizDisplay = arrayFilter.filter(element => element.revisionDate <= Date.now())
+    console.log("dataQuizDisplay : ",dataQuizDisplay)
+
+
     const arraySuccessSentence = ["Au top", "Une de plus de réussi", "Tu es sur la bonne voie", "Génial", "Bravo", "+1 au compteur", "Tu continue à progresser", "L'anatomie n'a plus de secret pour toi", "Elle est validé !!!", "Parfait"]
     const arrayErrorSentence = ["Je crois en toi", "Tu peux le faire", "La prochaine fois ça sera la bonne", "Il faut tomber pour apprendre", "Tu y es presque", "Tu te fera plus avoir", "Persévérer", "Soit acteur de ta réussite tu vas y arriver", "Dommage", "La route de la connaissance est semé d'embûches"]
     let arraySucces = []
@@ -66,8 +66,7 @@ function Quiz(props) {
 
     const handleNext = (e) => {
         let countCurrent = count
-        console.log(e)
-        firebase.updateTimerFalse(userSession.uid, dataCollection.nameCollection, dataQuizDisplayID[count], e)
+        firebase.updateTimerFalse(userSession.uid, dataCollection.nameCollection, dataQuizDisplay[count].id_card, e)
         if(count < dataQuizDisplay.length -1 ){
             countCurrent++
             setCount(countCurrent)
@@ -75,8 +74,6 @@ function Quiz(props) {
                 pdivQuiz[i].classList.remove('selected')
             }
             handleSwitchMode()
-        }else{
-            console.log("je viens de finir et faut faire un appel à la db")
         }
     }
 
@@ -155,8 +152,14 @@ function Quiz(props) {
             });
     }
 
-
-    return (
+    return dataQuizDisplay.length === 0 ? (<div className="quizContainer">
+        <div className="divQuizNameCollection">
+            <h3>{dataCollection.nameCollection}</h3>
+        </div>
+        <div>
+            <p>Tu n'as pas de carte à réviser !!</p>
+        </div>
+    </div>) : (
         <div className="quizContainer">
             <div className="divQuizNameCollection">
                 <h3>{dataCollection.nameCollection}</h3>

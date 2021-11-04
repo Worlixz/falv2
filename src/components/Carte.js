@@ -17,14 +17,12 @@ toast.configure()
 function Carte(props) {
 
     const firebase = useContext(FirebaseContext)
-    console.log("clg props carte.js : ",props)
     
     
     const dataCollection = props.propsHistory.location.state.dataCardsMap
     const dataCards = props.propsHistory.location.state.dataCardsMap.cards
 
     const newArchiDB = props.propsHistory.location.state.dataCardsMap.cards.cards
-    console.log("clg new archi carte.JS", newArchiDB)
 
     const assombrir = document.querySelector('.sombreModalCardsManagement')
 
@@ -67,14 +65,12 @@ function Carte(props) {
     const handleClickBtn = (creationCards) => {
         setModalCheck(true)
         setModalData(creationCards) //Initialisation des données su state en fonction de la carte cliqué
-        console.log(creationCards)
         assombrir.style.zIndex = "2"
     }
     
     const handleChange = (e) => {
         // Modification du state de handleClickBtn 
         setModalData({...modalData, [e.target.id]: e.target.value})
-        console.log("modal Data : ",modalData)
         
     }
     
@@ -183,17 +179,13 @@ function Carte(props) {
             p4: ""
         }
         const idCards = Object.values(element)
-        console.log("je suiis dans element de map : ",element)
         Object.values(element).map((deepElement) => {
-            console.log("deepElement : ",deepElement)
-            if(deepElement.question != undefined){
-                /* console.log("Question : ", deepElement.question)*/
+            if(deepElement.question != undefined){ 
                 creationCards.question = deepElement.question
                 creationCards.type = deepElement.type
                 creationCards.id = idCards[0]
             }
             if(deepElement.reponse != undefined){
-                /* console.log("Réponse : " , deepElement.reponse) */
                 creationCards.reponse = deepElement.reponse === true ? (deepElement.reponse.toString()) : deepElement.reponse
             }
             if(deepElement.type === "quiz"){

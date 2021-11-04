@@ -73,10 +73,14 @@ class Firebase {
                     question: modalData.question,
                         reponse: modalData.reponse,
                         type: modalData.type,
-                        p1: modalData.p1,
-                        p2: modalData.p2,
-                        p3: modalData.p3,
-                        p4: modalData.p4
+                        possibilite: {
+                            p1: modalData.p1,
+                            p2: modalData.p2,
+                            p3: modalData.p3,
+                            p4: modalData.p4
+                        },
+                        id_card: modalData.id,
+                        revisionDate: Date.now()
                 }
             }
         }, {merge: true})
@@ -89,10 +93,15 @@ class Firebase {
                     question: modalData.question,
                     reponse: modalData.reponse,
                     type: modalData.type,
-                    p1: modalData.p1,
-                    p2: modalData.p2,
-                    p3: modalData.p3,
-                    p4: modalData.p4
+                    possibilite : {
+                        p1: modalData.p1,
+                        p2: modalData.p2,
+                        p3: modalData.p3,
+                        p4: modalData.p4
+                    },
+                    id_card: modalData.id,
+                    revisionDate: Date.now()
+
             }
             }   
         }, {merge: true})

@@ -16,7 +16,6 @@ toast.configure()
 function Collection(props) {
 
     const firebase = useContext(FirebaseContext)
-    console.log("je suis dans Collection : ",props)
 
     const assombrir = document.querySelector('.sombreModal')
 
@@ -73,7 +72,6 @@ function Collection(props) {
 
     const handleChange = (e) => {
         setNewCollection({...newCollection, [e.target.id]: e.target.value})
-        console.log(newCollection)
     }
 
     const btnCreation = newCollection.nameCollection == '' ? 
@@ -106,7 +104,6 @@ function Collection(props) {
     } 
        
     const displayCollection = mapDataCards.map((element) => {
-        console.log(" fonction map : ", element)
         let dataCardsMap = {
             nbreCards: '',
             cards: '',
@@ -114,10 +111,8 @@ function Collection(props) {
             categorie: ''
         }
         Object.values(element).map((cards) => {
-            console.log("je suis dans map cards : ",cards.cards)
              let saveNbre = cards.cards
             dataCardsMap.nbreCards = Object.keys(saveNbre).length
-            console.log("datacardsNbreCards : ", dataCardsMap.nbreCards)
             dataCardsMap.cards = cards
             dataCardsMap.categorie = cards.categorie
             return dataCardsMap
