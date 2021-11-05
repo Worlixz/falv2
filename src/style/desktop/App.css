@@ -540,7 +540,7 @@ iframe {
   height: 280px;
   width: 500px;
   z-index: 3;
-  background: #ffb452;
+  background: #e5e5e5;
   border-radius: 30px;
 }
 .btnCloseModal {
@@ -1062,4 +1062,8 @@ tr:nth-child(n) {
 .btnBackCollection:hover {
   transform: scale(1.05);
   transition: 0.2s ease-in-out;
+}
+
+#backCollection{
+  margin-top: 50px;
 }

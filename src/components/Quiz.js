@@ -152,14 +152,18 @@ function Quiz(props) {
             });
     }
 
-    return dataQuizDisplay.length === 0 ? (<div className="quizContainer">
-        <div className="divQuizNameCollection">
-            <h3>{dataCollection.nameCollection}</h3>
-        </div>
-        <div>
-            <p>Tu n'as pas de carte à réviser !!</p>
-        </div>
-    </div>) : (
+    return dataQuizDisplay.length === 0 ? (
+        <div className="quizContainer">
+            <div className="divQuizNameCollection">
+                <h3>{dataCollection.nameCollection}</h3>
+            </div>
+            <div className="divQuizQuestion">
+                <p>Tu n'as pas de carte à réviser !!</p>
+            </div>
+            <div id="backCollection">
+                <Link className="btnBackCollection" to="/collection">Retour aux collections</Link>
+            </div>
+        </div>) : (
         <div className="quizContainer">
             <div className="divQuizNameCollection">
                 <h3>{dataCollection.nameCollection}</h3>
