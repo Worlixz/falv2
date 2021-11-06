@@ -14,13 +14,15 @@ const config = {
 }
 
 
+
+
 class Firebase {
     constructor(){
         app.initializeApp(config)
         this.auth = app.auth()
         this.db = app.firestore()
     }
-
+    
     signupUser = (email, password) => {
         return (this.auth.createUserWithEmailAndPassword(email, password))
     }
@@ -34,21 +36,6 @@ class Firebase {
     userData = (uid) => this.db.doc(`users/${uid}`)
     
     userCollection = (uid) => this.db.doc(`users/${uid}`).collection('CartesCollection')
-
-    /* userCollection = () => {
-        let refCollection = this.db.listCollections()
-        console.log(refCollection)
-        return refCollection
-    } */
-    
-    /* userCollection = (uid) => {
-        let refCollection = this.db.doc(`users/${uid}`).collection()
-        .get()
-        .then((collection) => {
-            console.log("je suis dans le then",collection)
-        })
-        console.log(refCollection)
-    } */
     
     signoutUser = () => this.auth.signOut()
 
@@ -127,10 +114,6 @@ class Firebase {
         profilPicture: profilPicture
     })
 
-    // NECESSITE 
-        // Identifiant User OK
-        // Identifiant cards
-        // Identifiant collection
     updateTimerFalse = (uid, nameCollection, idCards, event) => {
         let date
 
@@ -154,7 +137,8 @@ class Firebase {
     }
     
 
-    user = (uid) => this.db.doc(`users/${uid}`)
+
+    /* user = (uid) => this.db.doc(`users/${uid}`) */
 }
 
 export default Firebase
