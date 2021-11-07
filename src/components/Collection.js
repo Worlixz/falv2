@@ -16,7 +16,6 @@ toast.configure()
 function Collection(props) {
 
     const firebase = useContext(FirebaseContext)
-
     const assombrir = document.querySelector('.sombreModal')
 
     const propsHistory = props.propsHistory
