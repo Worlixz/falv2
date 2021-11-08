@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useContext, useEffect} from 'react'
+import app from 'firebase/app'
 import { Link } from 'react-router-dom'
 import { FirebaseContext } from './Firebase'
 import OsCasse from '../assets/Cards/os-casse.svg'
@@ -18,6 +19,8 @@ function Collection(props) {
     const firebase = useContext(FirebaseContext)
     const assombrir = document.querySelector('.sombreModal')
 
+    const urlCardsFreeAcces = "gs://flash-anatomy-learning.appspot.com/CarteFreeAccess"
+
     const propsHistory = props.propsHistory
     const dataNewCollection = {
         nameCollection : '',
@@ -31,6 +34,7 @@ function Collection(props) {
     const [modalCheck, setModalCheck] = useState(false)
     const [newCollection, setNewCollection] = useState(dataNewCollection)
     const [userSession, setUserSession] = useState(props.userSession.uid.toString())
+    const [test, setTest] = useState(null)
     
 
 

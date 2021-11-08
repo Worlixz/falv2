@@ -67,15 +67,14 @@ function Profil(props) {
         console.log(dataProfil)
     }
 
-    const handleFileChange = (e) => {
+    const handleFileChange = async (e) => {
         const file = e.target.files[0]
         const storageRef = app.storage().ref('/ProfilPicture')
         const fileRef = storageRef.child(file.name)
-        fileRef.put(file).then(() => {
-            console.log('Upload file')
-        })
-        //Set une référence sur le profil de l'utilisateur 7'09 de la vidéo 
-        console.log(file)
+        await fileRef.put(file)
+        //Permet de récupérer url de stockage
+        const tempFileUrl = await fileRef.getDownloadURL()
+        setDataProfil({...dataProfil, profilPicture: tempFileUrl})
     }
 
     const handleUpdateProfilData = (e) => {
@@ -101,25 +100,6 @@ function Profil(props) {
         })
     }
 
-    const selector = (
-        <select id="etude">
-            <optgroup label="-- STAPS --">
-                <option value="Staps - Licence 1">Staps - Licence 1</option>
-                <option value="Staps - Licence 2">Staps - Licence 2</option>
-                <option value="Staps - Licence 3">Staps - Licence 3</option>
-                <option value="Staps - Master 1">Staps - Master 1</option>
-                <option value="Staps - Master 2">Staps - Master 2</option>
-            </optgroup>
-            <optgroup label="-- OSTEOPHATIE --">
-                <option value="Ostéophatie - Licence 1">Ostéophatie - Licence 1</option>
-                <option value="Ostéophatie - Licence 1">Ostéophatie - Licence 2</option>
-                <option value="Ostéophatie - Licence 1">Ostéophatie - Licence 3</option>
-                <option value="Ostéophatie - Master 1">Ostéophatie - Master 1</option>
-                <option value="Ostéophatie - Master 2">Ostéophatie - Master 2</option>
-            </optgroup>
-        </select>
-    )
-
     return userSession === null ? (
         <Loader />
     ) : (
@@ -129,7 +109,7 @@ function Profil(props) {
                 <div className="containerInfoImg">
                     {modeEdition ? (<p id="paraModifIMG">Mettre une image d'une grandeur de 150*150px <br />Pour redimentionnser votre image :<a target="_blank" href="https://convert-my-image.com/ImageConverter_Fr"> C'est par ici !</a></p>) : (null)}
                     <div className="containerModifProfil">
-                        <img src={dataProfil.profilPicture} />
+                        <img id='profilPicture' src={dataProfil.profilPicture} />
                         {modeEdition ? (<img onClick={handleEditionMode} id="modificationPencil" src={crossRed} />) : (<img onClick={handleEditionMode} id="modificationPencil" src={pencil} />)} 
                     </div>
                     {modeEdition ? (
