@@ -1,4 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react'
+import app from 'firebase/app'
 import Blob from '../assets/Blob.png'
 import { FirebaseContext } from './Firebase/index'
 import Loader from './Loader'
@@ -66,6 +67,17 @@ function Profil(props) {
         console.log(dataProfil)
     }
 
+    const handleFileChange = (e) => {
+        const file = e.target.files[0]
+        const storageRef = app.storage().ref('/ProfilPicture')
+        const fileRef = storageRef.child(file.name)
+        fileRef.put(file).then(() => {
+            console.log('Upload file')
+        })
+        //Set une référence sur le profil de l'utilisateur 7'09 de la vidéo 
+        console.log(file)
+    }
+
     const handleUpdateProfilData = (e) => {
         e.preventDefault()
         firebase.updateProfil(userSession.uid, dataProfil.userName, dataProfil.email, dataProfil.nomPrenom, dataProfil.etude, dataProfil.profilPicture)
@@ -121,7 +133,7 @@ function Profil(props) {
                         {modeEdition ? (<img onClick={handleEditionMode} id="modificationPencil" src={crossRed} />) : (<img onClick={handleEditionMode} id="modificationPencil" src={pencil} />)} 
                     </div>
                     {modeEdition ? (
-                        <input onChange={handleChange} type="file" id="profilPicture" name="profile_pic"
+                        <input onChange={handleFileChange} type="file" id="profilPicture" name="profile_pic"
                             accept=".jpg, .jpeg, .png"></input>) : (null)}
                 </div>
             </div>
