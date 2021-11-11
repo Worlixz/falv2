@@ -12,7 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { freeCards } from './freeCards'
-import { freeCards2 } from './freeCards'
+
 
 toast.configure()
 
@@ -119,7 +119,7 @@ function Collection(props) {
     for(const [key, value] of Object.entries(mapDataCardsCopie)){
         mapDataCards.push({[key]: value})
     }  
-    /* for(const [key, value] of Object.entries(freeCards2)){
+    /* for(const [key, value] of Object.entries(freeCards)){
         mapDataTest.push({[key]: value})
     } */
     //Les données sont formaté et issue de la DB
@@ -141,7 +141,7 @@ function Collection(props) {
             // Si égal ne rien faire 
             // Sinon récupérer les élements non similaire et les push sur la DB
     
-    const test = freeCards2.map(element => {
+    const test = freeCards.map(element => {
         console.log("dans map : ", element)
     })        
     console.log('test : ', test)
@@ -151,7 +151,7 @@ function Collection(props) {
     })
     
     
-    const arrarayTest = mapDataCards.concat(freeCards2)
+    const arrarayTest = mapDataCards.concat(freeCards)
     
     const displayCollection = arrarayTest.map((element) => {
         let dataCardsMap = {
