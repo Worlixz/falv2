@@ -11,6 +11,9 @@ import interogationPoint from '../assets/Cards/interrogationPoint.svg'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { freeCards } from './freeCards'
+import { freeCards2 } from './freeCards'
+
 toast.configure()
 
 
@@ -30,17 +33,29 @@ function Collection(props) {
     }
     const mapDataCards = []
     const mapDataCardsCopie = props.dataCards
+    const mapDataTest = []
+    const formatedData = []
     
     const [modalCheck, setModalCheck] = useState(false)
     const [newCollection, setNewCollection] = useState(dataNewCollection)
     const [userSession, setUserSession] = useState(props.userSession.uid.toString())
-    const [test, setTest] = useState(null)
-    
+    const [collectionCardsInDB, setCollectionCardsInDB] = useState([])
 
+    let collection_CardsInDB = {}
+    
+    console.table("freeCards : ",freeCards2)
 
     useEffect(() => {
         let listener = firebase.auth.onAuthStateChanged(user => {
             user ? setUserSession(user) : propsHistory.push('/')
+        })
+        firebase.userCollection(userSession.uid)
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.docs.map((doc) => {
+                collection_CardsInDB = {...collection_CardsInDB, [doc.id]: doc.data()}
+                setCollectionCardsInDB(collection_CardsInDB)
+            })
         })
         return () => {
             listener()
@@ -105,8 +120,27 @@ function Collection(props) {
     for(const [key, value] of Object.entries(mapDataCardsCopie)){
         mapDataCards.push({[key]: value})
     } 
-       
-    const displayCollection = mapDataCards.map((element) => {
+    for(const [key, value] of Object.entries(freeCards2)){
+        mapDataTest.push({[key]: value})
+    }
+    //Les données sont formaté et issue de la DB
+    for(const [key, value] of Object.entries(collectionCardsInDB)){
+        formatedData.push({[key]: value})
+    }
+
+    //Vérification de l'existance des collections et carte entre la db et le local
+        //Si différents alors envoyer les données à la db
+        //Si pareil ne rien faire
+
+    /*  console.log("mapDataCards : ",mapDataCards)
+    console.log("mapDataTest :  ",mapDataTest) */
+    const arrarayTest = mapDataCards.concat(freeCards2)
+    console.log("arrayTest : ",arrarayTest)
+
+    console.log("collection DB ",collectionCardsInDB)
+    console.log("formatedData : ",formatedData)
+
+    const displayCollection = arrarayTest.map((element) => {
         let dataCardsMap = {
             nbreCards: '',
             cards: '',
@@ -114,7 +148,7 @@ function Collection(props) {
             categorie: ''
         }
         Object.values(element).map((cards) => {
-             let saveNbre = cards.cards
+            let saveNbre = cards.cards
             dataCardsMap.nbreCards = Object.keys(saveNbre).length
             dataCardsMap.cards = cards
             dataCardsMap.categorie = cards.categorie
