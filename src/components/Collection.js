@@ -42,8 +42,6 @@ function Collection(props) {
     const [collectionCardsInDB, setCollectionCardsInDB] = useState([])
 
     let collection_CardsInDB = {}
-    
-    console.table("freeCards : ",freeCards2)
 
     useEffect(() => {
         let listener = firebase.auth.onAuthStateChanged(user => {
@@ -116,30 +114,45 @@ function Collection(props) {
             </form>
         </div>
     )
-        
+    
+    let nameCollectionStorageLocal = []
     for(const [key, value] of Object.entries(mapDataCardsCopie)){
         mapDataCards.push({[key]: value})
-    } 
-    for(const [key, value] of Object.entries(freeCards2)){
+    }  
+    /* for(const [key, value] of Object.entries(freeCards2)){
         mapDataTest.push({[key]: value})
-    }
+    } */
     //Les données sont formaté et issue de la DB
     for(const [key, value] of Object.entries(collectionCardsInDB)){
         formatedData.push({[key]: value})
+    }
+    let collectionNameInDB = []
+    for(const [key, value] of Object.entries(collectionCardsInDB)){
+        collectionNameInDB.push(key)
     }
 
     //Vérification de l'existance des collections et carte entre la db et le local
         //Si différents alors envoyer les données à la db
         //Si pareil ne rien faire
-
-    /*  console.log("mapDataCards : ",mapDataCards)
-    console.log("mapDataTest :  ",mapDataTest) */
+    
+    //Vérification de la correspondance entre les tableaux: 
+        // Parcourir le tableau formatedData
+            //Le comparer élément par élément à mapDataTest
+            // Si égal ne rien faire 
+            // Sinon récupérer les élements non similaire et les push sur la DB
+    
+    const test = freeCards2.map(element => {
+        console.log("dans map : ", element)
+    })        
+    console.log('test : ', test)
+    
+    const filterCollection = collectionNameInDB.filter(element => {
+        /* console.log(element) */
+    })
+    
+    
     const arrarayTest = mapDataCards.concat(freeCards2)
-    console.log("arrayTest : ",arrarayTest)
-
-    console.log("collection DB ",collectionCardsInDB)
-    console.log("formatedData : ",formatedData)
-
+    
     const displayCollection = arrarayTest.map((element) => {
         let dataCardsMap = {
             nbreCards: '',
