@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useContext, useEffect} from 'react'
-import app from 'firebase/app'
 import { Link } from 'react-router-dom'
 import { FirebaseContext } from './Firebase'
 import OsCasse from '../assets/Cards/os-casse.svg'
@@ -33,13 +32,15 @@ function Collection(props) {
     }
     const mapDataCards = []
     const mapDataCardsCopie = props.dataCards
-    const mapDataTest = []
+    let mapDataTest = []
     const formatedData = []
     
     const [modalCheck, setModalCheck] = useState(false)
     const [newCollection, setNewCollection] = useState(dataNewCollection)
     const [userSession, setUserSession] = useState(props.userSession.uid.toString())
     const [collectionCardsInDB, setCollectionCardsInDB] = useState([])
+
+    const copyFreeCards = freeCards
 
     let collection_CardsInDB = {}
 
@@ -131,6 +132,8 @@ function Collection(props) {
         collectionNameInDB.push(key)
     }
 
+    const stock = Object.values(copyFreeCards)
+    console.log(stock)
     //Vérification de l'existance des collections et carte entre la db et le local
         //Si différents alors envoyer les données à la db
         //Si pareil ne rien faire
@@ -140,11 +143,15 @@ function Collection(props) {
             //Le comparer élément par élément à mapDataTest
             // Si égal ne rien faire 
             // Sinon récupérer les élements non similaire et les push sur la DB
+
+    // Copie du local 
+    // Modifier la date de révision sur la copie
+    // Ajout sur le tableau de base
     
-    const test = freeCards.map(element => {
+    /* const test = freeCards.map(element => {
         console.log("dans map : ", element)
     })        
-    console.log('test : ', test)
+    console.log('test : ', test) */
     
     const filterCollection = collectionNameInDB.filter(element => {
         /* console.log(element) */
@@ -152,6 +159,12 @@ function Collection(props) {
     
     
     const arrarayTest = mapDataCards.concat(freeCards)
+    
+    /* copyFreeCards.forEach(element => {
+        const stock = Object.values(element).map((cards) => console.log("cards ds map : ",cards))
+        console.log('stock : ', stock[0].cards)
+
+    }); */
     
     const displayCollection = arrarayTest.map((element) => {
         let dataCardsMap = {
