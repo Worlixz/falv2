@@ -133,7 +133,9 @@ function Collection(props) {
     }
 
     const stock = Object.values(copyFreeCards)
-    console.log(stock)
+    for(var i = 0; i < stock.length; i++){
+        console.log("je suis dans for", stock[i])
+    }
     //Vérification de l'existance des collections et carte entre la db et le local
         //Si différents alors envoyer les données à la db
         //Si pareil ne rien faire
