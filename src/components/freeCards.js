@@ -16,7 +16,7 @@ export const freeCards = [
                     reponse: "ceci est la réponse ",
                     type: "quiz",
                     id_card: "hvuzpvbe",
-                    revisionDate: 0,
+                    revisionDate: 1,
                     possibilite: {
                         p1: "ceci est la réponse",
                         p2: "je suis dans p2,",
@@ -29,14 +29,14 @@ export const freeCards = [
                     reponse: false,
                     type: "vraiFaux",
                     id_card: 'vbfiylsqfbdcsqil',
-                    revisionDate: 0
+                    revisionDate: 2
                 },
                 vfuoiagfce: {
                     question: "je suis en q4 FreeCollection",
                     reponse: "ceci est la réponse ",
                     type: "quiz",
                     id_card: "vfuoiagfce",
-                    revisionDate: 0,
+                    revisionDate: 3,
                     possibilite: {
                         p1: "je suis en p1",
                         p2: "je suis dans p2,",
@@ -48,7 +48,7 @@ export const freeCards = [
         }
     },
     {
-        freeCollection2: {
+        freeCollection2 : {
             etiquette: "membre inf",
             categorie: "physio",
             cards: {
@@ -57,14 +57,14 @@ export const freeCards = [
                     reponse: true,
                     type: "vraiFaux",
                     id_card: 'iulgzvfe',
-                    revisionDate: 0
+                    revisionDate: 4
                 }, 
                 yfvuizbfd: {
                     question: "je suis en q2 FreeCollection 2",
                     reponse: "ceci est la réponse FC2",
                     type: "quiz",
                     id_card: "yfvuizbfd",
-                    revisionDate: 0,
+                    revisionDate: 5,
                     possibilite: {
                         p1: "p1",
                         p2: "je suis dans p2,",
@@ -77,14 +77,14 @@ export const freeCards = [
                     reponse: false,
                     type: "vraiFaux",
                     id_card: 'oiuytrfdcvbn',
-                    revisionDate: 0
+                    revisionDate: 6
                 },
                 uyetgzhcdsk: {
                     question: "je suis en q4 FreeCollection 2",
                     reponse: "Ceci est la réponse FC2",
                     type: "quiz",
                     id_card: "uyetgzhcdsk",
-                    revisionDate: 0,
+                    revisionDate: 7,
                     possibilite: {
                         p1: "je suis en p1",
                         p2: "je suis dans p2,",

@@ -132,28 +132,24 @@ function Collection(props) {
         collectionNameInDB.push(key)
     }
 
-    const stock = Object.values(copyFreeCards)
-    for(var i = 0; i < stock.length; i++){
-        console.log("je suis dans for", stock[i])
-    }
-    //Vérification de l'existance des collections et carte entre la db et le local
-        //Si différents alors envoyer les données à la db
-        //Si pareil ne rien faire
-    
-    //Vérification de la correspondance entre les tableaux: 
-        // Parcourir le tableau formatedData
-            //Le comparer élément par élément à mapDataTest
-            // Si égal ne rien faire 
-            // Sinon récupérer les élements non similaire et les push sur la DB
+    console.log("copyFreeCards : ",copyFreeCards)
+    for(let i = 0; i < copyFreeCards.length; i++){
+        console.log("collectionCardsInDB : ",formatedData)
+        //Faire une boucle qui permet de vérifier si les deux collections sont exact si ok faire la modif des data revisionDate 
+        const stockKeys = Object.keys(copyFreeCards[i])
+        console.log("stockKeys : ",stockKeys)
+        // permet d'acceder au cartes dans l'élément cards de chaque collection de freeCopyCards
+        let refCards = copyFreeCards[i][stockKeys].cards
+        let keysCards = Object.keys(refCards)
+        for(let x = 0 ; x < keysCards.length; x++){
+            const stockBis = keysCards[x]
+            console.log('je suis dans une deuxième boucle : ', keysCards[x])
+            console.log('refCards', refCards[stockBis].revisionDate )
+        }
 
-    // Copie du local 
-    // Modifier la date de révision sur la copie
-    // Ajout sur le tableau de base
     
-    /* const test = freeCards.map(element => {
-        console.log("dans map : ", element)
-    })        
-    console.log('test : ', test) */
+    }
+    
     
     const filterCollection = collectionNameInDB.filter(element => {
         /* console.log(element) */
