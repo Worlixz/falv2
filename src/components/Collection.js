@@ -120,9 +120,6 @@ function Collection(props) {
     for(const [key, value] of Object.entries(mapDataCardsCopie)){
         mapDataCards.push({[key]: value})
     }  
-    /* for(const [key, value] of Object.entries(freeCards)){
-        mapDataTest.push({[key]: value})
-    } */
     //Les données sont formaté et issue de la DB
     for(const [key, value] of Object.entries(collectionCardsInDB)){
         formatedData.push({[key]: value})
@@ -131,38 +128,39 @@ function Collection(props) {
     for(const [key, value] of Object.entries(collectionCardsInDB)){
         collectionNameInDB.push(key)
     }
-
-    console.log("copyFreeCards : ",copyFreeCards)
+    
     for(let i = 0; i < copyFreeCards.length; i++){
-        console.log("collectionCardsInDB : ",formatedData)
-        //Faire une boucle qui permet de vérifier si les deux collections sont exact si ok faire la modif des data revisionDate 
+        /* console.log("collectionCardsInDB : ",formatedData) */
+        
         const stockKeys = Object.keys(copyFreeCards[i])
-        console.log("stockKeys : ",stockKeys)
-        // permet d'acceder au cartes dans l'élément cards de chaque collection de freeCopyCards
-        let refCards = copyFreeCards[i][stockKeys].cards
-        let keysCards = Object.keys(refCards)
-        for(let x = 0 ; x < keysCards.length; x++){
-            const stockBis = keysCards[x]
-            console.log('je suis dans une deuxième boucle : ', keysCards[x])
-            console.log('refCards', refCards[stockBis].revisionDate )
-        }
-
-    
+        formatedData.forEach( element => { 
+            const keysFormatedData = Object.keys(element)
+            if(keysFormatedData[0] === stockKeys[0]){
+                let refCardsCopy = copyFreeCards[i][stockKeys].cards
+                let refCardsDB = element[stockKeys].cards
+                let keysCardsCopy = Object.keys(refCardsCopy)
+                console.log("keysCardsCopy : ",keysCardsCopy)
+                for(let y = 0; y < keysCardsCopy.length ; y++){
+                    const index = keysCardsCopy[y]
+                    refCardsCopy[index].revisionDate = refCardsDB[index].revisionDate
+                }
+                //remplacer les différents éléments
+                console.log("element : ", Object.keys(element))
+                console.log("copyFreeCards : ", Object.keys(copyFreeCards[i]))
+            }else{
+                console.log(false)
+            }
+            console.log("hors if : ",formatedData)
+        })
+        
+        
     }
-    
+
+    const arrarayTest = formatedData.concat(copyFreeCards)
     
     const filterCollection = collectionNameInDB.filter(element => {
         /* console.log(element) */
     })
-    
-    
-    const arrarayTest = mapDataCards.concat(freeCards)
-    
-    /* copyFreeCards.forEach(element => {
-        const stock = Object.values(element).map((cards) => console.log("cards ds map : ",cards))
-        console.log('stock : ', stock[0].cards)
-
-    }); */
     
     const displayCollection = arrarayTest.map((element) => {
         let dataCardsMap = {
