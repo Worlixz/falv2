@@ -518,9 +518,15 @@ iframe {
   position: relative;
   height: 70px;
   width: 600px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .divBtnPlus button {
-  position: absolute;
+  background: none;
+  border: none;
+}
+.divBtnPlus {
   right: 0px;
   background: none;
   border: none;
@@ -534,7 +540,8 @@ iframe {
   transform: scale(1.1);
   transition: 0.3s ease-in-out;
 }
-#btnPlus {
+#btnPlus,
+#btnReload {
   height: 50px;
 }
 

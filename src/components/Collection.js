@@ -5,6 +5,7 @@ import OsCasse from '../assets/Cards/os-casse.svg'
 import Physio from '../assets/Cards/poumons.svg'
 import Play from '../assets/Cards/bouton-jouer.svg'
 import btnPlus from '../assets/plus.svg'
+import btnReload from '../assets/reload.svg'
 import btnClose from '../assets/close.svg'
 import interogationPoint from '../assets/Cards/interrogationPoint.svg'
 import { ToastContainer, toast } from 'react-toastify';
@@ -39,6 +40,7 @@ function Collection(props) {
     const [newCollection, setNewCollection] = useState(dataNewCollection)
     const [userSession, setUserSession] = useState(props.userSession.uid.toString())
     const [collectionCardsInDB, setCollectionCardsInDB] = useState([])
+    const [mapCards, setMapCards] = useState(null)
 
     const copyFreeCards = freeCards
 
@@ -128,10 +130,12 @@ function Collection(props) {
     for(const [key, value] of Object.entries(collectionCardsInDB)){
         collectionNameInDB.push(key)
     }
+
+
     
+    let arrayKeysElement = []
     for(let i = 0; i < copyFreeCards.length; i++){
         /* console.log("collectionCardsInDB : ",formatedData) */
-        
         const stockKeys = Object.keys(copyFreeCards[i])
         formatedData.forEach( element => { 
             const keysFormatedData = Object.keys(element)
@@ -144,23 +148,44 @@ function Collection(props) {
                     const index = keysCardsCopy[y]
                     refCardsCopy[index].revisionDate = refCardsDB[index].revisionDate
                 }
-                //remplacer les différents éléments
-                console.log("element : ", Object.keys(element))
-                console.log("copyFreeCards : ", Object.keys(copyFreeCards[i]))
-            }else{
-                console.log(false)
             }
-            console.log("hors if : ",formatedData)
+            let keysElement = Object.keys(element)
+            arrayKeysElement.indexOf(keysElement[0]) === -1 ? arrayKeysElement.push(keysElement[0]) : (console.log("null"))
         })
-        
         
     }
 
-    const arrarayTest = formatedData.concat(copyFreeCards)
+    console.log("FD : avt ", formatedData)
+    console.log("CFC : avt ", copyFreeCards)
+
+    let arrayComparaison =[]
+    for(let a = 0; a < formatedData.length; a++){
+        let stockCopyData 
+        let stock = Object.keys(formatedData[a])
+        arrayComparaison.push(stock[0])
+        let verif
+        copyFreeCards.forEach(element => {
+            console.log("foreach element : ",element)
+            stockCopyData = Object.keys(element)
+            arrayComparaison.indexOf(stockCopyData[0]) === -1 ? (verif = false) : (verif = true)
+            if(verif === true){
+                formatedData[a] = element
+                copyFreeCards.splice(element,1)
+            }
+        })
+    }
+
+
+    console.log("FD : arr ", formatedData)
+    console.log("CFC : arr ", copyFreeCards)
     
-    const filterCollection = collectionNameInDB.filter(element => {
-        /* console.log(element) */
-    })
+    const arrarayTest = formatedData.concat(copyFreeCards)
+
+    console.log("veridf fin", arrarayTest)
+    
+   /*  const filterCollection = collectionNameInDB.filter(element => {
+         console.log(element) 
+    }) */
     
     const displayCollection = arrarayTest.map((element) => {
         let dataCardsMap = {
@@ -199,6 +224,7 @@ function Collection(props) {
             <div className="containerUl">
                 <h2>Mes collections</h2>
                 <div className='divBtnPlus'>
+                    <button onClick={() => reloadPage()}><img id='btnReload' src={btnReload}/></button>
                     <button onClick={() => handleClickBtn()}><img id='btnPlus' src={btnPlus}/></button>
                 </div>
                 <ul>
