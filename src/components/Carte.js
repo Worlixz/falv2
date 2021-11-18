@@ -6,6 +6,7 @@ import pencil from '../assets/CardsManagement/pencil.svg'
 import btnClose from '../assets/close.svg'
 import check from '../assets/CardsManagement/check.svg'
 import btnPlus from '../assets/plus.svg'
+import btnReload from '../assets/btnReload.svg'
 import { FirebaseContext } from './Firebase'
 import { nanoid } from 'nanoid'
 import { ToastContainer, toast } from 'react-toastify';
@@ -164,6 +165,10 @@ function Carte(props) {
             progress: undefined,
             });
     }
+
+    function reloadPage () {
+        window.location.reload()
+    }
     
     const btnCreationCards = modalData.type !== "" && modalData.reponse !== "" ? (<button className="modificationCards">Créer ma carte</button>) : (<button disabled className="modificationCards disabled">Créer ma carte</button>)    
     
@@ -321,6 +326,7 @@ function Carte(props) {
                     <div className="containerCardsAdd">
                         <Link className="btnGo" to={{pathname:"/quiz", state:{dataCards, dataCollection}}}>C'est parti !</Link>
                     </div>
+                        <button onClick={() => reloadPage()}><img id='btnReload' src={btnReload}/></button>
                         <img id="btnPlusQuiz" onClick={() => handleModalCreationOpen()} src={btnPlus} />
                     <div className="containerCardsForManage">
                         {displayCards}  
