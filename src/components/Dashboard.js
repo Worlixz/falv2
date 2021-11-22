@@ -2,9 +2,7 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 
 function Dashboard(props) {
-    console.log('je suis dans dashboard : ', props.propsHistory.location.state)
     const [stateDashboardPage, setStateDashboardPage] = useState(props.propsHistory.location.state.stateDashboard)
-    console.log(stateDashboardPage)
 
     const displayCarteSuccess = stateDashboardPage.carteSucces.map(element => {
         return (<tr>

@@ -135,7 +135,6 @@ function Collection(props) {
     
     let arrayKeysElement = []
     for(let i = 0; i < copyFreeCards.length; i++){
-        /* console.log("collectionCardsInDB : ",formatedData) */
         const stockKeys = Object.keys(copyFreeCards[i])
         formatedData.forEach( element => { 
             const keysFormatedData = Object.keys(element)
@@ -155,9 +154,6 @@ function Collection(props) {
         
     }
 
-    console.log("FD : avt ", formatedData)
-    console.log("CFC : avt ", copyFreeCards)
-
     let arrayComparaison =[]
     for(let a = 0; a < formatedData.length; a++){
         let stockCopyData 
@@ -165,7 +161,6 @@ function Collection(props) {
         arrayComparaison.push(stock[0])
         let verif
         copyFreeCards.forEach(element => {
-            console.log("foreach element : ",element)
             stockCopyData = Object.keys(element)
             arrayComparaison.indexOf(stockCopyData[0]) === -1 ? (verif = false) : (verif = true)
             if(verif === true){
@@ -176,16 +171,8 @@ function Collection(props) {
     }
 
 
-    console.log("FD : arr ", formatedData)
-    console.log("CFC : arr ", copyFreeCards)
-    
+    console.log("copyFreeCards : ",copyFreeCards)
     const arrarayTest = formatedData.concat(copyFreeCards)
-
-    console.log("veridf fin", arrarayTest)
-    
-   /*  const filterCollection = collectionNameInDB.filter(element => {
-         console.log(element) 
-    }) */
     
     const displayCollection = arrarayTest.map((element) => {
         let dataCardsMap = {

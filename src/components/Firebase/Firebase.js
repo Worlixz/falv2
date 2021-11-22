@@ -45,7 +45,6 @@ class Firebase {
     }
 
     setNewCollectionCards = (uid, newCollection) => {
-        console.log('je suis dans la fct firebase uid : ', uid)
         return this.db.doc(`users/${uid}/CartesCollection/${newCollection.nameCollection}`).set({
             categorie: newCollection.categorie,
             etiquette: newCollection.etiquette,
@@ -98,7 +97,6 @@ class Firebase {
     deleteDataCards = (uid, dataCollection, creattionCards) => {
         const admin = require('firebase-admin');
         const FieldValue = admin.firestore.FieldValue; 
-        console.log("dataCollection : ", dataCollection)
         let cards = dataCollection.cards.cards
         
         delete cards[creattionCards]

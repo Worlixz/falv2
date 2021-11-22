@@ -37,7 +37,6 @@ function Profil(props) {
             .get()
             .then((doc) => {
                 if(doc.exists){
-                    console.log(doc.data())
                     const myData = doc.data()
                     setDataProfil({
                         userName: myData.userName ? myData.userName : "A renseigner",
@@ -64,7 +63,6 @@ function Profil(props) {
 
     const handleChange = (e) => {
         setDataProfil({...dataProfil, [e.target.id]: e.target.value})
-        console.log(dataProfil)
     }
 
     const handleFileChange = async (e) => {

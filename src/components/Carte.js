@@ -6,7 +6,7 @@ import pencil from '../assets/CardsManagement/pencil.svg'
 import btnClose from '../assets/close.svg'
 import check from '../assets/CardsManagement/check.svg'
 import btnPlus from '../assets/plus.svg'
-import btnReload from '../assets/btnReload.svg'
+import btnReload from '../assets/reload.svg'
 import { FirebaseContext } from './Firebase'
 import { nanoid } from 'nanoid'
 import { ToastContainer, toast } from 'react-toastify';
@@ -326,8 +326,12 @@ function Carte(props) {
                     <div className="containerCardsAdd">
                         <Link className="btnGo" to={{pathname:"/quiz", state:{dataCards, dataCollection}}}>C'est parti !</Link>
                     </div>
+                    <div className='divBtnPlus'>
                         <button onClick={() => reloadPage()}><img id='btnReload' src={btnReload}/></button>
-                        <img id="btnPlusQuiz" onClick={() => handleModalCreationOpen()} src={btnPlus} />
+                        <button onClick={() => handleClickBtn()}><img id='btnPlus' src={btnPlus}/></button>
+                    </div>
+                        {/* <button onClick={() => reloadPage()}><img id='btnReload' src={btnReload}/></button>
+                        <img id="btnPlusQuiz" onClick={() => handleModalCreationOpen()} src={btnPlus} /> */}
                     <div className="containerCardsForManage">
                         {displayCards}  
                     </div>

@@ -32,7 +32,6 @@ function Quiz(props) {
 
     const arrayFilter = Object.values(dataQuiz)
     const dataQuizDisplay = arrayFilter.filter(element => element.revisionDate <= Date.now())
-    console.log("dataQuizDisplay : ",dataQuizDisplay)
 
 
     const arraySuccessSentence = ["Au top", "Une de plus de réussi", "Tu es sur la bonne voie", "Génial", "Bravo", "+1 au compteur", "Tu continue à progresser", "L'anatomie n'a plus de secret pour toi", "Elle est validé !!!", "Parfait"]

@@ -27,11 +27,10 @@ const User = (props) => {
             firebase.userData(userSession.uid)
             .get()
             .then((doc) => {
-                console.log("clg de doc dans userData : ",doc)
                 if(doc.exists){
-                    console.log("clg de doc dans userData mais dans le if avec data : ",doc)
+
                     const myData = doc.data()
-                    console.log(myData.collectionUser)
+
                     setUserData(myData)
                 }
             })
@@ -83,13 +82,22 @@ const User = (props) => {
         }
         default : {
 
-            content = <div className="containerUser"> 
+            content = (
+            <div className="containerUser"> 
                 <div className="divPresentation">
                     <h2>Bienvenu dans l'application FAL</h2>
                     <p>Sur cette page ce trouve une vidéo tutoriel, dans cette dernière tu apprendra pourquoi nous avons crée FAL et comment s'en servir. < br />Tout les retours sont les bienvenu afin d'améliorer cette dernière</p>
                 </div>
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/oZYauzQWtvk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
+                <div className="divRoadMap">
+                    <h2>Road map des mises à jour</h2>
+                    <ul>
+                        <li>Modification de l'affichage pour les smartphones</li>
+                        <li>Ajout de l'image de profil dans la barre d'affichage</li>
+                        <li>Optimisation de l'utilisation de l'application</li>
+                    </ul>
+                </div>
+            </div>)
             
             break
         }

@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState} from 'react'
+import React, { Fragment, useContext, useState, useEffect} from 'react'
 import User from './User'
 import Collection from './Collection'
 import {BrowserRouter as Router, NavLink, Route, Switch} from 'react-router-dom'
@@ -19,8 +19,9 @@ function Sidebar(props) {
     const hangleSignOut = (e) => {
         firebase.signoutUser()
     }
-
+    
     const [imgCheck, setImgCheck] = useState(true)
+    const [profilPictureData, setProfilPictureData] = useState()
 
     const imgArow = document.querySelector('.rightArrow')
     const sidebar = document.querySelector('.sideBar')
@@ -54,7 +55,7 @@ function Sidebar(props) {
         <ul>
         {imgCheck ? (<Fragment>
             <li className='profilLi' id="liSidebar">
-                <img src={profilImg}/>
+                <img src={profilPictureData ? (profilPictureData) : (profilImg)}/>
             </li>
             <li id="liSidebar">
                 <NavLink activeClassName="active" to='/user'><img src={imgHouse}/></NavLink>
@@ -63,7 +64,7 @@ function Sidebar(props) {
                 <NavLink activeClassName="active" to='/collection'><img src={cardsImg}/></NavLink>
             </li>
             <li id="liSidebar"> 
-                <NavLink activeClassName="active" to='/profil'><img src={profilImg}/></NavLink>
+                <NavLink activeClassName="active" to='/profil'><img src={profilPictureData ? (profilPictureData) : (profilImg)}/></NavLink>
             </li>
         </Fragment>) : (<Fragment>
             <li className='profilLi' id="liSidebar">
