@@ -42,7 +42,8 @@ function Collection(props) {
     const [collectionCardsInDB, setCollectionCardsInDB] = useState([])
     const [mapCards, setMapCards] = useState(null)
 
-    const copyFreeCards = freeCards
+    let copyFreeCards = freeCards
+    console.log("copyFreeCards : ",copyFreeCards)
 
     let collection_CardsInDB = {}
 
@@ -142,7 +143,7 @@ function Collection(props) {
                 let refCardsCopy = copyFreeCards[i][stockKeys].cards
                 let refCardsDB = element[stockKeys].cards
                 let keysCardsCopy = Object.keys(refCardsCopy)
-                console.log("keysCardsCopy : ",keysCardsCopy)
+                /* console.log("keysCardsCopy : ",keysCardsCopy) */
                 for(let y = 0; y < keysCardsCopy.length ; y++){
                     const index = keysCardsCopy[y]
                     refCardsCopy[index].revisionDate = refCardsDB[index].revisionDate
@@ -154,27 +155,32 @@ function Collection(props) {
         
     }
 
-    let arrayComparaison =[]
+    let arraySplice = []
+    let arrayComparaison = []
+    let arrayForMap = []
     for(let a = 0; a < formatedData.length; a++){
         let stockCopyData 
         let stock = Object.keys(formatedData[a])
         arrayComparaison.push(stock[0])
-        let verif
         copyFreeCards.forEach(element => {
             stockCopyData = Object.keys(element)
-            arrayComparaison.indexOf(stockCopyData[0]) === -1 ? (verif = false) : (verif = true)
-            if(verif === true){
+            let index = arrayComparaison.indexOf(stockCopyData[0])
+            console.log("stockCopyData : ",stockCopyData)
+            if(index !== -1){
                 formatedData[a] = element
-                copyFreeCards.splice(element,1)
+                console.log("dans if : ",formatedData)
+                arraySplice = copyFreeCards.splice(element, 1)
+                console.log("arraySplice : ",arraySplice)
+                console.log("copyFreeCards ds IF : ",copyFreeCards )                
             }
         })
     }
 
 
     console.log("copyFreeCards : ",copyFreeCards)
-    const arrarayTest = formatedData.concat(copyFreeCards)
+    arrayForMap = formatedData.concat(copyFreeCards)
     
-    const displayCollection = arrarayTest.map((element) => {
+    const displayCollection = arrayForMap.map((element) => {
         let dataCardsMap = {
             nbreCards: '',
             cards: '',

@@ -113,9 +113,8 @@ class Firebase {
         profilPicture: profilPicture
     })
 
-    updateTimerFalse = (uid, nameCollection, idCards, event) => {
+    updateTimerFalse = (uid, nameCollection, idCards, event, dataQuizDisplay) => {
         let date
-
         switch(event){
             case 1 : date = Date.now()
             break
@@ -126,13 +125,38 @@ class Firebase {
             case 7 : date = (Date.now() + 7*86400000)
             break
         }
-        return this.db.doc(`users/${uid}/CartesCollection/${nameCollection}`).set({
-            cards: {
-                [idCards]: {
-                    revisionDate: date
-            }
-            }   
-        }, {merge: true})
+        if ( dataQuizDisplay.possibilite == true ) {
+            return this.db.doc(`users/${uid}/CartesCollection/${nameCollection}`).set({
+                cards: {
+                    [idCards]: {
+                        question: dataQuizDisplay.question,
+                        reponse: dataQuizDisplay.reponse,
+                        type: dataQuizDisplay.type,
+                        possibilite : {
+                            p1: dataQuizDisplay.possibilite.p1, 
+                            p2: dataQuizDisplay.possibilite.p2, 
+                            p3: dataQuizDisplay.possibilite.p3, 
+                            p4: dataQuizDisplay.possibilite.p4 
+                        },
+                        id_card: idCards,
+                        revisionDate: date
+                }
+                }   
+            }, {merge: true}) 
+        }else {
+            return this.db.doc(`users/${uid}/CartesCollection/${nameCollection}`).set({
+                cards: {
+                    [idCards]: {
+                        question: dataQuizDisplay.question,
+                        reponse: dataQuizDisplay.reponse,
+                        type: dataQuizDisplay.type,
+                        id_card: idCards,
+                        revisionDate: date
+                }
+                }   
+            }, {merge: true})
+
+        }
     }
     
 

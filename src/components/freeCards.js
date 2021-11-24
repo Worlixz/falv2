@@ -94,5 +94,53 @@ export const freeCards = [
                 }
             }
         }
+    },
+    {
+        freeCollection3 : {
+            etiquette: "membre inf",
+            categorie: "anatomy",
+            cards: {
+                fvdhquoi : {
+                    question: "question 1 de free collection 3",
+                    reponse : false,
+                    type: 'vraiFaux',
+                    id_card : "fvdhquoi",
+                    revisionDate: 8
+                },
+                vbfyiezbqvlv : {
+                    question: "question 2 de free collection 3",
+                    reponse : "ceci est la réponse de la q2 de FC3",
+                    type: 'vraiFaux',
+                    id_card : "vbfyiezbqvlv",
+                    revisionDate: 8,
+                    possibilite : {
+                        p1: "je suis en p1",
+                        p2: "je suis en p2",
+                        p3: "je suis en p3",
+                        p4: "ceci est la réponse de la q2 de FC3"
+                    }
+                },
+                ceyzuaf : {
+                    question: "question 3 de free collection 3",
+                    reponse : false,
+                    type: 'vraiFaux',
+                    id_card : "ceyzuaf",
+                    revisionDate: 8
+                },
+                dyigezyqq : {
+                    question: "question 4 de free collection 3",
+                    reponse : "ceci est la réponse de Q4 en FC3",
+                    type: 'vraiFaux',
+                    id_card : "dyigezyqq",
+                    revisionDate: 8,
+                    possibilite : {
+                        p1: "je suis en p1",
+                        p2: "ceci est la réponse de Q4 en FC3",
+                        p3: "je suis en p3",
+                        p4: "je suis en p4"
+                    }
+                }
+            }
+        }
     }
 ]

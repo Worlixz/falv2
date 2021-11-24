@@ -19,7 +19,8 @@ function Carte(props) {
 
     const firebase = useContext(FirebaseContext)
     
-    
+    console.log("props : ", props)
+
     const dataCollection = props.propsHistory.location.state.dataCardsMap
     const dataCards = props.propsHistory.location.state.dataCardsMap.cards
 

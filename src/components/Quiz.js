@@ -65,7 +65,7 @@ function Quiz(props) {
 
     const handleNext = (e) => {
         let countCurrent = count
-        firebase.updateTimerFalse(userSession.uid, dataCollection.nameCollection, dataQuizDisplay[count].id_card, e)
+        firebase.updateTimerFalse(userSession.uid, dataCollection.nameCollection, dataQuizDisplay[count].id_card, e, dataQuizDisplay[count])
         if(count < dataQuizDisplay.length -1 ){
             countCurrent++
             setCount(countCurrent)
