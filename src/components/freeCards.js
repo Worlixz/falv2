@@ -94,5 +94,53 @@ export const freeCards = [
                 }
             }
         }
+    },
+    {
+        freeCollection3 : {
+            etiquette: "membre inf",
+            categorie: "physio",
+            cards: {
+                ugpridvq: {
+                    question: "je suis la Q1",
+                    reponse: true,
+                    type: "vraiFaux",
+                    id_card: 'ugpridvq',
+                    revisionDate: 4
+                }, 
+                fuzoefea: {
+                    question: "je suis en q2 FreeCollection 2",
+                    reponse: "ceci est la réponse FC2",
+                    type: "quiz",
+                    id_card: "fuzoefea",
+                    revisionDate: 5,
+                    possibilite: {
+                        p1: "p1",
+                        p2: "je suis dans p2,",
+                        p3: "je suis dans p3,",
+                        p4: "ceci est la réponse FC2"
+                    }
+                },
+                poejfzaqf: {
+                    question: "je suis la Q3 FC2",
+                    reponse: false,
+                    type: "vraiFaux",
+                    id_card: 'poejfzaqf',
+                    revisionDate: 6
+                },
+                ertzavqfe: {
+                    question: "je suis en q4 FreeCollection 2",
+                    reponse: "Ceci est la réponse FC2",
+                    type: "quiz",
+                    id_card: "ertzavqfe",
+                    revisionDate: 7,
+                    possibilite: {
+                        p1: "je suis en p1",
+                        p2: "je suis dans p2,",
+                        p3: "je suis en p3",
+                        p4: "Ceci est la réponse FC2"
+                    }
+                }
+            }
+        }
     }
 ]

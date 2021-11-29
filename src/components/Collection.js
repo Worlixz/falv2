@@ -22,8 +22,6 @@ function Collection(props) {
     const firebase = useContext(FirebaseContext)
     const assombrir = document.querySelector('.sombreModal')
 
-    const urlCardsFreeAcces = "gs://flash-anatomy-learning.appspot.com/CarteFreeAccess"
-
     const propsHistory = props.propsHistory
     const dataNewCollection = {
         nameCollection : '',
@@ -31,20 +29,21 @@ function Collection(props) {
         etiquette: '',
         cards: {}
     }
-    const mapDataCards = []
-    const mapDataCardsCopie = props.dataCards
-    let mapDataTest = []
+   
     const formatedData = []
+    const formatedDataKeys = []
+
+    const dataBrut = []
+    const dataBrutKey = []
+
     
     const [modalCheck, setModalCheck] = useState(false)
     const [newCollection, setNewCollection] = useState(dataNewCollection)
     const [userSession, setUserSession] = useState(props.userSession.uid.toString())
     const [collectionCardsInDB, setCollectionCardsInDB] = useState([])
-    const [mapCards, setMapCards] = useState(null)
 
     let copyFreeCards = freeCards
-    console.log("copyFreeCards : ",copyFreeCards)
-
+    copyFreeCards.flat()
     let collection_CardsInDB = {}
 
     useEffect(() => {
@@ -119,68 +118,52 @@ function Collection(props) {
         </div>
     )
     
-    let nameCollectionStorageLocal = []
-    for(const [key, value] of Object.entries(mapDataCardsCopie)){
-        mapDataCards.push({[key]: value})
-    }  
-    //Les données sont formaté et issue de la DB
     for(const [key, value] of Object.entries(collectionCardsInDB)){
         formatedData.push({[key]: value})
+        formatedDataKeys.push(key)
     }
-    let collectionNameInDB = []
-    for(const [key, value] of Object.entries(collectionCardsInDB)){
-        collectionNameInDB.push(key)
+    for(const [key, value] of Object.entries(copyFreeCards)){
+        dataBrut.push(value)
     }
-
-
-    
-    let arrayKeysElement = []
-    for(let i = 0; i < copyFreeCards.length; i++){
-        const stockKeys = Object.keys(copyFreeCards[i])
-        formatedData.forEach( element => { 
-            const keysFormatedData = Object.keys(element)
-            if(keysFormatedData[0] === stockKeys[0]){
-                let refCardsCopy = copyFreeCards[i][stockKeys].cards
-                let refCardsDB = element[stockKeys].cards
-                let keysCardsCopy = Object.keys(refCardsCopy)
-                /* console.log("keysCardsCopy : ",keysCardsCopy) */
-                for(let y = 0; y < keysCardsCopy.length ; y++){
-                    const index = keysCardsCopy[y]
-                    refCardsCopy[index].revisionDate = refCardsDB[index].revisionDate
-                }
-            }
-            let keysElement = Object.keys(element)
-            arrayKeysElement.indexOf(keysElement[0]) === -1 ? arrayKeysElement.push(keysElement[0]) : (console.log("null"))
-        })
-        
+    for(let i = 0; i < dataBrut.length; i++){
+        const stock = Object.keys(dataBrut[i])
+        const stringKey = stock[0]
+        dataBrutKey.push(stringKey)
     }
 
-    let arraySplice = []
-    let arrayComparaison = []
     let arrayForMap = []
-    for(let a = 0; a < formatedData.length; a++){
-        let stockCopyData 
-        let stock = Object.keys(formatedData[a])
-        arrayComparaison.push(stock[0])
-        copyFreeCards.forEach(element => {
-            stockCopyData = Object.keys(element)
-            let index = arrayComparaison.indexOf(stockCopyData[0])
-            console.log("stockCopyData : ",stockCopyData)
-            if(index !== -1){
-                formatedData[a] = element
-                console.log("dans if : ",formatedData)
-                arraySplice = copyFreeCards.splice(element, 1)
-                console.log("arraySplice : ",arraySplice)
-                console.log("copyFreeCards ds IF : ",copyFreeCards )                
-            }
-        })
-    }
-
-
-    console.log("copyFreeCards : ",copyFreeCards)
     arrayForMap = formatedData.concat(copyFreeCards)
     
-    const displayCollection = arrayForMap.map((element) => {
+    const arrayTest = arrayForMap.filter(element => {
+        const stock = Object.keys(element)
+        const stockBis = stock[0]
+        return element[stockBis].etiquette !== undefined
+    })
+    // Dans ArrayTest j'ai toutes les cartes fusionné entre la db et le stokage brut sans doublon car élimination des cartes de la DB manque 'etiquette'
+    console.log(" arrayTest : ",arrayTest)
+
+    // Je doit remplacer la date de revision des cartes en doublons entre la DB et le stockage brut 
+    // parcourrir ArrayTest pour chaque itération 
+    for(var a = 0; a < arrayTest.length; a++){
+        const stock = Object.keys(arrayTest[a])
+        const stringKeys = stock[0]
+        console.log("stringKeys : ",stringKeys)
+        let index = formatedDataKeys.indexOf(stringKeys)
+        if (index !== -1){
+            console.log("correspondance")
+            console.log("arrayTest [a] : ",arrayTest[a])
+            console.log("dataBrut : ", formatedData[index])
+        }
+        /* console.log("dataBrutKey : ", dataBrutKey.indexOf(stringKeys)) */
+
+        
+    }
+        // Vérifier que le nom de la collection correspond
+            // Si correspondance alors
+                // Ecraser la date de résivion de arrayTest par freeCards
+            // Sinon passer à l'itération suivante
+
+    const displayCollection = arrayTest.map((element) => {
         let dataCardsMap = {
             nbreCards: '',
             cards: '',
