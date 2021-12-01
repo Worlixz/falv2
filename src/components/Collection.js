@@ -117,6 +117,8 @@ function Collection(props) {
             </form>
         </div>
     )
+
+    // MISE EN FORME DES DONNEES POUR EXPLOITATION
     
     for(const [key, value] of Object.entries(collectionCardsInDB)){
         formatedData.push({[key]: value})
@@ -129,41 +131,62 @@ function Collection(props) {
         const stock = Object.keys(dataBrut[i])
         const stringKey = stock[0]
         dataBrutKey.push(stringKey)
+        console.log(dataBrutKey)
     }
 
+
+    // CREATION DE DEUX TABLEAUX => arrayNoDoublons et arrayForDate : 
+        // 1 - A toute les cartes valide question / reponse stockées en dur et fusionnées
+        // 2 - Uniquement les cartes issus de la base de données mais avec la revisionDate correcte
     let arrayForMap = []
     arrayForMap = formatedData.concat(copyFreeCards)
     
-    const arrayTest = arrayForMap.filter(element => {
+    const arrayNoDoublons = arrayForMap.filter(element => {
         const stock = Object.keys(element)
         const stockBis = stock[0]
         return element[stockBis].etiquette !== undefined
     })
-    // Dans ArrayTest j'ai toutes les cartes fusionné entre la db et le stokage brut sans doublon car élimination des cartes de la DB manque 'etiquette'
-    console.log(" arrayTest : ",arrayTest)
+    const arrayForDate = formatedData.filter(element => {
+        const stock = Object.keys(element)
+        const stockBis = stock[0]
+        return element[stockBis].etiquette == undefined
+    })
 
-    // Je doit remplacer la date de revision des cartes en doublons entre la DB et le stockage brut 
-    // parcourrir ArrayTest pour chaque itération 
-    for(var a = 0; a < arrayTest.length; a++){
-        const stock = Object.keys(arrayTest[a])
+    console.log("arrayForDate : ", arrayForDate)
+
+    // PARCOURIR LE TABLEAU => arrayNoDoublons
+        // Pour chaque itération 
+            // Vérifier si revision date est === à 0
+                // Si OUI 
+                    // => Mofidier la date de arrayNoDoublons par celle de arrayForDate 
+                // Sinon ne rien faire
+
+    for (var x = 0; x < arrayNoDoublons.length; x++){
+        const stock = Object.keys(arrayNoDoublons[x])
         const stringKeys = stock[0]
-        console.log("stringKeys : ",stringKeys)
-        let index = formatedDataKeys.indexOf(stringKeys)
+        /* console.log("stringKeys : ",stringKeys) */
+        let index = dataBrutKey.indexOf(stringKeys)
         if (index !== -1){
-            console.log("correspondance")
-            console.log("arrayTest [a] : ",arrayTest[a])
-            console.log("dataBrut : ", formatedData[index])
+            const stockValues = Object.values(arrayNoDoublons[x])
+            const stockCardsDB = stockValues[0].cards
+
+            
+            let stockValuesDate = []
+            let stockCardsDate = []
+            if(arrayForDate[index]){
+                stockValuesDate = Object.values(arrayForDate[index])
+                stockCardsDate = stockValuesDate[0].cards
+            }
+            console.log("stockCardsDB : ", stockCardsDB)
+            console.log("stockCardsDate : ", stockCardsDate)
+            /* stockCardsDB.map((element, i) => {
+                console.log(i)
+                console.log(element)
+            }) */
         }
-        /* console.log("dataBrutKey : ", dataBrutKey.indexOf(stringKeys)) */
-
-        
     }
-        // Vérifier que le nom de la collection correspond
-            // Si correspondance alors
-                // Ecraser la date de résivion de arrayTest par freeCards
-            // Sinon passer à l'itération suivante
 
-    const displayCollection = arrayTest.map((element) => {
+    const displayCollection = arrayNoDoublons.map((element) => {
         let dataCardsMap = {
             nbreCards: '',
             cards: '',
