@@ -131,7 +131,7 @@ function Collection(props) {
         const stock = Object.keys(dataBrut[i])
         const stringKey = stock[0]
         dataBrutKey.push(stringKey)
-        console.log(dataBrutKey)
+        /* console.log(dataBrutKey) */
     }
 
 
@@ -152,7 +152,7 @@ function Collection(props) {
         return element[stockBis].etiquette == undefined
     })
 
-    console.log("arrayForDate : ", arrayForDate)
+    /* console.log("arrayForDate : ", arrayForDate) */
 
     // PARCOURIR LE TABLEAU => arrayNoDoublons
         // Pour chaque itération 
@@ -161,32 +161,53 @@ function Collection(props) {
                     // => Mofidier la date de arrayNoDoublons par celle de arrayForDate 
                 // Sinon ne rien faire
 
-    for (var x = 0; x < arrayNoDoublons.length; x++){
-        const stock = Object.keys(arrayNoDoublons[x])
-        const stringKeys = stock[0]
-        /* console.log("stringKeys : ",stringKeys) */
-        let index = dataBrutKey.indexOf(stringKeys)
+    // for (var x = 0; x < arrayNoDoublons.length; x++){
+    //     const stock = Object.keys(arrayNoDoublons[x])
+    //     const stringKeys = stock[0]
+    //     /* console.log("stringKeys : ",stringKeys) */
+    //     let index = dataBrutKey.indexOf(stringKeys)
+    //     if (index !== -1){
+    //         const stockValues = Object.values(arrayNoDoublons[x])
+    //         const stockCardsDB = stockValues[0].cards
+
+            
+    //         let stockValuesDate = []
+    //         let stockCardsDate = []
+    //         if(arrayForDate[index]){
+    //             stockValuesDate = Object.values(arrayForDate[index])
+    //             stockCardsDate = stockValuesDate[0].cards
+    //         }
+    //     }
+    // }
+    /* console.log("stockCardsDB : ", stockCardsDB)
+    console.log("stockCardsDate : ", stockCardsDate)
+    
+    for (const [key, value] of Object.entries(stockCardsDB)){
+        console.log(" dans la boucle for",{[key]: value})
+    }
+    /* console.log("Object test", Object.keys(stockCardsDB)) */
+
+    const displayCollection = arrayNoDoublons.map((element) => {
+
+        const stock = Object.keys(element)
+        const stockName = stock[0]
+        /* console.log("stock Name : ",stockName) */
+
+        let index = dataBrutKey.indexOf(stockName)
+        let stockCardsDate = []
         if (index !== -1){
-            const stockValues = Object.values(arrayNoDoublons[x])
-            const stockCardsDB = stockValues[0].cards
+            /* const stockValues = Object.values(arrayNoDoublons[x]) */
+            /* const stockCardsDB = stockValues[0].cards */
 
             
             let stockValuesDate = []
-            let stockCardsDate = []
             if(arrayForDate[index]){
                 stockValuesDate = Object.values(arrayForDate[index])
                 stockCardsDate = stockValuesDate[0].cards
             }
-            console.log("stockCardsDB : ", stockCardsDB)
-            console.log("stockCardsDate : ", stockCardsDate)
-            /* stockCardsDB.map((element, i) => {
-                console.log(i)
-                console.log(element)
-            }) */
+            /* console.log("stockCardsDate : ",stockCardsDate) */
         }
-    }
 
-    const displayCollection = arrayNoDoublons.map((element) => {
         let dataCardsMap = {
             nbreCards: '',
             cards: '',
@@ -208,7 +229,7 @@ function Collection(props) {
                     <h3>{dataCardsMap.nameCollection}</h3>
                     { <p>{dataCardsMap.nbreCards} {dataCardsMap.nbreCards > 1 ? 'Cartes' : 'Carte'}</p> }
                 </div>
-                <Link to={{pathname:"/carte", state:{dataCardsMap}}}> 
+                <Link to={{pathname:"/carte", state:{dataCardsMap, element, stockCardsDate}}}> 
                     <img src={Play}/>
                 </Link>
             </li>

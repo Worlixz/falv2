@@ -19,12 +19,36 @@ function Carte(props) {
 
     const firebase = useContext(FirebaseContext)
     
-    console.log("props : ", props)
+    /* console.log("props : ", props) */
 
     const dataCollection = props.propsHistory.location.state.dataCardsMap
     const dataCards = props.propsHistory.location.state.dataCardsMap.cards
 
     const newArchiDB = props.propsHistory.location.state.dataCardsMap.cards.cards
+
+    const collectionName = dataCollection.nameCollection
+    const cardsElement = props.propsHistory.location.state.element[collectionName].cards
+    const cardsStock = props.propsHistory.location.state.stockCardsDate
+
+    /* console.log('carteDB : ', cardsElement) */
+    // console.log('cardsStock : ', cardsStock)
+
+    //Parcourir cardsElement
+    /* console.log("parcourir : ", Object.entries(cardsElement)) */
+    for ( const [key, value] of Object.entries(cardsElement)){
+        console.log(key , ' : ', value)
+        for (const [keyStock, valueStock] of Object.entries(cardsStock)){
+            console.log(keyStock, " : ", valueStock)
+            if(key === keyStock){
+                /* console.log('correspondance ')
+                console.log("value.revisiondate : ", value.revisionDate) */
+                value.revisionDate = valueStock.revisionDate
+            }
+        }
+    }
+
+    console.log("cardsElement en dehors de for : ",cardsElement)
+    
 
     const assombrir = document.querySelector('.sombreModalCardsManagement')
 
