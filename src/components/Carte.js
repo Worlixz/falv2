@@ -36,13 +36,14 @@ function Carte(props) {
     //Parcourir cardsElement
     /* console.log("parcourir : ", Object.entries(cardsElement)) */
     for ( const [key, value] of Object.entries(cardsElement)){
-        console.log(key , ' : ', value)
+        console.log('key :',key , ' : ', value)
         for (const [keyStock, valueStock] of Object.entries(cardsStock)){
             console.log(keyStock, " : ", valueStock)
             if(key === keyStock){
-                /* console.log('correspondance ')
-                console.log("value.revisiondate : ", value.revisionDate) */
+                console.log('correspondance ')
+                console.log("value.revisiondate : ", value.revisionDate)
                 value.revisionDate = valueStock.revisionDate
+                console.log("value.revisiondate after attribution  : ", value.revisionDate)
             }
         }
     }
@@ -349,7 +350,7 @@ function Carte(props) {
                 <div className="containerTest">
                     <h2>Collection : {dataCollection.nameCollection}</h2> 
                     <div className="containerCardsAdd">
-                        <Link className="btnGo" to={{pathname:"/quiz", state:{dataCards, dataCollection}}}>C'est parti !</Link>
+                        <Link className="btnGo" to={{pathname:"/quiz", state:{dataCards, dataCollection, cardsElement}}}>C'est parti !</Link>
                     </div>
                     <div className='divBtnPlus'>
                         <button onClick={() => reloadPage()}><img id='btnReload' src={btnReload}/></button>

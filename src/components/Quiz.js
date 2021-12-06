@@ -21,6 +21,7 @@ function Quiz(props) {
 
     const {dataCards, dataCollection, startTimer} = props.propsHistory.location.state
    
+    console.log('props : ', props)
 
     const [modeQuestion, setModeQuestion] = useState(false)
     const [count, setCount] = useState(0)
