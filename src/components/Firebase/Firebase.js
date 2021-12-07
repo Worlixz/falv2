@@ -44,6 +44,10 @@ class Firebase {
         return this.auth.sendPasswordResetEmail(email)
     }
 
+    downloadDocument = (uid, document) => {
+        return this.db.doc(`users/${uid}/CartesCollection/${document}`)
+    }
+
     setNewCollectionCards = (uid, newCollection) => {
         return this.db.doc(`users/${uid}/CartesCollection/${newCollection.nameCollection}`).set({
             categorie: newCollection.categorie,
@@ -115,6 +119,7 @@ class Firebase {
 
     updateTimerFalse = (uid, nameCollection, idCards, event, dataQuizDisplay) => {
         let date
+        console.log('event :', event)
         switch(event){
             case 1 : date = Date.now()
             break
@@ -124,8 +129,14 @@ class Firebase {
 
             case 7 : date = (Date.now() + 7*86400000)
             break
+            
+            default : date = Date.now()
         }
-        if ( dataQuizDisplay.possibilite == true ) {
+        console.log('date firebase : ', date)
+        console.log('date now :', Date.now())
+        const diff = date - Date.now()
+        console.log("diff date : ", diff)
+        if ( dataQuizDisplay.possibilite) {
             return this.db.doc(`users/${uid}/CartesCollection/${nameCollection}`).set({
                 cards: {
                     [idCards]: {

@@ -27,26 +27,28 @@ function Carte(props) {
     const newArchiDB = props.propsHistory.location.state.dataCardsMap.cards.cards
 
     const collectionName = dataCollection.nameCollection
-    const cardsElement = props.propsHistory.location.state.element[collectionName].cards
+    const cardsElement = props.propsHistory.location.state.element[collectionName]
     const cardsStock = props.propsHistory.location.state.stockCardsDate
-
+    console.log("props : ",props)
     console.log('carteDB : ', cardsElement)
     console.log('cardsStock : ', cardsStock)
 
     //Parcourir cardsElement
-    /* console.log("parcourir : ", Object.entries(cardsElement)) */
-    for ( const [key, value] of Object.entries(cardsElement)){
-       // console.log('key :',key , ' : ', value)
-        for (const [keyStock, valueStock] of Object.entries(cardsStock)){
-          //  console.log(keyStock, " : ", valueStock)
-            if(key === keyStock){
-                //console.log('correspondance ')
-                //console.log("value.revisiondate : ", value.revisionDate)
-                value.revisionDate = valueStock.revisionDate
-                //console.log("value.revisiondate after attribution  : ", value.revisionDate)
-            }
-        }
-    }
+    // console.log("parcourir : ", Object.entries(cardsElement)) 
+    // for ( const [key, value] of Object.entries(cardsElement)){
+    //    // console.log('key :',key , ' : ', value)
+    //     for (const [keyStock, valueStock] of Object.entries(cardsStock)){
+    //       //  console.log(keyStock, " : ", valueStock)
+    //         if(key === keyStock){
+    //             //console.log('correspondance ')
+    //             //console.log("value.revisiondate : ", value.revisionDate)
+    //             value.revisionDate = valueStock.revisionDate
+    //             //console.log("value.revisiondate after attribution  : ", value.revisionDate)
+    //         }
+    //     }
+    // }
+
+    // const dataDB = firebase.downloadDocument()
 
     console.log("cardsElement en dehors de for : ",cardsElement)
     
@@ -67,6 +69,7 @@ function Carte(props) {
         p3: "",
         p4: ""
     })
+    const [dataDB, setDataDB] = useState()
 
     const resetModalData = {
         question: "",
@@ -83,12 +86,25 @@ function Carte(props) {
         let listener = firebase.auth.onAuthStateChanged(user => {
             user ? setUserSession(user) : props.history.push('/')
         })
+        firebase.downloadDocument(userSession.uid, dataCollection.nameCollection)
+        .get()
+        .then((doc) => {
+            if(doc.exists){
+                console.log("doc data : ", doc.data())
+                setDataDB(doc.data())
+            }else {
+                console.log('no doc')
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
         return () => {
             listener()
         }
     }, [userSession])
 
-        
+    console.log("dataDB : ",dataDB)    
     const handleClickBtn = (creationCards) => {
         setModalCheck(true)
         setModalData(creationCards) //Initialisation des données su state en fonction de la carte cliqué
@@ -337,6 +353,9 @@ function Carte(props) {
             </div>
         </Fragment>
     )
+    
+    const dataCardsQuiz = dataDB ? (dataDB.cards) : cardsElement.cards
+    console.log("dataCardsQuiz",dataCardsQuiz)
 
     return (
         <Fragment>
@@ -350,7 +369,7 @@ function Carte(props) {
                 <div className="containerTest">
                     <h2>Collection : {dataCollection.nameCollection}</h2> 
                     <div className="containerCardsAdd">
-                        <Link className="btnGo" to={{pathname:"/quiz", state:{dataCards, dataCollection, cardsElement}}}>C'est parti !</Link>
+                        <Link className="btnGo" to={{pathname:"/quiz", state:{dataCards, dataCollection, dataCardsQuiz}}}>C'est parti !</Link>
                     </div>
                     <div className='divBtnPlus'>
                         <button onClick={() => reloadPage()}><img id='btnReload' src={btnReload}/></button>

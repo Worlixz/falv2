@@ -195,6 +195,7 @@ function Collection(props) {
 
         let index = dataBrutKey.indexOf(stockName)
         let stockCardsDate = []
+        console.log("element", element)
         if (index !== -1){
             /* const stockValues = Object.values(arrayNoDoublons[x]) */
             /* const stockCardsDB = stockValues[0].cards */
@@ -205,9 +206,9 @@ function Collection(props) {
                 stockValuesDate = Object.values(arrayForDate[index])
                 stockCardsDate = stockValuesDate[0].cards
             }
-            /* console.log("stockCardsDate : ",stockCardsDate) */
         }
-
+        console.log("stockCardsDate : ",stockCardsDate)
+        
         let dataCardsMap = {
             nbreCards: '',
             cards: '',
@@ -229,7 +230,7 @@ function Collection(props) {
                     <h3>{dataCardsMap.nameCollection}</h3>
                     { <p>{dataCardsMap.nbreCards} {dataCardsMap.nbreCards > 1 ? 'Cartes' : 'Carte'}</p> }
                 </div>
-                <Link to={{pathname:"/carte", state:{dataCardsMap, element, stockCardsDate}}}> 
+                <Link to={{pathname:"/carte", state:{dataCardsMap, element}}}> 
                     <img src={Play}/>
                 </Link>
             </li>
