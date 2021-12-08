@@ -37,6 +37,7 @@ function Quiz(props) {
     // }
     const cardsfilter = []
     const arrayFilter = Object.values(dataQuiz)
+    console.log("arrayFilter : ",arrayFilter)
     // for ( const [ key , value ] of Object.entries(arrayFilter)){
     //      cardsfilter.push({[key]: value})
     // }
@@ -48,7 +49,7 @@ function Quiz(props) {
     
     const arrayTest = []
     for(let x = 0; x < arrayFilter.length; x++){
-        if(arrayFilter[x].revisionDate > 0){
+        if(arrayFilter[x].revisionDate <= Date.now()){
             arrayTest.push(arrayFilter[x])
         }
     }
