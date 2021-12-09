@@ -31,30 +31,15 @@ function Quiz(props) {
     const [stateTemporaire, setStateTemporaire] = useState([])
     const [stateTemporaireError, setStateTemporaireError] = useState([])
 
-    // for(const [key, value] of Object.entries(collectionCardsInDB)){
-    //     formatedData.push({[key]: value})
-    //     formatedDataKeys.push(key)
-    // }
-    const cardsfilter = []
-    const arrayFilter = Object.values(dataQuiz)
-    console.log("arrayFilter : ",arrayFilter)
-    // for ( const [ key , value ] of Object.entries(arrayFilter)){
-    //      cardsfilter.push({[key]: value})
-    // }
-    // // console.log("cards filter : ",cardsfilter)
-    // // console.log("arrayFilter :", arrayFilter)
-    // console.log("arrayFilter : ",arrayFilter)
-    // console.log("cards filter : ",cardsfilter)
-    // const arrayFilter2 = arrayFilter.filter(element => element.revisionDate <= Date.now())
+    const arrayData = Object.values(dataQuiz)
     
-    const arrayTest = []
-    for(let x = 0; x < arrayFilter.length; x++){
-        if(arrayFilter[x].revisionDate <= Date.now()){
-            arrayTest.push(arrayFilter[x])
+    const arrayFilter = []
+    for(let x = 0; x < arrayData.length; x++){
+        if(arrayData[x].revisionDate <= Date.now()){
+            arrayFilter.push(arrayData[x])
         }
     }
-    console.log("arrayTest : ", arrayTest)
-    const dataQuizDisplay = arrayTest
+    const dataQuizDisplay = arrayFilter
 
     const arraySuccessSentence = ["Au top", "Une de plus de réussi", "Tu es sur la bonne voie", "Génial", "Bravo", "+1 au compteur", "Tu continue à progresser", "L'anatomie n'a plus de secret pour toi", "Elle est validé !!!", "Parfait"]
     const arrayErrorSentence = ["Je crois en toi", "Tu peux le faire", "La prochaine fois ça sera la bonne", "Il faut tomber pour apprendre", "Tu y es presque", "Tu te fera plus avoir", "Persévérer", "Soit acteur de ta réussite tu vas y arriver", "Dommage", "La route de la connaissance est semé d'embûches"]

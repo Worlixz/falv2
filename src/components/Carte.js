@@ -18,8 +18,6 @@ toast.configure()
 function Carte(props) {
 
     const firebase = useContext(FirebaseContext)
-    
-    /* console.log("props : ", props) */
 
     const dataCollection = props.propsHistory.location.state.dataCardsMap
     const dataCards = props.propsHistory.location.state.dataCardsMap.cards
@@ -29,28 +27,7 @@ function Carte(props) {
     const collectionName = dataCollection.nameCollection
     const cardsElement = props.propsHistory.location.state.element[collectionName]
     const cardsStock = props.propsHistory.location.state.stockCardsDate
-    console.log("props : ",props)
-    console.log('carteDB : ', cardsElement)
-    console.log('cardsStock : ', cardsStock)
-
-    //Parcourir cardsElement
-    // console.log("parcourir : ", Object.entries(cardsElement)) 
-    // for ( const [key, value] of Object.entries(cardsElement)){
-    //    // console.log('key :',key , ' : ', value)
-    //     for (const [keyStock, valueStock] of Object.entries(cardsStock)){
-    //       //  console.log(keyStock, " : ", valueStock)
-    //         if(key === keyStock){
-    //             //console.log('correspondance ')
-    //             //console.log("value.revisiondate : ", value.revisionDate)
-    //             value.revisionDate = valueStock.revisionDate
-    //             //console.log("value.revisiondate after attribution  : ", value.revisionDate)
-    //         }
-    //     }
-    // }
-
-    // const dataDB = firebase.downloadDocument()
-
-    console.log("cardsElement en dehors de for : ",cardsElement)
+    
     
 
     const assombrir = document.querySelector('.sombreModalCardsManagement')
@@ -157,9 +134,9 @@ function Carte(props) {
     
     const deleteCards = () => {
         firebase.deleteDataCards(userSession.uid, dataCollection, modalData.id)
-        /* .then(() => {
+        .then(() => {
             window.location.reload()
-        }) */
+        })
         setDeleteModal(false)
         assombrir.style.zIndex = "-2"
     }
@@ -375,8 +352,6 @@ function Carte(props) {
                         <button onClick={() => reloadPage()}><img id='btnReload' src={btnReload}/></button>
                         <button onClick={() => handleClickBtn()}><img id='btnPlus' src={btnPlus}/></button>
                     </div>
-                        {/* <button onClick={() => reloadPage()}><img id='btnReload' src={btnReload}/></button>
-                        <img id="btnPlusQuiz" onClick={() => handleModalCreationOpen()} src={btnPlus} /> */}
                     <div className="containerCardsForManage">
                         {displayCards}  
                     </div>
