@@ -332,7 +332,6 @@ function Carte(props) {
     )
     
     const dataCardsQuiz = dataDB ? (dataDB.cards) : cardsElement.cards
-    console.log("dataCardsQuiz",dataCardsQuiz)
 
     return (
         <Fragment>
