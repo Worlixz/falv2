@@ -30,7 +30,6 @@ const User = (props) => {
                 if(doc.exists){
 
                     const myData = doc.data()
-
                     setUserData(myData)
                 }
             })
@@ -102,7 +101,7 @@ const User = (props) => {
             break
         }
     }
-    
+   
      return userSession === null ? 
     (
         <Loader />
@@ -112,7 +111,7 @@ const User = (props) => {
         <Fragment>
             <Header children props={userData} />
             <div className="containerAccueil">
-                <Sidebar children props={userData}/>
+                <Sidebar props={userData}/>
                 {content}
             </div>
         </Fragment>

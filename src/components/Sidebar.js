@@ -19,10 +19,31 @@ function Sidebar(props) {
     const hangleSignOut = (e) => {
         firebase.signoutUser()
     }
-    
-    const [imgCheck, setImgCheck] = useState(true)
-    const [profilPictureData, setProfilPictureData] = useState()
 
+    const [imgCheck, setImgCheck] = useState(true)
+    const [userSession, setUserSession] = useState(null)
+    const [userData, setUserData] = useState(null)
+
+    useEffect(() => {
+        let listener = firebase.auth.onAuthStateChanged((user) => {
+            user ? (setUserSession(user)) : props.history.push('/')
+        })
+        if(userSession !== null){
+            firebase.userData(userSession.uid)
+            .get()
+            .then((doc) => {
+                const myData = doc.data()
+                setUserData(myData)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+        return () => {
+            listener()
+        }
+    }, [userSession])
+    
     const imgArow = document.querySelector('.rightArrow')
     const sidebar = document.querySelector('.sideBar')
     
@@ -55,7 +76,7 @@ function Sidebar(props) {
         <ul>
         {imgCheck ? (<Fragment>
             <li className='profilLi' id="liSidebar">
-                <img src={profilPictureData ? (profilPictureData) : (profilImg)}/>
+                <img src={userData ? (userData.profilPicture) : (profilImg)}/>
             </li>
             <li id="liSidebar">
                 <NavLink activeClassName="active" to='/user'><img src={imgHouse}/></NavLink>
@@ -64,11 +85,11 @@ function Sidebar(props) {
                 <NavLink activeClassName="active" to='/collection'><img src={cardsImg}/></NavLink>
             </li>
             <li id="liSidebar"> 
-                <NavLink activeClassName="active" to='/profil'><img src={profilPictureData ? (profilPictureData) : (profilImg)}/></NavLink>
+                <NavLink activeClassName="active" to='/profil'><img src={userData ? (userData.profilPicture) : (profilImg)}/></NavLink>
             </li>
         </Fragment>) : (<Fragment>
             <li className='profilLi' id="liSidebar">
-                <img src={profilImg}/>
+                <img src={userData ? (userData.profilPicture) : (profilImg)}/>
                 <h2>{props.props.userName}</h2>
             </li>
             <li id="liSidebar">
@@ -80,7 +101,7 @@ function Sidebar(props) {
                 <NavLink activeClassName="active" to='/collection'>Mes collections</NavLink>
             </li>
             <li id="liSidebar">
-                <img src={profilImg}/>
+                <img src={userData ? (userData.profilPicture) : (profilImg)}/>
                 <NavLink activeClassName="active" to='/profil'>Profil</NavLink>
             </li>
         </Fragment>)}

@@ -118,8 +118,8 @@ function Collection(props) {
         </div>
     )
 
-    // MISE EN FORME DES DONNEES POUR EXPLOITATION
     
+    // MISE EN FORME DES DONNEES POUR EXPLOITATION
     for(const [key, value] of Object.entries(collectionCardsInDB)){
         formatedData.push({[key]: value})
         formatedDataKeys.push(key)
@@ -131,7 +131,6 @@ function Collection(props) {
         const stock = Object.keys(dataBrut[i])
         const stringKey = stock[0]
         dataBrutKey.push(stringKey)
-        /* console.log(dataBrutKey) */
     }
 
 
@@ -152,55 +151,15 @@ function Collection(props) {
         return element[stockBis].etiquette == undefined
     })
 
-    /* console.log("arrayForDate : ", arrayForDate) */
-
-    // PARCOURIR LE TABLEAU => arrayNoDoublons
-        // Pour chaque itération 
-            // Vérifier si revision date est === à 0
-                // Si OUI 
-                    // => Mofidier la date de arrayNoDoublons par celle de arrayForDate 
-                // Sinon ne rien faire
-
-    // for (var x = 0; x < arrayNoDoublons.length; x++){
-    //     const stock = Object.keys(arrayNoDoublons[x])
-    //     const stringKeys = stock[0]
-    //     /* console.log("stringKeys : ",stringKeys) */
-    //     let index = dataBrutKey.indexOf(stringKeys)
-    //     if (index !== -1){
-    //         const stockValues = Object.values(arrayNoDoublons[x])
-    //         const stockCardsDB = stockValues[0].cards
-
-            
-    //         let stockValuesDate = []
-    //         let stockCardsDate = []
-    //         if(arrayForDate[index]){
-    //             stockValuesDate = Object.values(arrayForDate[index])
-    //             stockCardsDate = stockValuesDate[0].cards
-    //         }
-    //     }
-    // }
-    /* console.log("stockCardsDB : ", stockCardsDB)
-    console.log("stockCardsDate : ", stockCardsDate)
-    
-    for (const [key, value] of Object.entries(stockCardsDB)){
-        console.log(" dans la boucle for",{[key]: value})
-    }
-    /* console.log("Object test", Object.keys(stockCardsDB)) */
-
     const displayCollection = arrayNoDoublons.map((element) => {
 
         const stock = Object.keys(element)
         const stockName = stock[0]
-        /* console.log("stock Name : ",stockName) */
 
         let index = dataBrutKey.indexOf(stockName)
         let stockCardsDate = []
         console.log("element", element)
-        if (index !== -1){
-            /* const stockValues = Object.values(arrayNoDoublons[x]) */
-            /* const stockCardsDB = stockValues[0].cards */
-
-            
+        if (index !== -1){            
             let stockValuesDate = []
             if(arrayForDate[index]){
                 stockValuesDate = Object.values(arrayForDate[index])
