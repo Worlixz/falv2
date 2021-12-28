@@ -331,6 +331,9 @@ function Carte(props) {
         </Fragment>
     )
     
+    // Modification à faire :  
+        // Ne pas vérifier si dataDB existe mais si ça longueur est égal à celle de cardsElement    
+    
     const dataCardsQuiz = dataDB ? (dataDB.cards) : cardsElement.cards
 
     return (
