@@ -189,7 +189,7 @@ function Carte(props) {
         window.location.reload()
     }
     
-    const btnCreationCards = modalData.type !== "" && modalData.reponse !== "" ? (<button className="modificationCards">Créer ma carte</button>) : (<button disabled className="modificationCards disabled">Créer ma carte</button>)    
+    const btnCreationCards = /* modalData.type !== ""  && */ modalData.reponse !== "" ? (<button className="modificationCards">Créer ma carte</button>) : (<button disabled className="modificationCards disabled">Créer ma carte</button>)    
     
     const displayCards = Object.entries(newArchiDB).map((element) => {
         let creationCards = {
@@ -333,10 +333,42 @@ function Carte(props) {
     
     // Modification à faire :  
         // Ne pas vérifier si dataDB existe mais si ça longueur est égal à celle de cardsElement    
-    
-    const dataCardsQuiz = dataDB ? (dataDB.cards) : cardsElement.cards
+    let keyDataDB = []
+    let keyCardsElement = []
+    let stockDataDB = []
+    let stockCardsElement = []
+    let dataCardsQuiz = null
 
-    return (
+    if(dataDB){
+        for( const [key, value] of Object.entries(dataDB.cards)){
+            keyDataDB.push(key)
+            stockDataDB.push(value)
+        }
+        if(cardsElement){
+            for( const [key, value] of Object.entries(cardsElement.cards)){
+                keyCardsElement.push(key)
+                stockCardsElement.push(value)
+            }
+        }
+        
+        if(keyDataDB.length === keyCardsElement.length){
+            dataCardsQuiz = dataDB.cards
+            console.log('les deux tableaux sont égaux, on utilise dataDB')
+            
+        }else if(keyDataDB.length > keyCardsElement.length){
+            dataCardsQuiz = dataDB.cards
+            console.log('DataDB supérieur, on utilise dataDB')
+            
+        }else{
+            dataCardsQuiz = cardsElement.cards
+                console.log('Finalement on utilise cardsElement')
+        }
+    }else{
+        dataCardsQuiz = cardsElement.cards
+            console.log('Finalement on utilise cardsElement')
+    }
+
+    return dataCardsQuiz != null ? (
         <Fragment>
             <div className="sombreModalCardsManagement">
                 {modalCheck ? modal : null}
@@ -361,6 +393,25 @@ function Carte(props) {
         </div>
         </Fragment>
         
+    ) : (
+        <Fragment>
+            <div className="containerQuiz">
+                <Link to="/collection" id="btnArowPreviously"><img id="arowPreviously" src={arow}/></Link>
+                <div className="containerTest">
+                    <h2>Collection : default</h2> 
+                    <div className="containerCardsAdd">
+                        <Link className="btnGo">C'est parti !</Link>
+                    </div>
+                    <div className='divBtnPlus'>
+                        <button onClick={() => reloadPage()}><img id='btnReload' src={btnReload}/></button>
+                        <button onClick={() => handleClickBtn()}><img id='btnPlus' src={btnPlus}/></button>
+                    </div>
+                    <div className="containerCardsForManage">
+                        test 
+                    </div>
+                </div>
+        </div>
+        </Fragment>
     )
 }
 

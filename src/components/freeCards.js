@@ -275,7 +275,7 @@ export const freeCards = [
                 }
             }
         }
-    },
+    } ,
     {
         'Anatomie clinique' : {
             etiquette: "Anatomie clinique",
@@ -724,6 +724,230 @@ export const freeCards = [
                 }
             }
         }
-    }
+    },
+    {
+        'Info pratique' : {
+            etiquette: "Info",
+            categorie: "physio",
+            cards: {
+                '6FBF21E422E3498D8C67035E3E788D5D': {
+                    question: "Faire un tirage derriere la nuque est plus traumatisant pour l'épaule",
+                    reponse: true,
+                    type: "vraiFaux",
+                    id_card: '6FBF21E422E3498D8C67035E3E788D5D',
+                    revisionDate: 0
+                }, 
+                '0CB447F835D44357B2CC3D218A20053B': {
+                    question: "Qu'es ce que le ciblage proprioceptif?",
+                    reponse: "Toucher le muscle qu'on travaille pour augmenter la connexion cerveau muscle",
+                    type: "quiz",
+                    id_card: "0CB447F835D44357B2CC3D218A20053B",
+                    revisionDate: 0,
+                    possibilite: {
+                        p1: "Toucher le muscle qu'on travaille pour augmenter la connexion cerveau muscle",
+                        p2: "Faire de l'exercice sur un pied pour augmenter la connexion cerveau muscle",
+                        p3: "Ce regarder dans la glace pour augmenter la connexion cerveau muscle",
+                        p4: "Compter jusqu'a 10 pour augmenter la stimulation neuronale"
+                    }
+                },
+                '6164FB7BB87949BA9CFCE8CE1E66ECAA': {
+                    question: "les courbatures sont du a une fuite de calcium intracellulaire et a l'inflammation",
+                    reponse: true,
+                    type: "vraiFaux",
+                    id_card: '6164FB7BB87949BA9CFCE8CE1E66ECAA',
+                    revisionDate: 0
+                }, 
+                'F202E3DE40CA458695059FB9370D85F2': {
+                    question: "Qu'es ce que le cross education",
+                    reponse: "Ex:Lorsqu'on travaille le biceps droit on a un gain de 10% sur le gauche",
+                    type: "quiz",
+                    id_card: "F202E3DE40CA458695059FB9370D85F2",
+                    revisionDate: 0,
+                    possibilite: {
+                        p1: "Le faite de faire des mots croisé permet un gain de 15% sur nos muscles",
+                        p2: "Ex: lorsqu'on court on a un gain de 20% sur tout nos muscles",
+                        p3: "Ex:Lorsqu'on travaille le biceps droit on a un gain de 30% sur le droit",
+                        p4: "Ex:Lorsqu'on travaille le biceps droit on a un gain de 10% sur le gauche"         
+                    }
+                },
+                'E1E93EDFFB284BAA9131854583438516': {
+                    question: "l'infra epineux est souvent sur-devellopé chez les pratiquants de musculation",
+                    reponse: false,
+                    type: "vraiFaux",
+                    id_card: 'E1E93EDFFB284BAA9131854583438516',
+                    revisionDate: 0
+                }, 
+                '509A45E571FD48CBB3E849B70E083765': {
+                    question: "Comment rattraper un muscle faible",
+                    reponse: "Poids faible , cibler,beaucoup de répétition",
+                    type: "quiz",
+                    id_card: "509A45E571FD48CBB3E849B70E083765",
+                    revisionDate: 0,
+                    possibilite: {
+                        p1: "Poids faible , cibler,beaucoup de répétition",
+                        p2: "Mettre plus lourd et augmenter les series",
+                        p3: "Bosser avec un tempo different",
+                        p4: "Poids lourd, cibler,peu de répétition répétition"
+                    }
+                },
+                '7958FE624ACB44DDB29FB16DDF375565': {
+                    question: "La rotation interne de bras permet de travailler le grand rond",
+                    reponse: true,
+                    type: "vraiFaux",
+                    id_card: '7958FE624ACB44DDB29FB16DDF375565',
+                    revisionDate: 0
+                }, 
+                'A3B3F95D30E944C4A284DC2AA4473A8D': {
+                    question: "Quelle région musculaire est le plus ciblé durant un rowings",
+                    reponse: "L'interieur du dos",
+                    type: "quiz",
+                    id_card: "A3B3F95D30E944C4A284DC2AA4473A8D",
+                    revisionDate: 0,
+                    possibilite: {
+                        p1: "L'exterieur du dos",
+                        p2: "L'interieur du dos",
+                        p3: "Les pectoraux",
+                        p4: "Les lombaires "         
+                    }
+                },
+                '65BD52B902BB4840945FDDEC2B34917C': {
+                    question: "Le sissy squat permet d'isoler les ischios",
+                    reponse: false,
+                    type: "vraiFaux",
+                    id_card: '65BD52B902BB4840945FDDEC2B34917C',
+                    revisionDate: 0
+                }, 
+                '31D40F18BD384C6DA2C05F05D38BF4CC': {
+                    question: "Quels muscle est le plus sollicité lors du relevé de jambe?",
+                    reponse: "Droit femoral",
+                    type: "quiz",
+                    id_card: "31D40F18BD384C6DA2C05F05D38BF4CC",
+                    revisionDate: 0,
+                    possibilite: {
+                        p1: "Sartorius",
+                        p2: "Droit femoral",
+                        p3: "Gastrocnemien",
+                        p4: "Ischio"                          
+                    }
+                }
+            }
+        }
+    },
+    {
+        'Les grands syndromes' : {
+            etiquette: "les grand syndromes",
+            categorie: "clinique",
+            cards: {
+                '32D8C2DEF75345AA840CCB391FE6FF7E': {
+                    question: "Le signe de babinski fait parti du syndrome pyramidal",
+                    reponse: true,
+                    type: "vraiFaux",
+                    id_card: '32D8C2DEF75345AA840CCB391FE6FF7E',
+                    revisionDate: 0
+                }, 
+                '4C773382E9DA4D4095DCFFF201A285AB': {
+                    question: "L'hypertonie spastique fait partie de quelle syndrome?",
+                    reponse: "Syndrome pyramidal",
+                    type: "quiz",
+                    id_card: "4C773382E9DA4D4095DCFFF201A285AB",
+                    revisionDate: 0,
+                    possibilite: {
+                        p1: "Syndrome méningée",
+                        p2: "Syndrome infectieux",
+                        p3: "Syndrome extrapyramidal",
+                        p4: "Syndrome pyramidal"
+                    }
+                },
+                'CF63D071192D4AA5A9FBAD5598CF63B4': {
+                    question: "Il y a des troubles moteur dans le S.Extra pyramidal",
+                    reponse: false,
+                    type: "vraiFaux",
+                    id_card: 'CF63D071192D4AA5A9FBAD5598CF63B4',
+                    revisionDate: 0
+                }, 
+                '31CBFAB75BE14FBB863227E9D668825B': {
+                    question: "Où peut ton trouver un tremblement de repos",
+                    reponse: "Syndorme extra-pyramidal",
+                    type: "quiz",
+                    id_card: "31CBFAB75BE14FBB863227E9D668825B",
+                    revisionDate: 0,
+                    possibilite: {
+                        p1: "Syndorme pyramidal",
+                        p2: "Syndorme extra-pyramidal",
+                        p3: "Syndrome méningée",
+                        p4: "Syndrome cerebelleux"         
+                    }
+                },
+                'F3AF2A8330E84C0C92811AB85E87A107': {
+                    question: "Hypertonie plastique fait partie du S.Extra-pyramidal",
+                    reponse: true,
+                    type: "vraiFaux",
+                    id_card: 'F3AF2A8330E84C0C92811AB85E87A107',
+                    revisionDate: 0
+                }, 
+                'C9C5F0A10FBE4B7EA45818AF254A84AB': {
+                    question: "Le syndrome cerebelleux est composé de trouble ?",
+                    reponse: "Statique et dynamique",
+                    type: "quiz",
+                    id_card: "C9C5F0A10FBE4B7EA45818AF254A84AB",
+                    revisionDate: 0,
+                    possibilite: {
+                        p1: "Statique et dynamique",
+                        p2: "Statique et neuroveg",
+                        p3: "Statique",
+                        p4: "Dynamique et vestibulaire"
+                    }
+                },
+                '730D06A39A0C4B098A7663BE8035FFA2': {
+                    question: "Il n'y a pas de raideur de nuque dans le S.méningé?",
+                    reponse: false,
+                    type: "vraiFaux",
+                    id_card: '730D06A39A0C4B098A7663BE8035FFA2',
+                    revisionDate: 0
+                }, 
+                '46BFC980FD6B4D0C9F04D2BFE6D75CE6': {
+                    question: "Photophobie, nausée et vomissement font penser  ?",
+                    reponse: "au Syndrome méningé",
+                    type: "quiz",
+                    id_card: "46BFC980FD6B4D0C9F04D2BFE6D75CE6",
+                    revisionDate: 0,
+                    possibilite: {
+                        p1: "au Syndrome pyramidal",
+                        p2: "au Syndrome cerebelleux",
+                        p3: "au Syndrome méningé",
+                        p4: "a la lecture du sujet du bac de philo"         
+                    }
+                },
+                '5B5FE46CA6474FFCB3799F9E3068D3A1': {
+                    question: "",
+                    reponse: true,
+                    type: "vraiFaux",
+                    id_card: '5B5FE46CA6474FFCB3799F9E3068D3A1',
+                    revisionDate: 0
+                }, 
+                '01BF50FF2D584DB0AFC05239C6F7D868': {
+                    question: "La 3eme cause de mortalité en franc est le syndrome vasculaire",
+                    reponse: true,
+                    type: "vraiFaux",
+                    id_card: '01BF50FF2D584DB0AFC05239C6F7D868',
+                    revisionDate: 0
+                }, 
+                '82B94F454141450CBCCF15789AB5F7A1': {
+                    question: "Quelles sont les differentes phase du S.epileptique",
+                    reponse: "Tonique-Clonique-Stuporeuse",
+                    type: "quiz",
+                    id_card: "82B94F454141450CBCCF15789AB5F7A1",
+                    revisionDate: 0,
+                    possibilite: {
+                        p1: "Catatonique-Tonique-Clonique",
+                        p2: "Tonique-Clonique-Stuporeuse",
+                        p3: "Clonique-Clinique-Comique",
+                        p4: "Spastique-pastique-tonique"         
+                    }
+                }
+            }
+        }
+    } 
+
     
 ]
