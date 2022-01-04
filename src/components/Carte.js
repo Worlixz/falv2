@@ -12,6 +12,7 @@ import { nanoid } from 'nanoid'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { initializeApp } from 'firebase-admin'
+import JustCards from './JustCards'
 
 toast.configure()
 
@@ -21,8 +22,6 @@ function Carte(props) {
 
     const dataCollection = props.propsHistory.location.state.dataCardsMap
     const dataCards = props.propsHistory.location.state.dataCardsMap.cards
-
-    const newArchiDB = props.propsHistory.location.state.dataCardsMap.cards.cards
 
     const collectionName = dataCollection.nameCollection
     const cardsElement = props.propsHistory.location.state.element[collectionName]
@@ -41,10 +40,24 @@ function Carte(props) {
         reponse: '',
         type: '',
         id: "",
-        p1: "",
-        p2: "",
-        p3: "",
-        p4: ""
+        possibilite : {
+            p1: "",
+            p2: "",
+            p3: "",
+            p4: ""
+        }
+    })
+    const [modalDataCreation, setModalDataCreation] = useState({
+        question: "",
+        reponse: '',
+        type: "default",
+        id: "",
+        possibilite : {
+            p1: "",
+            p2: "",
+            p3: "",
+            p4: ""
+        }
     })
     const [dataDB, setDataDB] = useState()
 
@@ -53,10 +66,12 @@ function Carte(props) {
         reponse: '',
         type: '',
         id: "",
-        p1: "",
-        p2: "",
-        p3: "",
-        p4: ""
+        possibilite : {
+            p1: "",
+            p2: "",
+            p3: "",
+            p4: ""
+        }
     }
 
     useEffect(() => {
@@ -81,17 +96,77 @@ function Carte(props) {
         }
     }, [userSession])
 
-    console.log("dataDB : ",dataDB)    
+    let keyDataDB = []
+    let keyCardsElement = []
+    let stockDataDB = []
+    let stockCardsElement = []
+    let dataCardsQuiz = null
+    let dataGlobal = null
+
+    if(dataDB){
+        for( const [key, value] of Object.entries(dataDB.cards)){
+            keyDataDB.push(key)
+            stockDataDB.push(value)
+        }
+        if(cardsElement){
+            for( const [key, value] of Object.entries(cardsElement.cards)){
+                keyCardsElement.push(key)
+                stockCardsElement.push(value)
+            }
+        }
+        
+        if(keyDataDB.length === keyCardsElement.length){
+            dataCardsQuiz = dataDB.cards
+            dataGlobal = dataDB
+            console.log('les deux tableaux sont égaux, on utilise dataDB')
+            
+        }else if(keyDataDB.length > keyCardsElement.length){
+            dataCardsQuiz = dataDB.cards
+            dataGlobal = dataDB
+            console.log('DataDB supérieur, on utilise dataDB')
+            
+        }else{
+            dataCardsQuiz = cardsElement.cards
+            dataGlobal = cardsElement
+                console.log('Finalement on utilise cardsElement')
+        }
+    }else{
+        dataCardsQuiz = cardsElement.cards
+        dataGlobal = cardsElement
+            console.log('Finalement on utilise cardsElement')
+    }
+
+    console.log("dataCardsQuiz : ",dataCardsQuiz)
+    console.log("dataGlobal : ",dataGlobal)
+    console.log("dataCollection : ",dataCollection)
+
     const handleClickBtn = (creationCards) => {
         setModalCheck(true)
         setModalData(creationCards) //Initialisation des données su state en fonction de la carte cliqué
         assombrir.style.zIndex = "2"
     }
+
+    const handleClickBtnCreation = () => {
+        setModalCreation(true)
+        assombrir.style.zIndex = "2"
+    }
+
+
+
+    console.log("dataDB : ",dataDB)    
+    /* const handleClickBtn = (creationCards) => {
+        setModalCheck(true)
+        setModalData(creationCards) //Initialisation des données su state en fonction de la carte cliqué
+        assombrir.style.zIndex = "2"
+    } */
     
     const handleChange = (e) => {
         // Modification du state de handleClickBtn 
         setModalData({...modalData, [e.target.id]: e.target.value})
-        
+    }
+    const handleChangeCreation = (e) => {
+        // Modification du state de handleClickBtn 
+        setModalDataCreation({...modalDataCreation, [e.target.id]: e.target.value})
     }
     
     const handleCloseModal = (e) => {
@@ -117,17 +192,39 @@ function Carte(props) {
     }
     const handleSubmitCreationCards = (e) => {
         e.preventDefault()
-        modalData.id = nanoid()
-        firebase.creationCards(userSession.uid, dataCollection, modalData)
+        modalDataCreation.id = nanoid()
+        firebase.creationCards(userSession.uid, dataCollection, modalDataCreation)
         .then(() => {
             toastModalModification()
             handleDeleteModalClose()
-            setModalData("")
+            setModalDataCreation({
+                question: "",
+                reponse: '',
+                type: "default",
+                id: "",
+                possibilite : {
+                    p1: "",
+                    p2: "",
+                    p3: "",
+                    p4: ""
+                }
+            })
         })
         .catch(() => {
             toastModalError()
             handleDeleteModalClose()
-            setModalData("")
+            setModalDataCreation({
+                question: "",
+                reponse: '',
+                type: "default",
+                id: "",
+                possibilite : {
+                    p1: "",
+                    p2: "",
+                    p3: "",
+                    p4: ""
+                }
+            })
         })
         
     }
@@ -189,34 +286,37 @@ function Carte(props) {
         window.location.reload()
     }
     
-    const btnCreationCards = /* modalData.type !== ""  && */ modalData.reponse !== "" ? (<button className="modificationCards">Créer ma carte</button>) : (<button disabled className="modificationCards disabled">Créer ma carte</button>)    
+    //const btnCreationCards = /* modalData.type !== ""  && */ modalData.reponse !== "" ? (<button className="modificationCards">Créer ma carte</button>) : (<button disabled className="modificationCards disabled">Créer ma carte</button>)    
     
-    const displayCards = Object.entries(newArchiDB).map((element) => {
+    const displayCards = Object.entries(dataCardsQuiz).map((element) => {
         let creationCards = {
             question: "",
             reponse: '',
             type: '',
             id: '',
-            p1: "",
-            p2: "",
-            p3: "",
-            p4: ""
+            possibilite : {
+                p1: "",
+                p2: "",
+                p3: "",
+                p4: ""
+            }
         }
         const idCards = Object.values(element)
         Object.values(element).map((deepElement) => {
+            console.log("deepElement", deepElement)
             if(deepElement.question != undefined){ 
                 creationCards.question = deepElement.question
                 creationCards.type = deepElement.type
-                creationCards.id = idCards[0]
+                creationCards.id = deepElement.id_card
             }
             if(deepElement.reponse != undefined){
                 creationCards.reponse = deepElement.reponse === true ? (deepElement.reponse.toString()) : deepElement.reponse
             }
             if(deepElement.type === "quiz"){
-                creationCards.p1 = deepElement.p1
-                creationCards.p2 = deepElement.p2
-                creationCards.p3 = deepElement.p3
-                creationCards.p4 = deepElement.p4
+                creationCards.p1 = deepElement.possibilite.p1
+                creationCards.p2 = deepElement.possibilite.p2
+                creationCards.p3 = deepElement.possibilite.p3
+                creationCards.p4 = deepElement.possibilite.p4
             }
             return creationCards
         })
@@ -245,7 +345,7 @@ function Carte(props) {
                 </div>
             </div>
     )
-
+    
     const modal = (
         <Fragment>
             <div className="modalForCardsManagement">
@@ -255,17 +355,18 @@ function Carte(props) {
                     <hr/>
                     <h4>{dataCollection.nameCollection}</h4>
                     <h5>Type de réponse</h5>
-                    <select id="type" value={modalData.type} onChange={handleChange}>
+                    <select id="type" value={modalData.type} onChange={handleChange} >
                         <option value="vraiFaux">Vrai - Faux</option>
                         <option value="quiz">Quiz</option>
                     </select>
                     <h5 id="question">Question :</h5>
-                    <textarea type="text" id="question" value={modalData.question} onChange={handleChange}/> 
+                    <textarea type="text" id="question" value={modalData.question} onChange={handleChange} /> 
                     <h5 id="reponse">Réponse :</h5>
                     {modalData.type == 'vraiFaux' ? (<div className="selectVraiFaux">
                         
                         {modalData.reponse == 'true' ? (<img src={check} />) : (<img src={crossRed} />)}
-                        <select id="reponse" value={modalData.reponse} onChange={handleChange}>
+                        <select id="reponse" value={modalData.reponse} onChange={handleChange} >
+                            <option value="default" selected>--Default--</option>
                             <option value={true}>Vrai</option>
                             <option value={false}>Faux</option>
                         </select>
@@ -274,10 +375,10 @@ function Carte(props) {
                             <textarea id="reponse" value={modalData.reponse} onChange={handleChange} />
                             <h5> Possibilité : </h5>
                             <div className="quizReponsePossibilite">
-                                <textarea id="p1" onChange={handleChange} value={modalData.p1 != "" ? (modalData.p1) : ("")} />
-                                <textarea id="p2" onChange={handleChange} value={modalData.p2 != "" ? (modalData.p2) : ("")} />
-                                <textarea id="p3" onChange={handleChange} value={modalData.p3 != "" ? (modalData.p3) : ("")} />
-                                <textarea id="p4" onChange={handleChange} value={modalData.p4 != "" ? (modalData.p4) : ("")} />
+                                <textarea id="p1" onChange={handleChange} value={modalData.p1 != "" ? (modalData.p1) : ("")}  />
+                                <textarea id="p2" onChange={handleChange} value={modalData.p2 != "" ? (modalData.p2) : ("")}  />
+                                <textarea id="p3" onChange={handleChange} value={modalData.p3 != "" ? (modalData.p3) : ("")}  />
+                                <textarea id="p4" onChange={handleChange} value={modalData.p4 != "" ? (modalData.p4) : ("")}  />
                             </div>
                         </div>
                     )}
@@ -297,78 +398,45 @@ function Carte(props) {
                     <hr/>
                     <h4>{dataCollection.nameCollection}</h4>
                     <h5>Type de réponse</h5>
-                    <select id="type" value={modalData.type} onChange={handleChange}>
-                        <option selected value="">-- A définir --</option>
+                    <select id="type" value={modalDataCreation.type} onChange={handleChangeCreation}>
+                        <option selected value="default">-- A définir --</option>
                         <option value="vraiFaux">Vrai - Faux</option>
                         <option value="quiz">Quiz</option>
                     </select>
                     <h5 id="question">Question :</h5>
-                    <textarea type="text" id="question" value={modalData.question} onChange={handleChange}/> 
+                    <textarea type="text" id="question" value={modalDataCreation.question} onChange={handleChangeCreation}/> 
                     <h5 id="reponse">Réponse :</h5>
-                    {modalData.type == 'vraiFaux' ? (<div className="selectVraiFaux">
+                    {modalDataCreation.type == 'vraiFaux' ? (<div className="selectVraiFaux">
                         
-                        {modalData.reponse == 'true' ? (<img src={check} />) : (<img src={crossRed} />)}
-                        <select id="reponse" value={modalData.reponse} onChange={handleChange}>
+                        {modalDataCreation.reponse == 'true' ? (<img src={check} />) : (<img src={crossRed} />)}
+                        <select id="reponse" value={modalDataCreation.reponse} onChange={handleChangeCreation}>
                             <option selected value="">-- A définir --</option>
                             <option value={true}>Vrai</option>
                             <option value={false}>Faux</option>
                         </select>
                     </div>) : (
                         <div className="quizReponseModification">
-                            <textarea id="reponse" value={modalData.reponse} onChange={handleChange} />
+                            <textarea id="reponse" value={modalDataCreation.reponse} onChange={handleChangeCreation} />
                             <h5> Possibilité : </h5>
                             <div className="quizReponsePossibilite">
-                                <textarea id="p1" onChange={handleChange}/>
-                                <textarea id="p2" onChange={handleChange}/>
-                                <textarea id="p3" onChange={handleChange}/>
-                                <textarea id="p4" onChange={handleChange}/>
+                                <textarea id="p1" onChange={handleChangeCreation}/>
+                                <textarea id="p2" onChange={handleChangeCreation}/>
+                                <textarea id="p3" onChange={handleChangeCreation}/>
+                                <textarea id="p4" onChange={handleChangeCreation}/>
                             </div>
                         </div>
                     )}
-                {btnCreationCards}
+                    <button className="modificationCards">Créer ma carte</button>
                 </form>
             </div>
         </Fragment>
     )
+    {/* {btnCreationCards} */}
     
     // Modification à faire :  
         // Ne pas vérifier si dataDB existe mais si ça longueur est égal à celle de cardsElement    
-    let keyDataDB = []
-    let keyCardsElement = []
-    let stockDataDB = []
-    let stockCardsElement = []
-    let dataCardsQuiz = null
 
-    if(dataDB){
-        for( const [key, value] of Object.entries(dataDB.cards)){
-            keyDataDB.push(key)
-            stockDataDB.push(value)
-        }
-        if(cardsElement){
-            for( const [key, value] of Object.entries(cardsElement.cards)){
-                keyCardsElement.push(key)
-                stockCardsElement.push(value)
-            }
-        }
-        
-        if(keyDataDB.length === keyCardsElement.length){
-            dataCardsQuiz = dataDB.cards
-            console.log('les deux tableaux sont égaux, on utilise dataDB')
-            
-        }else if(keyDataDB.length > keyCardsElement.length){
-            dataCardsQuiz = dataDB.cards
-            console.log('DataDB supérieur, on utilise dataDB')
-            
-        }else{
-            dataCardsQuiz = cardsElement.cards
-                console.log('Finalement on utilise cardsElement')
-        }
-    }else{
-        dataCardsQuiz = cardsElement.cards
-            console.log('Finalement on utilise cardsElement')
-    }
-
-    return dataCardsQuiz != null ? (
+    return dataCardsQuiz !== null ? (
         <Fragment>
             <div className="sombreModalCardsManagement">
                 {modalCheck ? modal : null}
@@ -384,13 +452,13 @@ function Carte(props) {
                     </div>
                     <div className='divBtnPlus'>
                         <button onClick={() => reloadPage()}><img id='btnReload' src={btnReload}/></button>
-                        <button onClick={() => handleClickBtn()}><img id='btnPlus' src={btnPlus}/></button>
+                        <button onClick={() => handleClickBtnCreation()}><img id='btnPlus' src={btnPlus}/></button>
                     </div>
                     <div className="containerCardsForManage">
                         {displayCards}  
                     </div>
                 </div>
-        </div>
+            </div>
         </Fragment>
         
     ) : (
@@ -404,7 +472,7 @@ function Carte(props) {
                     </div>
                     <div className='divBtnPlus'>
                         <button onClick={() => reloadPage()}><img id='btnReload' src={btnReload}/></button>
-                        <button onClick={() => handleClickBtn()}><img id='btnPlus' src={btnPlus}/></button>
+                        <button onClick={() => handleClickBtnCreation()}><img id='btnPlus' src={btnPlus}/></button>
                     </div>
                     <div className="containerCardsForManage">
                         test 

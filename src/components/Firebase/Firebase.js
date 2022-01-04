@@ -77,20 +77,20 @@ class Firebase {
         }, {merge: true})
     }
 
-    creationCards = (uid, dataCollection, modalData) => {
+    creationCards = (uid, dataCollection, modalDataCreation) => {
         return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
             cards: {
-                [modalData.id]: {
-                    question: modalData.question,
-                    reponse: modalData.reponse,
-                    type: modalData.type,
+                [modalDataCreation.id]: {
+                    question: modalDataCreation.question,
+                    reponse: modalDataCreation.reponse,
+                    type: modalDataCreation.type,
                     possibilite : {
-                        p1: modalData.p1,
-                        p2: modalData.p2,
-                        p3: modalData.p3,
-                        p4: modalData.p4
+                        p1: modalDataCreation.p1,
+                        p2: modalDataCreation.p2,
+                        p3: modalDataCreation.p3,
+                        p4: modalDataCreation.p4
                     },
-                    id_card: modalData.id,
+                    id_card: modalDataCreation.id,
                     revisionDate: Date.now()
 
             }
