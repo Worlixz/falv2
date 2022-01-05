@@ -60,29 +60,41 @@ class Firebase {
 
     // Permet la modification d'une carte nécessite : UID | LA COLLECTION | LES DATA DE LA CARTE
     modificationCards = (uid, dataCollection, modalData) => {
-        return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
-            cards : {
-                [modalData.id]: {
-                    question: modalData.question,
-                        reponse: modalData.reponse,
-                        type: modalData.type,
-                        possibilite: {
-                            p1: modalData.p1,
-                            p2: modalData.p2,
-                            p3: modalData.p3,
-                            p4: modalData.p4
-                        },
-                        id_card: modalData.id,
-                        revisionDate: Date.now()
+        if(modalData.type === 'quiz'){
+            return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
+                cards : {
+                    [modalData.id]: {
+                        question: modalData.question,
+                            reponse: modalData.reponse,
+                            type: modalData.type,
+                            possibilite: {
+                                p1: modalData.p1,
+                                p2: modalData.p2,
+                                p3: modalData.p3,
+                                p4: modalData.p4
+                            },
+                            id_card: modalData.id,
+                            revisionDate: Date.now()
+                    }
                 }
-            }
-        }, {merge: true})
+            }, {merge: true})
+        }else {
+            return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
+                cards : {
+                    [modalData.id]: {
+                        question: modalData.question,
+                            reponse: modalData.reponse,
+                            type: modalData.type,
+                            id_card: modalData.id,
+                            revisionDate: Date.now()
+                    }
+                }
+            }, {merge: true})
+        }
     }
 
     creationCards = (uid, dataCollection, modalDataCreation) => {
-        console.log(modalDataCreation)
-        debugger
-        if(modalDataCreation.possibilite.p1 !== ""){
+        if(modalDataCreation.type === "quiz"){
             return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
                 cards: {
                     [modalDataCreation.id]: {

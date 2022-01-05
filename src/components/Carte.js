@@ -40,24 +40,20 @@ function Carte(props) {
         reponse: '',
         type: '',
         id: "",
-        possibilite : {
-            p1: "",
-            p2: "",
-            p3: "",
-            p4: ""
-        }
+        p1: "",
+        p2: "",
+        p3: "",
+        p4: ""
     })
     const [modalDataCreation, setModalDataCreation] = useState({
         question: "",
         reponse: '',
         type: "default",
         id: "",
-        possibilite : {
-            p1: "",
-            p2: "",
-            p3: "",
-            p4: ""
-        }
+        p1: "",
+        p2: "",
+        p3: "",
+        p4: "",
     })
     const [dataDB, setDataDB] = useState()
 
@@ -82,7 +78,6 @@ function Carte(props) {
         .get()
         .then((doc) => {
             if(doc.exists){
-                console.log("doc data : ", doc.data())
                 setDataDB(doc.data())
             }else {
                 console.log('no doc')
@@ -146,14 +141,12 @@ function Carte(props) {
         setModalData({...modalData, [e.target.id]: e.target.value})
     }
     const handleChangeCreation = (e) => {
-        // Modification du state de handleClickBtn 
         setModalDataCreation({...modalDataCreation, [e.target.id]: e.target.value})
     }
     
     const handleCloseModal = (e) => {
         setModalCheck(false)
         setModalData("")
-        /* setNewCollection(dataNewCollection) */
         assombrir.style.zIndex = "-2"
     }
     
@@ -270,29 +263,25 @@ function Carte(props) {
     //const btnCreationCards = /* modalData.type !== ""  && */ modalData.reponse !== "" ? (<button className="modificationCards">Créer ma carte</button>) : (<button disabled className="modificationCards disabled">Créer ma carte</button>)    
     
     const displayCards = Object.entries(dataCardsQuiz).map((element) => {
-        console.log("datacollection : ",dataCollection)
         let creationCards = {
             question: "",
             reponse: '',
             type: '',
             id: '',
-            possibilite : {
-                p1: "",
-                p2: "",
-                p3: "",
-                p4: ""
-            }
+            p1: "",
+            p2: "",
+            p3: "",
+            p4: ""
         }
         const idCards = Object.values(element)
         Object.values(element).map((deepElement) => {
-            console.log("deepElement", deepElement)
             if(deepElement.question != undefined){ 
                 creationCards.question = deepElement.question
                 creationCards.type = deepElement.type
                 creationCards.id = deepElement.id_card
             }
             if(deepElement.reponse != undefined){
-                creationCards.reponse = deepElement.reponse === true ? (deepElement.reponse.toString()) : deepElement.reponse
+                creationCards.reponse = deepElement.reponse
             }
             if(deepElement.type === "quiz"){
                 creationCards.p1 = deepElement.possibilite.p1
@@ -357,10 +346,10 @@ function Carte(props) {
                             <textarea id="reponse" value={modalData.reponse} onChange={handleChange} />
                             <h5> Possibilité : </h5>
                             <div className="quizReponsePossibilite">
-                                <textarea id="p1" onChange={handleChange} value={modalData.p1 != "" ? (modalData.p1) : ("")}  />
-                                <textarea id="p2" onChange={handleChange} value={modalData.p2 != "" ? (modalData.p2) : ("")}  />
-                                <textarea id="p3" onChange={handleChange} value={modalData.p3 != "" ? (modalData.p3) : ("")}  />
-                                <textarea id="p4" onChange={handleChange} value={modalData.p4 != "" ? (modalData.p4) : ("")}  />
+                                <textarea id="p1" onChange={handleChange} value={modalData.p1 != "" ? (modalData.p1) : ("")} required />
+                                <textarea id="p2" onChange={handleChange} value={modalData.p2 != "" ? (modalData.p2) : ("")} required />
+                                <textarea id="p3" onChange={handleChange} value={modalData.p3 != "" ? (modalData.p3) : ("")} required />
+                                <textarea id="p4" onChange={handleChange} value={modalData.p4 != "" ? (modalData.p4) : ("")} required />
                             </div>
                         </div>
                     )}
@@ -401,10 +390,10 @@ function Carte(props) {
                             <textarea id="reponse" value={modalDataCreation.reponse} onChange={handleChangeCreation} />
                             <h5> Possibilité : </h5>
                             <div className="quizReponsePossibilite">
-                                <textarea id="p1" onChange={handleChangeCreation}/>
-                                <textarea id="p2" onChange={handleChangeCreation}/>
-                                <textarea id="p3" onChange={handleChangeCreation}/>
-                                <textarea id="p4" onChange={handleChangeCreation}/>
+                                <textarea id="p1" onChange={handleChangeCreation} required/>
+                                <textarea id="p2" onChange={handleChangeCreation} required/>
+                                <textarea id="p3" onChange={handleChangeCreation} required/>
+                                <textarea id="p4" onChange={handleChangeCreation} required/>
                             </div>
                         </div>
                     )}
@@ -413,10 +402,6 @@ function Carte(props) {
             </div>
         </Fragment>
     )
-    {/* {btnCreationCards} */}
-    
-    // Modification à faire :  
-        // Ne pas vérifier si dataDB existe mais si ça longueur est égal à celle de cardsElement    
 
     return dataCardsQuiz !== null ? (
         <Fragment>
