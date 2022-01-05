@@ -783,7 +783,7 @@ export const freeCards = [
                 }, 
                 '509A45E571FD48CBB3E849B70E083765': {
                     question: "Comment rattraper un muscle faible",
-                    reponse: "Poids faible , cibler,beaucoup de répétition",
+                    reponse: "Poids faible , cibler, beaucoup de répétition",
                     type: "quiz",
                     id_card: "509A45E571FD48CBB3E849B70E083765",
                     revisionDate: 0,
@@ -1080,6 +1080,13 @@ export const freeCards = [
                         p3: "Plexus de Sanobira",
                         p4: "Plexus de Santorini"         
                     }
+                },
+                "DD746D2A8F9C475A8997C58246B7B87D" : {
+                    question: "La vessie a-t-elle une contenance inférieur à 500ml ?",
+                    reponse: false,
+                    type: "vraiFaux",
+                    id_card: "DD746D2A8F9C475A8997C58246B7B87D",
+                    revisionDate: 0
                 }
             }
         }
