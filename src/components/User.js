@@ -85,6 +85,7 @@ const User = (props) => {
             <div className="containerUser"> 
                 <div className="divPresentation">
                     <h2>Bienvenu dans l'application FAL</h2>
+                    <p>Une mise à jour ne vas pas tarder à arriver afin de vous présenter le fonctionnement de l'application </p>
                 </div>
                 <div className="divRoadMap">
                     <h2>Road map des mises à jour</h2>
