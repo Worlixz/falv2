@@ -51,6 +51,8 @@ function Collection(props) {
     copyFreeCards.flat()
     let collection_CardsInDB = {}
 
+    let deleteCollectionNale = ""
+
     useEffect(() => {
         let listener = firebase.auth.onAuthStateChanged(user => {
             user ? setUserSession(user) : propsHistory.push('/')
@@ -102,6 +104,7 @@ function Collection(props) {
     const handleOpenModalDelete = (collectionName) => {
         setDeleteModal(true)
         setDataDeleteModal(collectionName)
+        deleteCollectionNale = collectionName
         assombrir.style.zIndex = "2"
     }
 
@@ -111,8 +114,7 @@ function Collection(props) {
         assombrir.style.zIndex = "-2"
     }
 
-    const handleDeleteCollection = (dataDeleteModal) => {
-        debugger
+    const handleDeleteCollection = () => {
         firebase.deleteCollection(userSession.uid, dataDeleteModal)
         .then(() => {
             window.location.reload()
@@ -201,7 +203,6 @@ function Collection(props) {
 
         let index = dataBrutKey.indexOf(stockName)
         let stockCardsDate = []
-        console.log("element", element)
         if (index !== -1){            
             let stockValuesDate = []
             if(arrayForDate[index]){
@@ -219,7 +220,6 @@ function Collection(props) {
         }
         Object.values(element).map((cards) => {
             let saveNbre = cards.cards
-            console.log(cards)
             dataCardsMap.nbreCards = Object.keys(saveNbre).length
             dataCardsMap.cards = cards
             dataCardsMap.categorie = cards.categorie
