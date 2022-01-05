@@ -2,6 +2,7 @@ import React, { Fragment, useState, useContext, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { FirebaseContext } from './Firebase'
 import OsCasse from '../assets/Cards/os-casse.svg'
+import deleteSVG from '../assets/Cards/delete.svg'
 import Physio from '../assets/Cards/poumons.svg'
 import Play from '../assets/Cards/bouton-jouer.svg'
 import btnPlus from '../assets/plus.svg'
@@ -29,7 +30,7 @@ function Collection(props) {
         etiquette: '',
         cards: {}
     }
-   
+
     const formatedData = []
     const formatedDataKeys = []
 
@@ -41,6 +42,7 @@ function Collection(props) {
     const [newCollection, setNewCollection] = useState(dataNewCollection)
     const [userSession, setUserSession] = useState(props.userSession.uid.toString())
     const [collectionCardsInDB, setCollectionCardsInDB] = useState([])
+    const [userStatut, setUserStatut] = useState()
 
     let copyFreeCards = freeCards
     copyFreeCards.flat()
@@ -62,6 +64,7 @@ function Collection(props) {
             listener()
         }
     }, [userSession])
+
 
     const handleClickBtn = () => {
         setModalCheck(true)
@@ -91,6 +94,15 @@ function Collection(props) {
 
     const handleChange = (e) => {
         setNewCollection({...newCollection, [e.target.id]: e.target.value})
+    }
+
+    const handleDeleteCollection = (collectionName) => {
+        firebase.deleteCollection(userSession.uid, collectionName)
+        .then(() => {
+            console.log("suppression DB ok")
+        }).catch((err) => {
+            console.log(err)
+        })
     }
 
     const btnCreation = newCollection.nameCollection == '' ? 
@@ -166,7 +178,7 @@ function Collection(props) {
                 stockCardsDate = stockValuesDate[0].cards
             }
         }
-        console.log("stockCardsDate : ",stockCardsDate)
+    
         
         let dataCardsMap = {
             nbreCards: '',
@@ -176,9 +188,12 @@ function Collection(props) {
         }
         Object.values(element).map((cards) => {
             let saveNbre = cards.cards
+            console.log(cards)
             dataCardsMap.nbreCards = Object.keys(saveNbre).length
             dataCardsMap.cards = cards
             dataCardsMap.categorie = cards.categorie
+            dataCardsMap.abonnement = cards.abonnement
+            dataCardsMap.deleteOption = cards.deleteOption
             return dataCardsMap
         })
         dataCardsMap.nameCollection = Object.keys(element).toString()
@@ -189,7 +204,9 @@ function Collection(props) {
                     <h3>{dataCardsMap.nameCollection}</h3>
                     { <p>{dataCardsMap.nbreCards} {dataCardsMap.nbreCards > 1 ? 'Cartes' : 'Carte'}</p> }
                 </div>
-                <Link to={{pathname:"/carte", state:{dataCardsMap, element}}}> 
+                    {dataCardsMap.deleteOption ? (<img id='deleteCollectionBTN' src={deleteSVG} onClick={() => handleDeleteCollection(dataCardsMap.nameCollection)} />) : (null)} 
+                    
+                <Link to={{pathname:"/carte", state:{dataCardsMap, element}}}>
                     <img src={Play}/>
                 </Link>
             </li>

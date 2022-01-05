@@ -403,6 +403,10 @@ main {
   margin: 10px;
 }
 
+#deleteCollectionBTN {
+  cursor: pointer;
+}
+
 #btnPlay:hover {
   cursor: pointer;
 }

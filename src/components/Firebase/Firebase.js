@@ -52,6 +52,8 @@ class Firebase {
         return this.db.doc(`users/${uid}/CartesCollection/${newCollection.nameCollection}`).set({
             categorie: newCollection.categorie,
             etiquette: newCollection.etiquette,
+            abonnement: false,
+            deleteOption: true,
             cards: {}
         }, {merge: true})
     }
@@ -78,24 +80,45 @@ class Firebase {
     }
 
     creationCards = (uid, dataCollection, modalDataCreation) => {
-        return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
-            cards: {
-                [modalDataCreation.id]: {
-                    question: modalDataCreation.question,
-                    reponse: modalDataCreation.reponse,
-                    type: modalDataCreation.type,
-                    possibilite : {
-                        p1: modalDataCreation.p1,
-                        p2: modalDataCreation.p2,
-                        p3: modalDataCreation.p3,
-                        p4: modalDataCreation.p4
-                    },
-                    id_card: modalDataCreation.id,
-                    revisionDate: Date.now()
+        console.log(modalDataCreation)
+        debugger
+        if(modalDataCreation.possibilite.p1 !== ""){
+            return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
+                cards: {
+                    [modalDataCreation.id]: {
+                        question: modalDataCreation.question,
+                        reponse: modalDataCreation.reponse,
+                        type: modalDataCreation.type,
+                        possibilite : {
+                            p1: modalDataCreation.p1,
+                            p2: modalDataCreation.p2,
+                            p3: modalDataCreation.p3,
+                            p4: modalDataCreation.p4
+                        },
+                        id_card: modalDataCreation.id,
+                        revisionDate: Date.now()
+    
+                }
+                }   
+            }, {merge: true})
+        }else{
+            return this.db.doc(`users/${uid}/CartesCollection/${dataCollection.nameCollection}`).set({
+                cards: {
+                    [modalDataCreation.id]: {
+                        question: modalDataCreation.question,
+                        reponse: modalDataCreation.reponse,
+                        type: modalDataCreation.type,
+                        id_card: modalDataCreation.id,
+                        revisionDate: Date.now()
+    
+                }
+                }   
+            }, {merge: true})
+        }
+    }
 
-            }
-            }   
-        }, {merge: true})
+    deleteCollection = (uid, collectionName) => {
+        return this.db.doc(`users/${uid}/CartesCollection/${collectionName}`).delete()
     }
 
     deleteDataCards = (uid, dataCollection, creattionCards) => {

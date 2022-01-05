@@ -289,6 +289,7 @@ function Carte(props) {
     //const btnCreationCards = /* modalData.type !== ""  && */ modalData.reponse !== "" ? (<button className="modificationCards">Créer ma carte</button>) : (<button disabled className="modificationCards disabled">Créer ma carte</button>)    
     
     const displayCards = Object.entries(dataCardsQuiz).map((element) => {
+        console.log("datacollection : ",dataCollection)
         let creationCards = {
             question: "",
             reponse: '',
@@ -327,8 +328,8 @@ function Carte(props) {
                     <p className="cardsText">{creationCards.reponse}</p>
                 </div>
                 <div className="cardsCardsDivBTN">
-                    <button onClick={() => handleClickBtn(creationCards)} className="btnCardsManagement"><img id="pencil" src={pencil} /></button>
-                    <button className="btnCardsManagement"><img id="crossRed" onClick={() => handleDeleteModalOpen(creationCards)} src={crossRed} /></button>
+                    {dataCollection.deleteOption ? (<button onClick={() => handleClickBtn(creationCards)} className="btnCardsManagement"><img id="pencil" src={pencil} /></button>) : (null)}
+                    {dataCollection.deleteOption ? (<button className="btnCardsManagement"><img id="crossRed" onClick={() => handleDeleteModalOpen(creationCards)} src={crossRed} /></button>) : (null)}
                 </div>
             </div>) : null
         
@@ -452,7 +453,7 @@ function Carte(props) {
                     </div>
                     <div className='divBtnPlus'>
                         <button onClick={() => reloadPage()}><img id='btnReload' src={btnReload}/></button>
-                        <button onClick={() => handleClickBtnCreation()}><img id='btnPlus' src={btnPlus}/></button>
+                        {dataCollection.deleteOption ? (<button onClick={() => handleClickBtnCreation()}><img id='btnPlus' src={btnPlus}/></button>) : (null)}
                     </div>
                     <div className="containerCardsForManage">
                         {displayCards}  

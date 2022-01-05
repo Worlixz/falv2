@@ -490,6 +490,8 @@ export const freeCards = [
         'Myologie Dos' : {
             etiquette: "Dos",
             categorie: "physio",
+            abonnement: false,
+            deleteOption: false,
             cards: {
                 '56209BE0A1E74C86AE8C877535742113': {
                     question: "L'elevateur de la scapula s'insert sur C1-C4",
@@ -729,6 +731,8 @@ export const freeCards = [
         'Info pratique' : {
             etiquette: "Info",
             categorie: "physio",
+            abonnement: false,
+            deleteOption: false,
             cards: {
                 '6FBF21E422E3498D8C67035E3E788D5D': {
                     question: "Faire un tirage derriere la nuque est plus traumatisant pour l'épaule",
@@ -837,6 +841,8 @@ export const freeCards = [
         'Les grands syndromes' : {
             etiquette: "les grand syndromes",
             categorie: "clinique",
+            abonnement: false,
+            deleteOption: false,
             cards: {
                 '32D8C2DEF75345AA840CCB391FE6FF7E': {
                     question: "Le signe de babinski fait parti du syndrome pyramidal",
@@ -947,7 +953,137 @@ export const freeCards = [
                 }
             }
         }
-    } 
+    },
+    {
+        'Uro-génital' : {
+            etiquette: "Périnée et prostate",
+            categorie: "physio",
+            abonnement: false,
+            deleteOption: false,
+            cards: {
+                'A69E730B33D74CFD840A8BB762CFFF2B': {
+                    question: "Le périnée comprend 3 plans",
+                    reponse: true,
+                    type: "vraiFaux",
+                    id_card: 'A69E730B33D74CFD840A8BB762CFFF2B',
+                    revisionDate: 0
+                }, 
+                '8F20580ACF814F3EAB6902DFA12E64FD': {
+                    question: "Quelle est l'autre nom de la glande para-uretrales?",
+                    reponse: "Skène",
+                    type: "quiz",
+                    id_card: "8F20580ACF814F3EAB6902DFA12E64FD",
+                    revisionDate: 0,
+                    possibilite: {
+                        p1: "Skène",
+                        p2: "Bartholin",
+                        p3: "Beroline",
+                        p4: "Paro"
+                    }
+                },
+                'E8CEEB56047A4509B0DCD9116F45C96F': {
+                    question: "La glande de bartholin est de part est d'autre de la vulve",
+                    reponse: true,
+                    type: "vraiFaux",
+                    id_card: 'E8CEEB56047A4509B0DCD9116F45C96F',
+                    revisionDate: 0
+                }, 
+                'FF8B7F1A2E064C0ABB246266918FF1E2': {
+                    question: "Composition du plan profond du périnée",
+                    reponse: "Muscle Sphinctere externe de l'uretre et Transverse profond",
+                    type: "quiz",
+                    id_card: "FF8B7F1A2E064C0ABB246266918FF1E2",
+                    revisionDate: 0,
+                    possibilite: {
+                        p1: "Muscle Sphinctere interne de l'uretre et Transverse du pubis",
+                        p2: "Muscle Sphinctere externe de l'uretre et Transverse profond",
+                        p3: "Muscle Ilio-genital et Transverse superficiel",
+                        p4: "Muscle bulbo-spongieux  et Transverse profond"         
+                    }
+                },
+                'C2CA230AF78D4050A9A20502A1E58A2D': {
+                    question: "Le noyeux fibreux du périnée n'est pas composé de plusieurs muscle ",
+                    reponse: false,
+                    type: "vraiFaux",
+                    id_card: 'C2CA230AF78D4050A9A20502A1E58A2D',
+                    revisionDate: 0
+                }, 
+                'ED43D6DC7B6C4E9787CEA36E7373F118': {
+                    question: "Citez l'innervation ortho du périnée ",
+                    reponse: "Nerf pudental S2-S3-S4",
+                    type: "quiz",
+                    id_card: "ED43D6DC7B6C4E9787CEA36E7373F118",
+                    revisionDate: 0,
+                    possibilite: {
+                        p1: "Nerf pudental L5-S1",
+                        p2: "Nerf Splanchnique S2-S3-S4",
+                        p3: "Nerf pudental S2-S3-S4",
+                        p4: "Nerf Splanchnique C2-D3-S4"
+                    }
+                },
+                '78C8C7334F2A4C7AB06D2B537A630AD5': {
+                    question: "Artere iliaque interne se divise en 2 branches ant et post",
+                    reponse: true,
+                    type: "vraiFaux",
+                    id_card: '78C8C7334F2A4C7AB06D2B537A630AD5',
+                    revisionDate: 0
+                }, 
+                '8036AF655E76424FA2A85C9406B3727B': {
+                    question: "Citez 3 réeducations périneale",
+                    reponse: "Manuelle-bio feed-back avec sonde-Electro stimulation",
+                    type: "quiz",
+                    id_card: "8036AF655E76424FA2A85C9406B3727B",
+                    revisionDate: 0,
+                    possibilite: {
+                        p1: "Clampage-bio feed-back avec sonde-Electro acoustique",
+                        p2: "Manuelle-bio feed-back avec sonde-Electro stimulation",
+                        p3: "Manuelle-Clampage-Electrofeedic",
+                        p4: "Bio feed back- Electro stimulation-halterophilie"         
+                    }
+                },
+                '566604D20E7E44F7A08CEA63E2D01D52': {
+                    question: "Chez la femme la vessie et toujours au dessus de la symphyse si physiologique",
+                    reponse: false,
+                    type: "vraiFaux",
+                    id_card: '566604D20E7E44F7A08CEA63E2D01D52',
+                    revisionDate: 0
+                }, 
+                'C1EB1402A832434D9CFCB5214E5B629D': {
+                    question: "A quel age est il conseillait de faire un bilan prostatique ? ",
+                    reponse: "50ans",
+                    type: "quiz",
+                    id_card: "C1EB1402A832434D9CFCB5214E5B629D",
+                    revisionDate: 0,
+                    possibilite: {
+                        p1: "65ans",
+                        p2: "30ans",
+                        p3: "50ans",
+                        p4: "10ans"
+                    }
+                },
+                '5BA68605311E496A890698E3C18EEE28': {
+                    question: "Le Z prostatique est composé de 2 muscles et 1 ligaments",
+                    reponse: true,
+                    type: "vraiFaux",
+                    id_card: '5BA68605311E496A890698E3C18EEE28',
+                    revisionDate: 0
+                }, 
+                '3B4CBEAA27D64B218E326D475D2C08C2': {
+                    question: "Quelle plexus veineux est en avant du muscle strié de la vessie",
+                    reponse: "Plexus de Santorini",
+                    type: "quiz",
+                    id_card: "3B4CBEAA27D64B218E326D475D2C08C2",
+                    revisionDate: 0,
+                    possibilite: {
+                        p1: "Plexus soleaire",
+                        p2: "Plexus de Sanbardi",
+                        p3: "Plexus de Sanobira",
+                        p4: "Plexus de Santorini"         
+                    }
+                }
+            }
+        }
+    }
 
     
 ]
