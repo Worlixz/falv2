@@ -5,13 +5,13 @@ import 'firebase/storage'
 /* import { doc, updateDoc, deleteField } from "firebase/firestore"; */
 
 const config = {
-    apiKey: "AIzaSyBaMKAKMaQQYx-iCgZ6TzlCpJ2EtoaGtXc",
-    authDomain: "flash-anatomy-learning.firebaseapp.com",
-    projectId: "flash-anatomy-learning",
-    storageBucket: "flash-anatomy-learning.appspot.com",
-    messagingSenderId: "273500566620",
-    appId: "1:273500566620:web:be15de505d1b9c2a84a299",
-    measurementId: "G-6QKN8HD5B5"
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 }
 
 

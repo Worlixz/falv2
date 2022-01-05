@@ -92,7 +92,6 @@ const User = (props) => {
                     <h2>Road map des mises à jour</h2>
                     <ul>
                         <li>Modification de l'affichage pour les smartphones</li>
-                        <li>Ajout de l'image de profil dans la barre d'affichage</li>
                         <li>Optimisation de l'utilisation de l'application</li>
                     </ul>
                 </div>
