@@ -39,10 +39,13 @@ function Collection(props) {
 
     
     const [modalCheck, setModalCheck] = useState(false)
+    const [modalCheckDelete, setModalCheckDelete] = useState(false)
     const [newCollection, setNewCollection] = useState(dataNewCollection)
     const [userSession, setUserSession] = useState(props.userSession.uid.toString())
     const [collectionCardsInDB, setCollectionCardsInDB] = useState([])
     const [userStatut, setUserStatut] = useState()
+    const [deleteModal, setDeleteModal] = useState(false)
+    const [dataDeleteModal, setDataDeleteModal] = useState(null)
 
     let copyFreeCards = freeCards
     copyFreeCards.flat()
@@ -96,14 +99,42 @@ function Collection(props) {
         setNewCollection({...newCollection, [e.target.id]: e.target.value})
     }
 
-    const handleDeleteCollection = (collectionName) => {
-        firebase.deleteCollection(userSession.uid, collectionName)
+    const handleOpenModalDelete = (collectionName) => {
+        setDeleteModal(true)
+        setDataDeleteModal(collectionName)
+        assombrir.style.zIndex = "2"
+    }
+
+    const handleCloseModalDelete = (e) => {
+        setDeleteModal(false)
+        /* setNewCollection(dataNewCollection) */
+        assombrir.style.zIndex = "-2"
+    }
+
+    const handleDeleteCollection = (dataDeleteModal) => {
+        debugger
+        firebase.deleteCollection(userSession.uid, dataDeleteModal)
         .then(() => {
-            console.log("suppression DB ok")
-        }).catch((err) => {
+            window.location.reload()
+        })
+        setDeleteModal(false)
+        assombrir.style.zIndex = "-2"
+        .catch((err) => {
             console.log(err)
         })
     }
+
+    const deleteModalDisplay = (
+        <div className="deleteModalDiv">
+            <div className="deleteModalTitle">
+                <h4>Est-vous sur de vouloir supprimer cette collection ? </h4>
+            </div>
+            <div className="deleteModalBTN">
+                <button id="deleteBTN" onClick={() => handleDeleteCollection()}>Supprimer</button>
+                <button id="conserverBTN" onClick={() => handleCloseModalDelete()}>Conserver</button>
+            </div>
+        </div>
+)
 
     const btnCreation = newCollection.nameCollection == '' ? 
         (<button disabled style={{background: "lightgray"}}>Créer</button>) : (newCollection.categorie === 'default') ? 
@@ -204,7 +235,7 @@ function Collection(props) {
                     <h3>{dataCardsMap.nameCollection}</h3>
                     { <p>{dataCardsMap.nbreCards} {dataCardsMap.nbreCards > 1 ? 'Cartes' : 'Carte'}</p> }
                 </div>
-                    {dataCardsMap.deleteOption ? (<img id='deleteCollectionBTN' src={deleteSVG} onClick={() => handleDeleteCollection(dataCardsMap.nameCollection)} />) : (null)} 
+                    {dataCardsMap.deleteOption ? (<img id='deleteCollectionBTN' src={deleteSVG} onClick={() => handleOpenModalDelete(dataCardsMap.nameCollection)} />) : (null)} 
                     
                 <Link to={{pathname:"/carte", state:{dataCardsMap, element}}}>
                     <img src={Play}/>
@@ -217,6 +248,7 @@ function Collection(props) {
         <Fragment>
             <div className="sombreModal">
                 {modalCheck ? (modal) : (null)}
+                {deleteModal ? deleteModalDisplay : null}
             </div>
             <div className="containerUl">
                 <h2>Mes collections</h2>

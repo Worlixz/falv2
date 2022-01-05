@@ -85,9 +85,8 @@ const User = (props) => {
             <div className="containerUser"> 
                 <div className="divPresentation">
                     <h2>Bienvenu dans l'application FAL</h2>
-                    <p>Sur cette page ce trouve une vidéo tutoriel, dans cette dernière tu apprendra pourquoi nous avons crée FAL et comment s'en servir. < br />Tout les retours sont les bienvenu afin d'améliorer cette dernière</p>
+                    <p></p>
                 </div>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/oZYauzQWtvk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <div className="divRoadMap">
                     <h2>Road map des mises à jour</h2>
                     <ul>

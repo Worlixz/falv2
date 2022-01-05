@@ -118,27 +118,17 @@ function Carte(props) {
         if(keyDataDB.length === keyCardsElement.length){
             dataCardsQuiz = dataDB.cards
             dataGlobal = dataDB
-            console.log('les deux tableaux sont égaux, on utilise dataDB')
-            
         }else if(keyDataDB.length > keyCardsElement.length){
             dataCardsQuiz = dataDB.cards
             dataGlobal = dataDB
-            console.log('DataDB supérieur, on utilise dataDB')
-            
         }else{
             dataCardsQuiz = cardsElement.cards
-            dataGlobal = cardsElement
-                console.log('Finalement on utilise cardsElement')
+            dataGlobal = cardsElement           
         }
     }else{
         dataCardsQuiz = cardsElement.cards
-        dataGlobal = cardsElement
-            console.log('Finalement on utilise cardsElement')
+        dataGlobal = cardsElement        
     }
-
-    console.log("dataCardsQuiz : ",dataCardsQuiz)
-    console.log("dataGlobal : ",dataGlobal)
-    console.log("dataCollection : ",dataCollection)
 
     const handleClickBtn = (creationCards) => {
         setModalCheck(true)
@@ -150,15 +140,6 @@ function Carte(props) {
         setModalCreation(true)
         assombrir.style.zIndex = "2"
     }
-
-
-
-    console.log("dataDB : ",dataDB)    
-    /* const handleClickBtn = (creationCards) => {
-        setModalCheck(true)
-        setModalData(creationCards) //Initialisation des données su state en fonction de la carte cliqué
-        assombrir.style.zIndex = "2"
-    } */
     
     const handleChange = (e) => {
         // Modification du state de handleClickBtn 
